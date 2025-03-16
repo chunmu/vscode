@@ -1,6 +1,6 @@
 # 一步一步学习vscode
 
-```typescript
+```
 
 src
 ├── bootstrap-cli.ts
@@ -172,13 +172,13 @@ src
 │   │   │   └── window.ts
 │   │   ├── common
 │   │   │   ├── actions.ts
-│   │   │   ├── arrays.ts
-│   │   │   ├── arraysFind.ts
+│   │   │   ├── arrays.ts xxxxx 数组相关方法整合
+│   │   │   ├── arraysFind.ts 工具方法 主要是数组或集合元素查找
 │   │   │   ├── assert.ts 做一些类型断言，以及一些报错优化，以方便debugger
 │   │   │   ├── async.ts
 │   │   │   ├── buffer.ts
 │   │   │   ├── cache.ts
-│   │   │   ├── cancellation.ts
+│   │   │   ├── cancellation.ts xxxxx 还没看到实际用的地方
 │   │   │   ├── charCode.ts 键值编码
 │   │   │   ├── codecs
 │   │   │   │   ├── asyncDecoder.ts
@@ -204,11 +204,11 @@ src
 │   │   │   │   └── diffChange.ts
 │   │   │   ├── equals.ts
 │   │   │   ├── errorMessage.ts
-│   │   │   ├── errors.ts
+│   │   │   ├── errors.ts xxxxx 还没看到实际用的地方
 │   │   │   ├── event.ts
 │   │   │   ├── extpath.ts
 │   │   │   ├── filters.ts
-│   │   │   ├── functional.ts
+│   │   │   ├── functional.ts 创建只执行一次的方法 一般命名为once
 │   │   │   ├── fuzzyScorer.ts
 │   │   │   ├── glob.ts
 │   │   │   ├── hash.ts
@@ -220,7 +220,7 @@ src
 │   │   │   ├── iconLabels.ts
 │   │   │   ├── idGenerator.ts
 │   │   │   ├── ime.ts
-│   │   │   ├── iterator.ts
+│   │   │   ├── iterator.ts xxxxx 创建了一个基于数组的迭代器 暂时不知道用途
 │   │   │   ├── json.ts
 │   │   │   ├── jsonEdit.ts
 │   │   │   ├── jsonErrorMessages.ts
@@ -233,17 +233,17 @@ src
 │   │   │   ├── keybindings.ts
 │   │   │   ├── labels.ts
 │   │   │   ├── lazy.ts
-│   │   │   ├── lifecycle.ts
+│   │   │   ├── lifecycle.ts 基于FinalizationRegistry的资源回收通知等逻辑，没细看实现
 │   │   │   ├── linkedList.ts
 │   │   │   ├── linkedText.ts
-│   │   │   ├── map.ts
+│   │   │   ├── map.ts map/set工具方法，主要做了存取，转string，key为URI的RourceMap工具，链表Map(LinkedMap)，基于链表的缓存基础类Cache，基于前面Cache的LRU(最少使用算法)缓存，基于前面Cache的MRU(最近使用算法)缓存，key和value相互作为key，value的BidirectionalMap，双Map结构，专门存放set的Map(SetMap)
 │   │   │   ├── marked
 │   │   │   │   ├── cgmanifest.json
 │   │   │   │   ├── marked.d.ts
 │   │   │   │   ├── marked.js
 │   │   │   │   └── marked.license.txt
 │   │   │   ├── marshalling.ts
-│   │   │   ├── marshallingIds.ts
+│   │   │   ├── marshallingIds.ts xxxxx
 │   │   │   ├── mime.ts
 │   │   │   ├── naturalLanguage
 │   │   │   │   └── korean.ts
@@ -280,7 +280,7 @@ src
 │   │   │   │   └── utilsCancellation.ts
 │   │   │   ├── paging.ts
 │   │   │   ├── parsers.ts
-│   │   │   ├── path.ts
+│   │   │   ├── path.ts xxxxx
 │   │   │   ├── performance.ts 平台性能追踪相关标记代码
 │   │   │   ├── platform.ts 平台判断相关的工具方法，没啥特殊的
 │   │   │   ├── ports.ts
@@ -297,7 +297,7 @@ src
 │   │   │   │   ├── cgmanifest.json
 │   │   │   │   ├── semver.d.ts
 │   │   │   │   └── semver.js
-│   │   │   ├── sequence.ts
+│   │   │   ├── sequence.ts 队列管理 对队列的切割splice做了事件通知
 │   │   │   ├── severity.ts
 │   │   │   ├── skipList.ts
 │   │   │   ├── stopwatch.ts
@@ -307,7 +307,7 @@ src
 │   │   │   ├── ternarySearchTree.ts
 │   │   │   ├── tfIdf.ts
 │   │   │   ├── themables.ts
-│   │   │   ├── types.ts
+│   │   │   ├── types.ts 各类判断辅助，是否字符，字符数组，对象，数字，是否可迭代，等等
 │   │   │   ├── uint.ts
 │   │   │   ├── uri.ts
 │   │   │   ├── uriIpc.ts
@@ -1380,7 +1380,7 @@ src
 │   │   │   ├── common
 │   │   │   │   ├── configuration.ts
 │   │   │   │   ├── configurationModels.ts
-│   │   │   │   ├── configurationRegistry.ts
+│   │   │   │   ├── configurationRegistry.ts xxxxx
 │   │   │   │   ├── configurationService.ts
 │   │   │   │   └── configurations.ts
 │   │   ├── contextkey

@@ -1,7 +1,5 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) Microsoft Corporation. All rights reserved.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/******************************************** 已阅 ********************************************/
+// 基于FinalizationRegistry的资源回收通知等逻辑，没细看实现
 
 import { compareBy, numberComparator } from './arrays.js';
 import { groupBy } from './collections.js';

@@ -1,7 +1,5 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) Microsoft Corporation. All rights reserved.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/******************************************** 已阅 ********************************************/
+// 队列管理 对队列的切割splice做了事件通知
 
 import { Emitter, Event } from './event.js';
 

@@ -1,7 +1,5 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) Microsoft Corporation. All rights reserved.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/******************************************** 已阅 ********************************************/
+// 创建只执行一次的方法 一般命名为once
 
 /**
  * Given a function, returns a function that is only calling that function once.

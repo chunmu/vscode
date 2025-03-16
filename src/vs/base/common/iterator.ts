@@ -1,8 +1,5 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) Microsoft Corporation. All rights reserved.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
-
+/******************************************** 已阅 ********************************************/
+// xxxxx 创建了一个基于数组的迭代器 暂时不知道用途
 import { isIterable } from './types.js';
 
 export namespace Iterable {

@@ -1,8 +1,5 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) Microsoft Corporation. All rights reserved.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
-
+/******************************************** 已阅 ********************************************/
+// 各类判断辅助，是否字符，字符数组，对象，数字，是否可迭代，等等
 import { URI } from './uri.js';
 import { assert } from './assert.js';
 
