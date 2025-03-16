@@ -9,68 +9,69 @@ import '../../platform/update/common/update.config.contribution.js';
 import { app, dialog } from 'electron';
 import { unlinkSync, promises } from 'fs';
 import { URI } from '../../base/common/uri.js';
-// import { coalesce, distinct } from '../../base/common/arrays.js';
+import { coalesce, distinct } from '../../base/common/arrays.js';
 // import { Promises } from '../../base/common/async.js';
-// import { toErrorMessage } from '../../base/common/errorMessage.js';
+import { toErrorMessage } from '../../base/common/errorMessage.js';
 import { ExpectedError, setUnexpectedErrorHandler } from '../../base/common/errors.js';
 // import { IPathWithLineAndColumn, isValidBasename, parseLineAndColumnAware, sanitizeFilePath } from '../../base/common/extpath.js';
 // import { Event } from '../../base/common/event.js';
-// import { getPathLabel } from '../../base/common/labels.js';
+import { getPathLabel } from '../../base/common/labels.js';
 // import { Schemas } from '../../base/common/network.js';
 // import { basename, resolve } from '../../base/common/path.js';
 // import { mark } from '../../base/common/performance.js';
-// import { IProcessEnvironment, isMacintosh, isWindows, OS } from '../../base/common/platform.js';
+import { IProcessEnvironment, isMacintosh, isWindows, OS } from '../../base/common/platform.js';
 // import { cwd } from '../../base/common/process.js';
 // import { rtrim, trim } from '../../base/common/strings.js';
 // import { Promises as FSPromises } from '../../base/node/pfs.js';
 // import { ProxyChannel } from '../../base/parts/ipc/common/ipc.js';
 // import { Client as NodeIPCClient } from '../../base/parts/ipc/common/ipc.net.js';
-// import { connect as nodeIPCConnect, serve as nodeIPCServe, Server as NodeIPCServer, XDG_RUNTIME_DIR } from '../../base/parts/ipc/node/ipc.net.js';
+// xxxxx
+import { connect as nodeIPCConnect, serve as nodeIPCServe, Server as NodeIPCServer, XDG_RUNTIME_DIR } from '../../base/parts/ipc/node/ipc.net.js';
 // import { CodeApplication } from './app.js';
-// import { localize } from '../../nls.js';
-// import { IConfigurationService } from '../../platform/configuration/common/configuration.js';
-// import { ConfigurationService } from '../../platform/configuration/common/configurationService.js';
-// import { IDiagnosticsMainService } from '../../platform/diagnostics/electron-main/diagnosticsMainService.js';
-// import { DiagnosticsService } from '../../platform/diagnostics/node/diagnosticsService.js';
-// import { NativeParsedArgs } from '../../platform/environment/common/argv.js';
-// import { EnvironmentMainService, IEnvironmentMainService } from '../../platform/environment/electron-main/environmentMainService.js';
+import { localize } from '../../nls.js';
+import { IConfigurationService } from '../../platform/configuration/common/configuration.js';
+import { ConfigurationService } from '../../platform/configuration/common/configurationService.js';
+import { IDiagnosticsMainService } from '../../platform/diagnostics/electron-main/diagnosticsMainService.js';
+import { DiagnosticsService } from '../../platform/diagnostics/node/diagnosticsService.js';
+import { NativeParsedArgs } from '../../platform/environment/common/argv.js';
+import { EnvironmentMainService, IEnvironmentMainService } from '../../platform/environment/electron-main/environmentMainService.js';
 // import { addArg, parseMainProcessArgv } from '../../platform/environment/node/argvHelper.js';
 // import { createWaitMarkerFileSync } from '../../platform/environment/node/wait.js';
 // import { IFileService } from '../../platform/files/common/files.js';
-// import { FileService } from '../../platform/files/common/fileService.js';
+import { FileService } from '../../platform/files/common/fileService.js';
 // import { DiskFileSystemProvider } from '../../platform/files/node/diskFileSystemProvider.js';
 // import { SyncDescriptor } from '../../platform/instantiation/common/descriptors.js';
-// import { IInstantiationService, ServicesAccessor } from '../../platform/instantiation/common/instantiation.js';
-// import { InstantiationService } from '../../platform/instantiation/common/instantiationService.js';
-// import { ServiceCollection } from '../../platform/instantiation/common/serviceCollection.js';
-// import { ILaunchMainService } from '../../platform/launch/electron-main/launchMainService.js';
-// import { ILifecycleMainService, LifecycleMainService } from '../../platform/lifecycle/electron-main/lifecycleMainService.js';
+import { IInstantiationService, ServicesAccessor } from '../../platform/instantiation/common/instantiation.js';
+import { InstantiationService } from '../../platform/instantiation/common/instantiationService.js';
+import { ServiceCollection } from '../../platform/instantiation/common/serviceCollection.js';
+import { ILaunchMainService } from '../../platform/launch/electron-main/launchMainService.js';
+import { ILifecycleMainService, LifecycleMainService } from '../../platform/lifecycle/electron-main/lifecycleMainService.js';
 // import { BufferLogger } from '../../platform/log/common/bufferLog.js';
-// import { ConsoleMainLogger, getLogLevel, ILoggerService, ILogService } from '../../platform/log/common/log.js';
-// import product from '../../platform/product/common/product.js';
-// import { IProductService } from '../../platform/product/common/productService.js';
-// import { IProtocolMainService } from '../../platform/protocol/electron-main/protocol.js';
-// import { ProtocolMainService } from '../../platform/protocol/electron-main/protocolMainService.js';
+import { ConsoleMainLogger, getLogLevel, ILoggerService, ILogService } from '../../platform/log/common/log.js';
+import product from '../../platform/product/common/product.js';
+import { IProductService } from '../../platform/product/common/productService.js';
+import { IProtocolMainService } from '../../platform/protocol/electron-main/protocol.js';
+import { ProtocolMainService } from '../../platform/protocol/electron-main/protocolMainService.js';
 // import { ITunnelService } from '../../platform/tunnel/common/tunnel.js';
-// import { TunnelService } from '../../platform/tunnel/node/tunnelService.js';
+import { TunnelService } from '../../platform/tunnel/node/tunnelService.js';
 // import { IRequestService } from '../../platform/request/common/request.js';
-// import { RequestService } from '../../platform/request/electron-utility/requestService.js';
+import { RequestService } from '../../platform/request/electron-utility/requestService.js';
 // import { ISignService } from '../../platform/sign/common/sign.js';
-// import { SignService } from '../../platform/sign/node/signService.js';
+import { SignService } from '../../platform/sign/node/signService.js';
 // import { IStateReadService, IStateService } from '../../platform/state/node/state.js';
 // import { NullTelemetryService } from '../../platform/telemetry/common/telemetryUtils.js';
-// import { IThemeMainService, ThemeMainService } from '../../platform/theme/electron-main/themeMainService.js';
-// import { IUserDataProfilesMainService, UserDataProfilesMainService } from '../../platform/userDataProfile/electron-main/userDataProfile.js';
+import { IThemeMainService, ThemeMainService } from '../../platform/theme/electron-main/themeMainService.js';
+import { IUserDataProfilesMainService, UserDataProfilesMainService } from '../../platform/userDataProfile/electron-main/userDataProfile.js';
 // import { IPolicyService, NullPolicyService } from '../../platform/policy/common/policy.js';
-// import { NativePolicyService } from '../../platform/policy/node/nativePolicyService.js';
-// import { FilePolicyService } from '../../platform/policy/common/filePolicyService.js';
-// import { DisposableStore } from '../../base/common/lifecycle.js';
+import { NativePolicyService } from '../../platform/policy/node/nativePolicyService.js';
+import { FilePolicyService } from '../../platform/policy/common/filePolicyService.js';
+import { DisposableStore } from '../../base/common/lifecycle.js';
 // import { IUriIdentityService } from '../../platform/uriIdentity/common/uriIdentity.js';
-// import { UriIdentityService } from '../../platform/uriIdentity/common/uriIdentityService.js';
-// import { ILoggerMainService, LoggerMainService } from '../../platform/log/electron-main/loggerService.js';
-// import { LogService } from '../../platform/log/common/logService.js';
-// import { massageMessageBoxOptions } from '../../platform/dialogs/common/dialogs.js';
-// import { SaveStrategy, StateService } from '../../platform/state/node/stateService.js';
+import { UriIdentityService } from '../../platform/uriIdentity/common/uriIdentityService.js';
+import { ILoggerMainService, LoggerMainService } from '../../platform/log/electron-main/loggerService.js';
+import { LogService } from '../../platform/log/common/logService.js';
+import { massageMessageBoxOptions } from '../../platform/dialogs/common/dialogs.js';
+import { SaveStrategy, StateService } from '../../platform/state/node/stateService.js';
 // import { FileUserDataProvider } from '../../platform/userData/common/fileUserDataProvider.js';
 // import { addUNCHostToAllowlist, getUNCHost } from '../../base/node/unc.js';
 
@@ -102,17 +103,19 @@ class CodeMain {
 		setUnexpectedErrorHandler(err => console.error(err));
 
 		// Create services
-		const [instantiationService, instanceEnvironment, environmentMainService, configurationService, stateMainService, bufferLogger, productService, userDataProfilesMainService] = this.createServices();
+		// const [instantiationService, instanceEnvironment, environmentMainService, configurationService, stateMainService, bufferLogger, productService, userDataProfilesMainService] = this.createServices();
+		const [instantiationService] = this.createServices();
 
 		try {
 
 			// Init services
 			try {
-				await this.initServices(environmentMainService, userDataProfilesMainService, configurationService, stateMainService, productService);
+				// await this.initServices(environmentMainService, userDataProfilesMainService, configurationService, stateMainService, productService);
+				throw new Error('x')
 			} catch (error) {
 
 				// Show a dialog for errors that can be resolved by the user
-				this.handleStartupDataDirError(environmentMainService, productService, error);
+				// this.handleStartupDataDirError(environmentMainService, productService, error);
 
 				throw error;
 			}
@@ -150,6 +153,19 @@ class CodeMain {
 		} catch (error) {
 			instantiationService.invokeFunction(this.quit, error);
 		}
+	}
+
+	private createServices(): [IInstantiationService, IProductService] {
+		const services = new ServiceCollection();
+		const disposables = new DisposableStore();
+		process.once('exit', () => disposables.dispose());
+
+		// Product
+		const productService = { _serviceBrand: undefined, ...product };
+		services.set(IProductService, productService);
+
+
+		return [new InstantiationService(services, true), productService];
 	}
 
 	// private createServices(): [IInstantiationService, IProcessEnvironment, IEnvironmentMainService, ConfigurationService, StateService, BufferLogger, IProductService, UserDataProfilesMainService] {
@@ -421,31 +437,31 @@ class CodeMain {
 	// 	return mainProcessNodeIpcServer;
 	// }
 
-	// private handleStartupDataDirError(environmentMainService: IEnvironmentMainService, productService: IProductService, error: NodeJS.ErrnoException): void {
-	// 	if (error.code === 'EACCES' || error.code === 'EPERM') {
-	// 		const directories = coalesce([environmentMainService.userDataPath, environmentMainService.extensionsPath, XDG_RUNTIME_DIR]).map(folder => getPathLabel(URI.file(folder), { os: OS, tildify: environmentMainService }));
+	private handleStartupDataDirError(environmentMainService: IEnvironmentMainService, productService: IProductService, error: NodeJS.ErrnoException): void {
+		if (error.code === 'EACCES' || error.code === 'EPERM') {
+			const directories = coalesce([environmentMainService.userDataPath, environmentMainService.extensionsPath, XDG_RUNTIME_DIR]).map(folder => getPathLabel(URI.file(folder), { os: OS, tildify: environmentMainService }));
 
-	// 		this.showStartupWarningDialog(
-	// 			localize('startupDataDirError', "Unable to write program user data."),
-	// 			localize('startupUserDataAndExtensionsDirErrorDetail', "{0}\n\nPlease make sure the following directories are writeable:\n\n{1}", toErrorMessage(error), directories.join('\n')),
-	// 			productService
-	// 		);
-	// 	}
-	// }
+			this.showStartupWarningDialog(
+				localize('startupDataDirError', "Unable to write program user data."),
+				localize('startupUserDataAndExtensionsDirErrorDetail', "{0}\n\nPlease make sure the following directories are writeable:\n\n{1}", toErrorMessage(error), directories.join('\n')),
+				productService
+			);
+		}
+	}
 
-	// private showStartupWarningDialog(message: string, detail: string, productService: IProductService): void {
+	private showStartupWarningDialog(message: string, detail: string, productService: IProductService): void {
 
-	// 	// use sync variant here because we likely exit after this method
-	// 	// due to startup issues and otherwise the dialog seems to disappear
-	// 	// https://github.com/microsoft/vscode/issues/104493
+		// use sync variant here because we likely exit after this method
+		// due to startup issues and otherwise the dialog seems to disappear
+		// https://github.com/microsoft/vscode/issues/104493
 
-	// 	dialog.showMessageBoxSync(massageMessageBoxOptions({
-	// 		type: 'warning',
-	// 		buttons: [localize({ key: 'close', comment: ['&& denotes a mnemonic'] }, "&&Close")],
-	// 		message,
-	// 		detail
-	// 	}, productService).options);
-	// }
+		dialog.showMessageBoxSync(massageMessageBoxOptions({
+			type: 'warning',
+			buttons: [localize({ key: 'close', comment: ['&& denotes a mnemonic'] }, "&&Close")],
+			message,
+			detail
+		}, productService).options);
+	}
 
 	// private async windowsAllowSetForegroundWindow(launchMainService: ILaunchMainService, logService: ILogService): Promise<void> {
 	// 	if (isWindows) {
@@ -461,30 +477,30 @@ class CodeMain {
 	// 	}
 	// }
 
-	// private quit(accessor: ServicesAccessor, reason?: ExpectedError | Error): void {
-	// 	const logService = accessor.get(ILogService);
-	// 	const lifecycleMainService = accessor.get(ILifecycleMainService);
+	private quit(accessor: ServicesAccessor, reason?: ExpectedError | Error): void {
+		const logService = accessor.get(ILogService);
+		const lifecycleMainService = accessor.get(ILifecycleMainService);
 
-	// 	let exitCode = 0;
+		let exitCode = 0;
 
-	// 	if (reason) {
-	// 		if ((reason as ExpectedError).isExpected) {
-	// 			if (reason.message) {
-	// 				logService.trace(reason.message);
-	// 			}
-	// 		} else {
-	// 			exitCode = 1; // signal error to the outside
+		if (reason) {
+			if ((reason as ExpectedError).isExpected) {
+				if (reason.message) {
+					logService.trace(reason.message);
+				}
+			} else {
+				exitCode = 1; // signal error to the outside
 
-	// 			if (reason.stack) {
-	// 				logService.error(reason.stack);
-	// 			} else {
-	// 				logService.error(`Startup error: ${reason.toString()}`);
-	// 			}
-	// 		}
-	// 	}
+				if (reason.stack) {
+					logService.error(reason.stack);
+				} else {
+					logService.error(`Startup error: ${reason.toString()}`);
+				}
+			}
+		}
 
-	// 	lifecycleMainService.kill(exitCode);
-	// }
+		lifecycleMainService.kill(exitCode);
+	}
 
 	// //#region Command line arguments utilities
 

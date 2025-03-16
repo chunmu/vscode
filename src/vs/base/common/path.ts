@@ -1,8 +1,5 @@
-// TODOOOOO 只知道是处理path的，但是具体什么场景不了解
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) Microsoft Corporation. All rights reserved.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/******************************************** 已阅 ********************************************/
+// 做mac和win32路径兼容
 
 // NOTE: VSCode's copy of nodejs path library to be usable in common (non-node) namespace
 // Copied from: https://github.com/nodejs/node/commits/v20.18.2/lib/path.js
@@ -1133,6 +1130,7 @@ export const win32: IPath = {
 	posix: null
 };
 
+// 获取统一菜单cwd 绝对路径
 const posixCwd = (() => {
 	if (platformIsWin32) {
 		// Converts Windows' backslash path separators to POSIX forward slashes

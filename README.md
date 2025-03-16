@@ -280,7 +280,7 @@ src
 │   │   │   │   └── utilsCancellation.ts
 │   │   │   ├── paging.ts
 │   │   │   ├── parsers.ts
-│   │   │   ├── path.ts xxxxx
+│   │   │   ├── path.ts 做mac和win32路径兼容
 │   │   │   ├── performance.ts 平台性能追踪相关标记代码
 │   │   │   ├── platform.ts 平台判断相关的工具方法，没啥特殊的
 │   │   │   ├── ports.ts
