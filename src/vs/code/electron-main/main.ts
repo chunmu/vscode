@@ -42,6 +42,7 @@ import { FileService } from '../../platform/files/common/fileService.js';
 // import { DiskFileSystemProvider } from '../../platform/files/node/diskFileSystemProvider.js';
 // import { SyncDescriptor } from '../../platform/instantiation/common/descriptors.js';
 import { IInstantiationService, ServicesAccessor } from '../../platform/instantiation/common/instantiation.js';
+// 【实例化】服务
 import { InstantiationService } from '../../platform/instantiation/common/instantiationService.js';
 import { ServiceCollection } from '../../platform/instantiation/common/serviceCollection.js';
 import { ILaunchMainService } from '../../platform/launch/electron-main/launchMainService.js';
@@ -156,8 +157,11 @@ class CodeMain {
 	}
 
 	private createServices(): [IInstantiationService, IProductService] {
+		// Map<ServiceIdentifier<any>, any> 构造了一个map
 		const services = new ServiceCollection();
+		// 新增一个可观测错误堆栈的，容器Set，用于存储具有回收内容或动作的service
 		const disposables = new DisposableStore();
+		// 所有窗口立刻关闭 即将退出应用
 		process.once('exit', () => disposables.dispose());
 
 		// Product

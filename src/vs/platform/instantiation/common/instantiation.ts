@@ -84,10 +84,12 @@ export interface IInstantiationService {
  * Identifies a service of type `T`.
  */
 export interface ServiceIdentifier<T> {
+	// 这个应该是构造方法
 	(...args: any[]): void;
 	type: T;
 }
 
+// service依赖关系处理
 function storeServiceDependency(id: Function, target: Function, index: number): void {
 	if ((target as any)[_util.DI_TARGET] === target) {
 		(target as any)[_util.DI_DEPENDENCIES].push({ id, index });
@@ -114,11 +116,13 @@ export function createDecorator<T>(serviceId: string): ServiceIdentifier<T> {
 	};
 
 	id.toString = () => serviceId;
+	console.log(id, 'chunmu: createDecorator')
 
 	_util.serviceIds.set(serviceId, id);
 	return id;
 }
 
+// 屁事没干呐 除了进行一次类型转换 父转子 子是父的超集
 export function refineServiceDecorator<T1, T extends T1>(serviceIdentifier: ServiceIdentifier<T1>): ServiceIdentifier<T> {
 	return <ServiceIdentifier<T>>serviceIdentifier;
 }
