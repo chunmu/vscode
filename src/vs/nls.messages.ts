@@ -1,19 +1,12 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) Microsoft Corporation. All rights reserved.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/******************************************** 已阅 ********************************************/
 
-/*
- * This module exists so that the AMD build of the monaco editor can replace this with an async loader plugin.
- * If you add new functions to this module make sure that they are also provided in the AMD build of the monaco editor.
- *
- * TODO@esm remove me once we no longer ship an AMD build.
- */
-
+// _VSCODE_NLS_MESSAGES 存储多语言解析的内容
 export function getNLSMessages(): string[] {
 	return globalThis._VSCODE_NLS_MESSAGES;
 }
 
+// 打包时可指定语言或者setting设置中处理，我预估是要重启才能生效
+// 也不一定要重启 因为多语言解析后的文本内容已经在内存中了，_VSCODE_NLS_MESSAGES 没验证 没必要
 export function getNLSLanguage(): string | undefined {
 	return globalThis._VSCODE_NLS_LANGUAGE;
 }

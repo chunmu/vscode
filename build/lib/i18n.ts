@@ -1,7 +1,7 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) Microsoft Corporation. All rights reserved.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/******************************************** 已阅 ********************************************/
+// 最终结果都导向专有语言包
+// 这边都是处理语言包的逻辑，包括从语言仓库读取文件夹，分模块加载解析json等工作
+// https://github.com/microsoft/vscode-loc
 
 import path from 'path';
 import fs from 'fs';

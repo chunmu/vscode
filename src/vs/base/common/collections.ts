@@ -1,24 +1,9 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) Microsoft Corporation. All rights reserved.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
-
-/**
- * An interface for a JavaScript object that
- * acts a dictionary. The keys are strings.
- */
+/******************************************** 已阅 ********************************************/
 export type IStringDictionary<V> = Record<string, V>;
 
-/**
- * An interface for a JavaScript object that
- * acts a dictionary. The keys are numbers.
- */
 export type INumberDictionary<V> = Record<number, V>;
 
-/**
- * Groups the collection into a dictionary based on the provided
- * group function.
- */
+// 分组
 export function groupBy<K extends string | number | symbol, V>(data: V[], groupFn: (element: V) => K): Record<K, V[]> {
 	const result: Record<K, V[]> = Object.create(null);
 	for (const element of data) {
@@ -31,7 +16,7 @@ export function groupBy<K extends string | number | symbol, V>(data: V[], groupF
 	}
 	return result;
 }
-
+// 比对Set
 export function diffSets<T>(before: ReadonlySet<T>, after: ReadonlySet<T>): { removed: T[]; added: T[] } {
 	const removed: T[] = [];
 	const added: T[] = [];
@@ -48,6 +33,7 @@ export function diffSets<T>(before: ReadonlySet<T>, after: ReadonlySet<T>): { re
 	return { removed, added };
 }
 
+// 比对Map
 export function diffMaps<K, V>(before: Map<K, V>, after: Map<K, V>): { removed: V[]; added: V[] } {
 	const removed: V[] = [];
 	const added: V[] = [];
@@ -65,7 +51,7 @@ export function diffMaps<K, V>(before: Map<K, V>, after: Map<K, V>): { removed: 
 }
 
 /**
- * Computes the intersection of two sets.
+ * Set交集
  *
  * @param setA - The first set.
  * @param setB - The second iterable.

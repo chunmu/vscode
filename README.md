@@ -9,7 +9,11 @@
 |   |   |- vs
 |   |   |   |- base
 |   |   |   |   |- common
-|   |   |   |   |   |- collection
+|   |   |   |   |   |- collection.ts 一些处理各类集合的工具方法，数组分组，Set对比，Set取交集，
+|   |   |   |   |   |- platform.ts 平台判断相关的工具方法，没啥特殊的
+|   |   |   |- nls.ts 多语言 解析语言仓库，加载到内存中，_VSCODE_NLS_MESSAGES
+|   |   |   |- nls.message.ts 获取当前语言和语言包，全量或者是当前语言id下对应的语言包 没验证
+
 |   |- ...
 
 ```

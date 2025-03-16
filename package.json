@@ -10,7 +10,7 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "test": "echo Please run any of the test scripts from the scripts folder.",
+    "test": "node ./out/main.js",
     "test-browser": "npx playwright install && node test/unit/browser/index.js",
     "test-browser-no-install": "node test/unit/browser/index.js",
     "test-node": "mocha test/unit/node/index.js --delay --ui=tdd --timeout=5000 --exit",
@@ -18,6 +18,7 @@
     "preinstall": "node build/npm/preinstall.js",
     "postinstall": "node build/npm/postinstall.js",
     "compile": "node ./node_modules/gulp/bin/gulp.js compile",
+    "compile-little": "node ./node_modules/gulp/bin/gulp-little.js compile",
     "watch": "npm-run-all -lp watch-client watch-extensions",
     "watchd": "deemon npm run watch",
     "watch-webd": "deemon npm run watch-web",

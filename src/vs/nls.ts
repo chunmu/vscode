@@ -1,8 +1,6 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) Microsoft Corporation. All rights reserved.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
-
+/******************************************** 已阅 ********************************************/
+// 最终结果都导向专有语言包
+// https://github.com/microsoft/vscode-loc
 // eslint-disable-next-line local/code-import-patterns
 import { getNLSLanguage, getNLSMessages } from './nls.messages.js';
 // eslint-disable-next-line local/code-import-patterns
