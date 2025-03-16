@@ -109,7 +109,7 @@ protocol.registerSchemesAsPrivileged([
 ]);
 
 // Global app listeners
-// registerListeners();
+registerListeners();
 
 /**
  * We can resolve the NLS configuration early if it is defined
@@ -142,79 +142,81 @@ if (userLocale) {
 // Pseudo Language Language Pack is being used.
 // In that case, use `en` as the Electron locale.
 
-// if (process.platform === 'win32' || process.platform === 'linux') {
-// 	const electronLocale = (!userLocale || userLocale === 'qps-ploc') ? 'en' : userLocale;
-// 	app.commandLine.appendSwitch('lang', electronLocale);
-// }
+if (process.platform === 'win32' || process.platform === 'linux') {
+	const electronLocale = (!userLocale || userLocale === 'qps-ploc') ? 'en' : userLocale;
+	app.commandLine.appendSwitch('lang', electronLocale);
+}
 
-// // Load our code once ready
-// app.once('ready', function () {
-// 	if (args['trace']) {
-// 		let traceOptions: Electron.TraceConfig | Electron.TraceCategoriesAndOptions;
-// 		if (args['trace-memory-infra']) {
-// 			const customCategories = args['trace-category-filter']?.split(',') || [];
-// 			customCategories.push('disabled-by-default-memory-infra', 'disabled-by-default-memory-infra.v8.code_stats');
-// 			traceOptions = {
-// 				included_categories: customCategories,
-// 				excluded_categories: ['*'],
-// 				memory_dump_config: {
-// 					allowed_dump_modes: ['light', 'detailed'],
-// 					triggers: [
-// 						{
-// 							type: 'periodic_interval',
-// 							mode: 'detailed',
-// 							min_time_between_dumps_ms: 10000
-// 						},
-// 						{
-// 							type: 'periodic_interval',
-// 							mode: 'light',
-// 							min_time_between_dumps_ms: 1000
-// 						}
-// 					]
-// 				}
-// 			};
-// 		} else {
-// 			traceOptions = {
-// 				categoryFilter: args['trace-category-filter'] || '*',
-// 				traceOptions: args['trace-options'] || 'record-until-full,enable-sampling'
-// 			};
-// 		}
+// Load our code once ready
+// 主线程启动完成
+app.once('ready', function () {
+	if (args['trace']) {
+		let traceOptions: Electron.TraceConfig | Electron.TraceCategoriesAndOptions;
+		if (args['trace-memory-infra']) {
+			const customCategories = args['trace-category-filter']?.split(',') || [];
+			customCategories.push('disabled-by-default-memory-infra', 'disabled-by-default-memory-infra.v8.code_stats');
+			traceOptions = {
+				included_categories: customCategories,
+				excluded_categories: ['*'],
+				memory_dump_config: {
+					allowed_dump_modes: ['light', 'detailed'],
+					triggers: [
+						{
+							type: 'periodic_interval',
+							mode: 'detailed',
+							min_time_between_dumps_ms: 10000
+						},
+						{
+							type: 'periodic_interval',
+							mode: 'light',
+							min_time_between_dumps_ms: 1000
+						}
+					]
+				}
+			};
+		} else {
+			traceOptions = {
+				categoryFilter: args['trace-category-filter'] || '*',
+				traceOptions: args['trace-options'] || 'record-until-full,enable-sampling'
+			};
+		}
 
-// 		contentTracing.startRecording(traceOptions).finally(() => onReady());
-// 	} else {
-// 		onReady();
-// 	}
-// });
+		contentTracing.startRecording(traceOptions).finally(() => onReady());
+	} else {
+		onReady();
+	}
+});
 
-// async function onReady() {
-// 	perf.mark('code/mainAppReady');
+async function onReady() {
+	perf.mark('code/mainAppReady');
 
-// 	try {
-// 		const [, nlsConfig] = await Promise.all([
-// 			mkdirpIgnoreError(codeCachePath),
-// 			resolveNlsConfiguration()
-// 		]);
+	try {
+		const [, nlsConfig] = await Promise.all([
+			mkdirpIgnoreError(codeCachePath),
+			resolveNlsConfiguration()
+		]);
 
-// 		await startup(codeCachePath, nlsConfig);
-// 	} catch (error) {
-// 		console.error(error);
-// 	}
-// }
+		await startup(codeCachePath, nlsConfig);
+	} catch (error) {
+		console.error(error);
+	}
+}
 
-// /**
-//  * Main startup routine
-//  */
-// async function startup(codeCachePath: string | undefined, nlsConfig: INLSConfiguration): Promise<void> {
-// 	process.env['VSCODE_NLS_CONFIG'] = JSON.stringify(nlsConfig);
-// 	process.env['VSCODE_CODE_CACHE_PATH'] = codeCachePath || '';
+/**
+ * Main startup routine
+ */
+async function startup(codeCachePath: string | undefined, nlsConfig: INLSConfiguration): Promise<void> {
+	process.env['VSCODE_NLS_CONFIG'] = JSON.stringify(nlsConfig);
+	process.env['VSCODE_CODE_CACHE_PATH'] = codeCachePath || '';
 
-// 	// Bootstrap ESM
-// 	await bootstrapESM();
+	// Bootstrap ESM
+	await bootstrapESM();
 
-// 	// Load Main
-// 	await import('./vs/code/electron-main/main.js');
-// 	perf.mark('code/didRunMainBundle');
-// }
+	// Load Main
+	console.log('chunmu: src/main.ts startup')
+	// await import('./vs/code/electron-main/main.js');
+	perf.mark('code/didRunMainBundle');
+}
 
 function configureCommandlineSwitchesSync(cliArgs: NativeParsedArgs) {
 	const SUPPORTED_ELECTRON_SWITCHES = [
@@ -548,39 +550,43 @@ function parseCLIArgs(): NativeParsedArgs {
 	});
 }
 
-// function registerListeners(): void {
+// 用来兼容macos的
+// 在拖拽一个文件夹到还没有启动的vscode图标时，open-file的时间会比app-ready事件更早
+// 所以需要记录 启动完成之后打开目录
+// 可以多个目录一起打开，也就是可以拖拽多个文件夹到图标上 跟我们印象中一个前端项目打开一个vscode的情况不一样
+function registerListeners(): void {
 
-// 	/**
-// 	 * macOS: when someone drops a file to the not-yet running VSCode, the open-file event fires even before
-// 	 * the app-ready event. We listen very early for open-file and remember this upon startup as path to open.
-// 	 */
-// 	const macOpenFiles: string[] = [];
-// 	(globalThis as any)['macOpenFiles'] = macOpenFiles;
-// 	app.on('open-file', function (event, path) {
-// 		macOpenFiles.push(path);
-// 	});
+	/**
+	 * macOS: when someone drops a file to the not-yet running VSCode, the open-file event fires even before
+	 * the app-ready event. We listen very early for open-file and remember this upon startup as path to open.
+	 */
+	const macOpenFiles: string[] = [];
+	(globalThis as any)['macOpenFiles'] = macOpenFiles;
+	app.on('open-file', function (event, path) {
+		macOpenFiles.push(path);
+	});
 
-// 	/**
-// 	 * macOS: react to open-url requests.
-// 	 */
-// 	const openUrls: string[] = [];
-// 	const onOpenUrl =
-// 		function (event: { preventDefault: () => void }, url: string) {
-// 			event.preventDefault();
+	/**
+	 * macOS: react to open-url requests.
+	 */
+	const openUrls: string[] = [];
+	const onOpenUrl =
+		function (event: { preventDefault: () => void }, url: string) {
+			event.preventDefault();
 
-// 			openUrls.push(url);
-// 		};
+			openUrls.push(url);
+		};
 
-// 	app.on('will-finish-launching', function () {
-// 		app.on('open-url', onOpenUrl);
-// 	});
+	app.on('will-finish-launching', function () {
+		app.on('open-url', onOpenUrl);
+	});
 
-// 	(globalThis as any)['getOpenUrls'] = function () {
-// 		app.removeListener('open-url', onOpenUrl);
+	(globalThis as any)['getOpenUrls'] = function () {
+		app.removeListener('open-url', onOpenUrl);
 
-// 		return openUrls;
-// 	};
-// }
+		return openUrls;
+	};
+}
 
 function getCodeCachePath(): string | undefined {
 
@@ -603,19 +609,19 @@ function getCodeCachePath(): string | undefined {
 	return path.join(userDataPath, 'CachedData', commit);
 }
 
-// async function mkdirpIgnoreError(dir: string | undefined): Promise<string | undefined> {
-// 	if (typeof dir === 'string') {
-// 		try {
-// 			await fs.promises.mkdir(dir, { recursive: true });
+async function mkdirpIgnoreError(dir: string | undefined): Promise<string | undefined> {
+	if (typeof dir === 'string') {
+		try {
+			await fs.promises.mkdir(dir, { recursive: true });
 
-// 			return dir;
-// 		} catch (error) {
-// 			// ignore
-// 		}
-// 	}
+			return dir;
+		} catch (error) {
+			// ignore
+		}
+	}
 
-// 	return undefined;
-// }
+	return undefined;
+}
 
 // //#region NLS Support
 
