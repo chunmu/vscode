@@ -214,7 +214,7 @@ async function startup(codeCachePath: string | undefined, nlsConfig: INLSConfigu
 
 	// Load Main
 	console.log('chunmu: src/main.ts startup')
-	// await import('./vs/code/electron-main/main.js');
+	await import('./vs/code/electron-main/main.js');
 	perf.mark('code/didRunMainBundle');
 }
 
