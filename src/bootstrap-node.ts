@@ -1,12 +1,10 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) Microsoft Corporation. All rights reserved.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/******************************************** 已阅 ********************************************/
 
 import * as path from 'path';
 import * as fs from 'fs';
 import { fileURLToPath } from 'url';
 import { createRequire } from 'node:module';
+// 链路已处理
 import type { IProductConfiguration } from './vs/base/common/product.js';
 
 const require = createRequire(import.meta.url);
@@ -129,9 +127,17 @@ export function removeGlobalNodeJsModuleLookupPaths(): void {
 	};
 }
 
-/**
- * Helper to enable portable mode.
- */
+
+// 便携模式 所有的用户数据存储在同目录的data文件夹下
+// 移动data文件夹可以转移到其他版本vscode下
+// |- VSCode-win32-x64-1.84.2
+// |   |- Code.exe (or code executable)
+// |   |- data
+// |   |   |- user-data
+// |   |   |   |- ...
+// |   |   |- extensions
+// |   |   |   |- ...
+// |   |- ...
 export function configurePortable(product: Partial<IProductConfiguration>): { portableDataPath: string; isPortable: boolean } {
 	const appRoot = path.dirname(__dirname);
 
