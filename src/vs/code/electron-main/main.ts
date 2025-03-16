@@ -12,7 +12,7 @@ import { URI } from '../../base/common/uri.js';
 // import { coalesce, distinct } from '../../base/common/arrays.js';
 // import { Promises } from '../../base/common/async.js';
 // import { toErrorMessage } from '../../base/common/errorMessage.js';
-// import { ExpectedError, setUnexpectedErrorHandler } from '../../base/common/errors.js';
+import { ExpectedError, setUnexpectedErrorHandler } from '../../base/common/errors.js';
 // import { IPathWithLineAndColumn, isValidBasename, parseLineAndColumnAware, sanitizeFilePath } from '../../base/common/extpath.js';
 // import { Event } from '../../base/common/event.js';
 // import { getPathLabel } from '../../base/common/labels.js';
@@ -97,6 +97,8 @@ class CodeMain {
 
 		// Set the error handler early enough so that we are not getting the
 		// default electron error dialog popping up
+		// 不懂 貌似是为了不抛出默认错误new Error，导致弹出electron的默认弹窗
+		// 覆写一下，自己看看抛错误内容就行了 这种抛错也是自己写的代码抛出的，不是electron或者node的，应该可以归类为编辑器代码的错误
 		setUnexpectedErrorHandler(err => console.error(err));
 
 		// Create services

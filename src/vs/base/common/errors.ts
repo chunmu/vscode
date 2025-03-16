@@ -308,6 +308,7 @@ export class ErrorNoTelemetry extends Error {
 /**
  * This error indicates a bug.
  * Do not throw this for invalid user input.
+ * // 优雅的捕捉错误和回复，不会导致panic，这种层次的错误 不应该导致崩溃
  * Only catch this error to recover gracefully from bugs.
  */
 export class BugIndicatingError extends Error {
