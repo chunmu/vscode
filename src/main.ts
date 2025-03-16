@@ -12,14 +12,14 @@ import { bootstrapESM } from './bootstrap-esm.js';
 import { fileURLToPath } from 'url';
 import { app, protocol, crashReporter, Menu, contentTracing } from 'electron';
 import minimist from 'minimist';
-// import { product } from './bootstrap-meta.js';
-// import { parse } from './vs/base/common/jsonc.js';
-// import { getUserDataPath } from './vs/platform/environment/node/userDataPath.js';
-// import * as perf from './vs/base/common/performance.js';
+import { product } from './bootstrap-meta.js';
+import { parse } from './vs/base/common/jsonc.js';
+import { getUserDataPath } from './vs/platform/environment/node/userDataPath.js';
+import * as perf from './vs/base/common/performance.js';
 // import { resolveNLSConfiguration } from './vs/base/node/nls.js';
 // import { getUNCHost, addUNCHostToAllowlist } from './vs/base/node/unc.js';
 // import { INLSConfiguration } from './vs/nls.js';
-// import { NativeParsedArgs } from './vs/platform/environment/common/argv.js';
+import { NativeParsedArgs } from './vs/platform/environment/common/argv.js';
 
 // const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -34,11 +34,11 @@ import minimist from 'minimist';
 // perf.mark('code/didLoadMainBundle');
 
 // // Enable portable support
-// const portable = configurePortable(product);
+const portable = configurePortable(product);
 
-// const args = parseCLIArgs();
+const args = parseCLIArgs();
 // // Configure static command line arguments
-// const argvConfig = configureCommandlineSwitchesSync(args);
+const argvConfig = configureCommandlineSwitchesSync(args);
 // // Enable sandbox globally unless
 // // 1) disabled via command line using either
 // //    `--no-sandbox` or `--disable-chromium-sandbox` argument.
@@ -57,7 +57,7 @@ import minimist from 'minimist';
 // }
 
 // // Set userData path before app 'ready' event
-// const userDataPath = getUserDataPath(args, product.nameShort ?? 'code-oss-dev');
+const userDataPath = getUserDataPath(args, product.nameShort ?? 'code-oss-dev');
 // if (process.platform === 'win32') {
 // 	const userDataUNCHost = getUNCHost(userDataPath);
 // 	if (userDataUNCHost) {
@@ -87,13 +87,10 @@ import minimist from 'minimist';
 // }
 // perf.mark('code/didStartCrashReporter');
 
-// // Set logs path before app 'ready' event if running portable
-// // to ensure that no 'logs' folder is created on disk at a
-// // location outside of the portable directory
-// // (https://github.com/microsoft/vscode/issues/56651)
-// if (portable && portable.isPortable) {
-// 	app.setAppLogsPath(path.join(userDataPath, 'logs'));
-// }
+// 设定app日志目录
+if (portable && portable.isPortable) {
+	app.setAppLogsPath(path.join(userDataPath, 'logs'));
+}
 
 // // Register custom schemes with privileges
 // protocol.registerSchemesAsPrivileged([
@@ -215,213 +212,214 @@ import minimist from 'minimist';
 // 	perf.mark('code/didRunMainBundle');
 // }
 
-// function configureCommandlineSwitchesSync(cliArgs: NativeParsedArgs) {
-// 	const SUPPORTED_ELECTRON_SWITCHES = [
+function configureCommandlineSwitchesSync(cliArgs: NativeParsedArgs) {
+	const SUPPORTED_ELECTRON_SWITCHES = [
 
-// 		// alias from us for --disable-gpu
-// 		'disable-hardware-acceleration',
+		// alias from us for --disable-gpu
+		'disable-hardware-acceleration',
 
-// 		// override for the color profile to use
-// 		'force-color-profile',
+		// override for the color profile to use
+		'force-color-profile',
 
-// 		// disable LCD font rendering, a Chromium flag
-// 		'disable-lcd-text',
+		// disable LCD font rendering, a Chromium flag
+		'disable-lcd-text',
 
-// 		// bypass any specified proxy for the given semi-colon-separated list of hosts
-// 		'proxy-bypass-list'
-// 	];
+		// bypass any specified proxy for the given semi-colon-separated list of hosts
+		'proxy-bypass-list'
+	];
 
-// 	if (process.platform === 'linux') {
+	if (process.platform === 'linux') {
 
-// 		// Force enable screen readers on Linux via this flag
-// 		SUPPORTED_ELECTRON_SWITCHES.push('force-renderer-accessibility');
+		// Force enable screen readers on Linux via this flag
+		SUPPORTED_ELECTRON_SWITCHES.push('force-renderer-accessibility');
 
-// 		// override which password-store is used on Linux
-// 		SUPPORTED_ELECTRON_SWITCHES.push('password-store');
-// 	}
+		// override which password-store is used on Linux
+		SUPPORTED_ELECTRON_SWITCHES.push('password-store');
+	}
 
-// 	const SUPPORTED_MAIN_PROCESS_SWITCHES = [
+	const SUPPORTED_MAIN_PROCESS_SWITCHES = [
 
-// 		// Persistently enable proposed api via argv.json: https://github.com/microsoft/vscode/issues/99775
-// 		'enable-proposed-api',
+		// Persistently enable proposed api via argv.json: https://github.com/microsoft/vscode/issues/99775
+		'enable-proposed-api',
 
-// 		// Log level to use. Default is 'info'. Allowed values are 'error', 'warn', 'info', 'debug', 'trace', 'off'.
-// 		'log-level',
+		// Log level to use. Default is 'info'. Allowed values are 'error', 'warn', 'info', 'debug', 'trace', 'off'.
+		'log-level',
 
-// 		// Use an in-memory storage for secrets
-// 		'use-inmemory-secretstorage'
-// 	];
+		// Use an in-memory storage for secrets
+		'use-inmemory-secretstorage'
+	];
 
-// 	// Read argv config
-// 	const argvConfig = readArgvConfigSync();
+	// Read argv config
+	const argvConfig = readArgvConfigSync();
 
-// 	Object.keys(argvConfig).forEach(argvKey => {
-// 		const argvValue = argvConfig[argvKey];
+	Object.keys(argvConfig).forEach(argvKey => {
+		const argvValue = argvConfig[argvKey];
 
-// 		// Append Electron flags to Electron
-// 		if (SUPPORTED_ELECTRON_SWITCHES.indexOf(argvKey) !== -1) {
-// 			if (argvValue === true || argvValue === 'true') {
-// 				if (argvKey === 'disable-hardware-acceleration') {
-// 					app.disableHardwareAcceleration(); // needs to be called explicitly
-// 				} else {
-// 					app.commandLine.appendSwitch(argvKey);
-// 				}
-// 			} else if (typeof argvValue === 'string' && argvValue) {
-// 				if (argvKey === 'password-store') {
-// 					// Password store
-// 					// TODO@TylerLeonhardt: Remove this migration in 3 months
-// 					let migratedArgvValue = argvValue;
-// 					if (argvValue === 'gnome' || argvValue === 'gnome-keyring') {
-// 						migratedArgvValue = 'gnome-libsecret';
-// 					}
-// 					app.commandLine.appendSwitch(argvKey, migratedArgvValue);
-// 				} else {
-// 					app.commandLine.appendSwitch(argvKey, argvValue);
-// 				}
-// 			}
-// 		}
+		// Append Electron flags to Electron
+		if (SUPPORTED_ELECTRON_SWITCHES.indexOf(argvKey) !== -1) {
+			if (argvValue === true || argvValue === 'true') {
+				if (argvKey === 'disable-hardware-acceleration') {
+					app.disableHardwareAcceleration(); // needs to be called explicitly
+				} else {
+					// commandLine是设置命令行标记的  在底层核心引擎启动之前设置
+					app.commandLine.appendSwitch(argvKey);
+				}
+			} else if (typeof argvValue === 'string' && argvValue) {
+				if (argvKey === 'password-store') {
+					// Password store
+					// TODO@TylerLeonhardt: Remove this migration in 3 months
+					let migratedArgvValue = argvValue;
+					if (argvValue === 'gnome' || argvValue === 'gnome-keyring') {
+						migratedArgvValue = 'gnome-libsecret';
+					}
+					app.commandLine.appendSwitch(argvKey, migratedArgvValue);
+				} else {
+					app.commandLine.appendSwitch(argvKey, argvValue);
+				}
+			}
+		}
 
-// 		// Append main process flags to process.argv
-// 		else if (SUPPORTED_MAIN_PROCESS_SWITCHES.indexOf(argvKey) !== -1) {
-// 			switch (argvKey) {
-// 				case 'enable-proposed-api':
-// 					if (Array.isArray(argvValue)) {
-// 						argvValue.forEach(id => id && typeof id === 'string' && process.argv.push('--enable-proposed-api', id));
-// 					} else {
-// 						console.error(`Unexpected value for \`enable-proposed-api\` in argv.json. Expected array of extension ids.`);
-// 					}
-// 					break;
+		// Append main process flags to process.argv
+		else if (SUPPORTED_MAIN_PROCESS_SWITCHES.indexOf(argvKey) !== -1) {
+			switch (argvKey) {
+				case 'enable-proposed-api':
+					if (Array.isArray(argvValue)) {
+						argvValue.forEach(id => id && typeof id === 'string' && process.argv.push('--enable-proposed-api', id));
+					} else {
+						console.error(`Unexpected value for \`enable-proposed-api\` in argv.json. Expected array of extension ids.`);
+					}
+					break;
 
-// 				case 'log-level':
-// 					if (typeof argvValue === 'string') {
-// 						process.argv.push('--log', argvValue);
-// 					} else if (Array.isArray(argvValue)) {
-// 						for (const value of argvValue) {
-// 							process.argv.push('--log', value);
-// 						}
-// 					}
-// 					break;
+				case 'log-level':
+					if (typeof argvValue === 'string') {
+						process.argv.push('--log', argvValue);
+					} else if (Array.isArray(argvValue)) {
+						for (const value of argvValue) {
+							process.argv.push('--log', value);
+						}
+					}
+					break;
 
-// 				case 'use-inmemory-secretstorage':
-// 					if (argvValue) {
-// 						process.argv.push('--use-inmemory-secretstorage');
-// 					}
-// 					break;
-// 			}
-// 		}
-// 	});
+				case 'use-inmemory-secretstorage':
+					if (argvValue) {
+						process.argv.push('--use-inmemory-secretstorage');
+					}
+					break;
+			}
+		}
+	});
 
-// 	// Following features are disabled from the runtime:
-// 	// `CalculateNativeWinOcclusion` - Disable native window occlusion tracker (https://groups.google.com/a/chromium.org/g/embedder-dev/c/ZF3uHHyWLKw/m/VDN2hDXMAAAJ)
-// 	// `PlzDedicatedWorker` - Refs https://github.com/microsoft/vscode/issues/233060#issuecomment-2523212427
-// 	const featuresToDisable =
-// 		`CalculateNativeWinOcclusion,PlzDedicatedWorker,${app.commandLine.getSwitchValue('disable-features')}`;
-// 	app.commandLine.appendSwitch('disable-features', featuresToDisable);
+	// Following features are disabled from the runtime:
+	// `CalculateNativeWinOcclusion` - Disable native window occlusion tracker (https://groups.google.com/a/chromium.org/g/embedder-dev/c/ZF3uHHyWLKw/m/VDN2hDXMAAAJ)
+	// `PlzDedicatedWorker` - Refs https://github.com/microsoft/vscode/issues/233060#issuecomment-2523212427
+	const featuresToDisable =
+		`CalculateNativeWinOcclusion,PlzDedicatedWorker,${app.commandLine.getSwitchValue('disable-features')}`;
+	app.commandLine.appendSwitch('disable-features', featuresToDisable);
 
-// 	// Blink features to configure.
-// 	// `FontMatchingCTMigration` - Siwtch font matching on macOS to Appkit (Refs https://github.com/microsoft/vscode/issues/224496#issuecomment-2270418470).
-// 	// `StandardizedBrowserZoom` - Disable zoom adjustment for bounding box (https://github.com/microsoft/vscode/issues/232750#issuecomment-2459495394)
-// 	const blinkFeaturesToDisable =
-// 		`FontMatchingCTMigration,StandardizedBrowserZoom,${app.commandLine.getSwitchValue('disable-blink-features')}`;
-// 	app.commandLine.appendSwitch('disable-blink-features', blinkFeaturesToDisable);
+	// Blink features to configure.
+	// `FontMatchingCTMigration` - Siwtch font matching on macOS to Appkit (Refs https://github.com/microsoft/vscode/issues/224496#issuecomment-2270418470).
+	// `StandardizedBrowserZoom` - Disable zoom adjustment for bounding box (https://github.com/microsoft/vscode/issues/232750#issuecomment-2459495394)
+	const blinkFeaturesToDisable =
+		`FontMatchingCTMigration,StandardizedBrowserZoom,${app.commandLine.getSwitchValue('disable-blink-features')}`;
+	app.commandLine.appendSwitch('disable-blink-features', blinkFeaturesToDisable);
 
-// 	// Support JS Flags
-// 	const jsFlags = getJSFlags(cliArgs);
-// 	if (jsFlags) {
-// 		app.commandLine.appendSwitch('js-flags', jsFlags);
-// 	}
+	// Support JS Flags
+	const jsFlags = getJSFlags(cliArgs);
+	if (jsFlags) {
+		app.commandLine.appendSwitch('js-flags', jsFlags);
+	}
 
-// 	// Use portal version 4 that supports current_folder option
-// 	// to address https://github.com/microsoft/vscode/issues/213780
-// 	// Runtime sets the default version to 3, refs https://github.com/electron/electron/pull/44426
-// 	app.commandLine.appendSwitch('xdg-portal-required-version', '4');
+	// Use portal version 4 that supports current_folder option
+	// to address https://github.com/microsoft/vscode/issues/213780
+	// Runtime sets the default version to 3, refs https://github.com/electron/electron/pull/44426
+	app.commandLine.appendSwitch('xdg-portal-required-version', '4');
 
-// 	return argvConfig;
-// }
+	return argvConfig;
+}
 
-// interface IArgvConfig {
-// 	[key: string]: string | string[] | boolean | undefined;
-// 	readonly locale?: string;
-// 	readonly 'disable-lcd-text'?: boolean;
-// 	readonly 'proxy-bypass-list'?: string;
-// 	readonly 'disable-hardware-acceleration'?: boolean;
-// 	readonly 'force-color-profile'?: string;
-// 	readonly 'enable-crash-reporter'?: boolean;
-// 	readonly 'crash-reporter-id'?: string;
-// 	readonly 'enable-proposed-api'?: string[];
-// 	readonly 'log-level'?: string | string[];
-// 	readonly 'disable-chromium-sandbox'?: boolean;
-// 	readonly 'use-inmemory-secretstorage'?: boolean;
-// }
+interface IArgvConfig {
+	[key: string]: string | string[] | boolean | undefined;
+	readonly locale?: string;
+	readonly 'disable-lcd-text'?: boolean;
+	readonly 'proxy-bypass-list'?: string;
+	readonly 'disable-hardware-acceleration'?: boolean;
+	readonly 'force-color-profile'?: string;
+	readonly 'enable-crash-reporter'?: boolean;
+	readonly 'crash-reporter-id'?: string;
+	readonly 'enable-proposed-api'?: string[];
+	readonly 'log-level'?: string | string[];
+	readonly 'disable-chromium-sandbox'?: boolean;
+	readonly 'use-inmemory-secretstorage'?: boolean;
+}
 
-// function readArgvConfigSync(): IArgvConfig {
+function readArgvConfigSync(): IArgvConfig {
 
-// 	// Read or create the argv.json config file sync before app('ready')
-// 	const argvConfigPath = getArgvConfigPath();
-// 	let argvConfig: IArgvConfig | undefined = undefined;
-// 	try {
-// 		argvConfig = parse(fs.readFileSync(argvConfigPath).toString());
-// 	} catch (error) {
-// 		if (error && error.code === 'ENOENT') {
-// 			createDefaultArgvConfigSync(argvConfigPath);
-// 		} else {
-// 			console.warn(`Unable to read argv.json configuration file in ${argvConfigPath}, falling back to defaults (${error})`);
-// 		}
-// 	}
+	// Read or create the argv.json config file sync before app('ready')
+	const argvConfigPath = getArgvConfigPath();
+	let argvConfig: IArgvConfig | undefined = undefined;
+	try {
+		argvConfig = parse(fs.readFileSync(argvConfigPath).toString());
+	} catch (error) {
+		if (error && error.code === 'ENOENT') {
+			createDefaultArgvConfigSync(argvConfigPath);
+		} else {
+			console.warn(`Unable to read argv.json configuration file in ${argvConfigPath}, falling back to defaults (${error})`);
+		}
+	}
 
-// 	// Fallback to default
-// 	if (!argvConfig) {
-// 		argvConfig = {};
-// 	}
+	// Fallback to default
+	if (!argvConfig) {
+		argvConfig = {};
+	}
 
-// 	return argvConfig;
-// }
+	return argvConfig;
+}
 
-// function createDefaultArgvConfigSync(argvConfigPath: string): void {
-// 	try {
+function createDefaultArgvConfigSync(argvConfigPath: string): void {
+	try {
 
-// 		// Ensure argv config parent exists
-// 		const argvConfigPathDirname = path.dirname(argvConfigPath);
-// 		if (!fs.existsSync(argvConfigPathDirname)) {
-// 			fs.mkdirSync(argvConfigPathDirname);
-// 		}
+		// Ensure argv config parent exists
+		const argvConfigPathDirname = path.dirname(argvConfigPath);
+		if (!fs.existsSync(argvConfigPathDirname)) {
+			fs.mkdirSync(argvConfigPathDirname);
+		}
 
-// 		// Default argv content
-// 		const defaultArgvConfigContent = [
-// 			'// This configuration file allows you to pass permanent command line arguments to VS Code.',
-// 			'// Only a subset of arguments is currently supported to reduce the likelihood of breaking',
-// 			'// the installation.',
-// 			'//',
-// 			'// PLEASE DO NOT CHANGE WITHOUT UNDERSTANDING THE IMPACT',
-// 			'//',
-// 			'// NOTE: Changing this file requires a restart of VS Code.',
-// 			'{',
-// 			'	// Use software rendering instead of hardware accelerated rendering.',
-// 			'	// This can help in cases where you see rendering issues in VS Code.',
-// 			'	// "disable-hardware-acceleration": true',
-// 			'}'
-// 		];
+		// Default argv content
+		const defaultArgvConfigContent = [
+			'// This configuration file allows you to pass permanent command line arguments to VS Code.',
+			'// Only a subset of arguments is currently supported to reduce the likelihood of breaking',
+			'// the installation.',
+			'//',
+			'// PLEASE DO NOT CHANGE WITHOUT UNDERSTANDING THE IMPACT',
+			'//',
+			'// NOTE: Changing this file requires a restart of VS Code.',
+			'{',
+			'	// Use software rendering instead of hardware accelerated rendering.',
+			'	// This can help in cases where you see rendering issues in VS Code.',
+			'	// "disable-hardware-acceleration": true',
+			'}'
+		];
 
-// 		// Create initial argv.json with default content
-// 		fs.writeFileSync(argvConfigPath, defaultArgvConfigContent.join('\n'));
-// 	} catch (error) {
-// 		console.error(`Unable to create argv.json configuration file in ${argvConfigPath}, falling back to defaults (${error})`);
-// 	}
-// }
+		// Create initial argv.json with default content
+		fs.writeFileSync(argvConfigPath, defaultArgvConfigContent.join('\n'));
+	} catch (error) {
+		console.error(`Unable to create argv.json configuration file in ${argvConfigPath}, falling back to defaults (${error})`);
+	}
+}
 
-// function getArgvConfigPath(): string {
-// 	const vscodePortable = process.env['VSCODE_PORTABLE'];
-// 	if (vscodePortable) {
-// 		return path.join(vscodePortable, 'argv.json');
-// 	}
+function getArgvConfigPath(): string {
+	const vscodePortable = process.env['VSCODE_PORTABLE'];
+	if (vscodePortable) {
+		return path.join(vscodePortable, 'argv.json');
+	}
 
-// 	let dataFolderName = product.dataFolderName;
-// 	if (process.env['VSCODE_DEV']) {
-// 		dataFolderName = `${dataFolderName}-dev`;
-// 	}
+	let dataFolderName = product.dataFolderName;
+	if (process.env['VSCODE_DEV']) {
+		dataFolderName = `${dataFolderName}-dev`;
+	}
 
-// 	return path.join(os.homedir(), dataFolderName!, 'argv.json');
-// }
+	return path.join(os.homedir(), dataFolderName!, 'argv.json');
+}
 
 // function configureCrashReporter(): void {
 // 	let crashReporterDirectory = args['crash-reporter-directory'];
@@ -514,36 +512,36 @@ import minimist from 'minimist';
 // 	});
 // }
 
-// function getJSFlags(cliArgs: NativeParsedArgs): string | null {
-// 	const jsFlags: string[] = [];
+function getJSFlags(cliArgs: NativeParsedArgs): string | null {
+	const jsFlags: string[] = [];
 
-// 	// Add any existing JS flags we already got from the command line
-// 	if (cliArgs['js-flags']) {
-// 		jsFlags.push(cliArgs['js-flags']);
-// 	}
+	// Add any existing JS flags we already got from the command line
+	if (cliArgs['js-flags']) {
+		jsFlags.push(cliArgs['js-flags']);
+	}
 
-// 	return jsFlags.length > 0 ? jsFlags.join(' ') : null;
-// }
+	return jsFlags.length > 0 ? jsFlags.join(' ') : null;
+}
 
-// function parseCLIArgs(): NativeParsedArgs {
-// 	return minimist(process.argv, {
-// 		string: [
-// 			'user-data-dir',
-// 			'locale',
-// 			'js-flags',
-// 			'crash-reporter-directory'
-// 		],
-// 		boolean: [
-// 			'disable-chromium-sandbox',
-// 		],
-// 		default: {
-// 			'sandbox': true
-// 		},
-// 		alias: {
-// 			'no-sandbox': 'sandbox'
-// 		}
-// 	});
-// }
+function parseCLIArgs(): NativeParsedArgs {
+	return minimist(process.argv, {
+		string: [
+			'user-data-dir',
+			'locale',
+			'js-flags',
+			'crash-reporter-directory'
+		],
+		boolean: [
+			'disable-chromium-sandbox',
+		],
+		default: {
+			'sandbox': true
+		},
+		alias: {
+			'no-sandbox': 'sandbox'
+		}
+	});
+}
 
 // function registerListeners(): void {
 

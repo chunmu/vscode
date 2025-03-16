@@ -1,8 +1,5 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) Microsoft Corporation. All rights reserved.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
-
+/******************************************** 已阅 ********************************************/
+// 主要是设定用户应用数据目录
 import * as os from 'os';
 import * as path from 'path';
 import { NativeParsedArgs } from '../common/argv.js';

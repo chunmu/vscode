@@ -16,6 +16,7 @@ const require = createRequire(import.meta.url);
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // Install a hook to module resolution to map 'fs' to 'original-fs'
+// 写个钩子  用于批处理fs的加载 低版本的js文件导入是from 'fs'的，需要调教
 if (process.env['ELECTRON_RUN_AS_NODE'] || process.versions['electron']) {
 	const jsCode = `
 	export async function resolve(specifier, context, nextResolve) {
