@@ -1,8 +1,5 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) Microsoft Corporation. All rights reserved.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
-
+/******************************************** 已阅 ********************************************/
+// 文件系统路径处理   windows系列的路径特点  /usr/xxx/xx  UNC: user:\usr\xxx\xx
 export function getUNCHostAllowlist(): string[] {
 	const allowlist = processUNCHostAllowlist();
 	if (allowlist) {

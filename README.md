@@ -16,6 +16,9 @@
 |   |   |   |   |   |- platform.ts 平台判断相关的工具方法，没啥特殊的
 |   |   |   |   |   |- performance.ts 平台性能追踪相关标记代码
 |   |   |   |   |   |- jsonc.ts 平台性能解析用户命令行参数配置的json文件，为什么不是require，因为这个是动态解析的，用户可以调整配置，所以是运行时解析json文本
+|   |   |   |   |- node
+|   |   |   |   |   |- nls.ts 配置多语言内容，这个实现内容不用纠结细节，只需要知道会根据配置读取到语言包
+|   |   |   |   |   |- unc.ts windows系列的路径特点  /usr/xxx/xx  UNC: user:\usr\xxx\xx
 |   |   |   |- nls.ts 多语言 解析语言仓库，加载到内存中，_VSCODE_NLS_MESSAGES
 |   |   |   |- nls.message.ts 获取当前语言和语言包，全量或者是当前语言id下对应的语言包 没验证
 |   |   |   |- platform
