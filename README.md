@@ -22,14 +22,6 @@ src
 ├── tsconfig.vscode-dts.json
 ├── tsconfig.vscode-proposed-dts.json
 ├── tsec.exemptions.json
-├── typings
-│   ├── base-common.d.ts
-│   ├── crypto.d.ts
-│   ├── editContext.d.ts
-│   ├── thenable.d.ts
-│   ├── vscode-globals-nls.d.ts
-│   ├── vscode-globals-product.d.ts
-│   └── vscode-globals-ttp.d.ts
 ├── vs
 │   ├── amdX.ts
 │   ├── base
@@ -70,46 +62,34 @@ src
 │   │   │   ├── ui
 │   │   │   │   ├── actionbar
 │   │   │   │   │   ├── actionViewItems.ts
-│   │   │   │   │   ├── actionbar.css
 │   │   │   │   │   └── actionbar.ts
 │   │   │   │   ├── aria
-│   │   │   │   │   ├── aria.css
 │   │   │   │   │   └── aria.ts
 │   │   │   │   ├── breadcrumbs
-│   │   │   │   │   ├── breadcrumbsWidget.css
 │   │   │   │   │   └── breadcrumbsWidget.ts
 │   │   │   │   ├── button
-│   │   │   │   │   ├── button.css
 │   │   │   │   │   └── button.ts
 │   │   │   │   ├── centered
 │   │   │   │   │   └── centeredViewLayout.ts
 │   │   │   │   ├── codicons
 │   │   │   │   │   ├── codicon
-│   │   │   │   │   │   ├── codicon-modifiers.css
-│   │   │   │   │   │   ├── codicon.css
 │   │   │   │   │   │   └── codicon.ttf
 │   │   │   │   │   └── codiconStyles.ts
 │   │   │   │   ├── contextview
-│   │   │   │   │   ├── contextview.css
 │   │   │   │   │   └── contextview.ts
 │   │   │   │   ├── countBadge
-│   │   │   │   │   ├── countBadge.css
 │   │   │   │   │   └── countBadge.ts
 │   │   │   │   ├── dialog
-│   │   │   │   │   ├── dialog.css
 │   │   │   │   │   └── dialog.ts
 │   │   │   │   ├── dropdown
-│   │   │   │   │   ├── dropdown.css
 │   │   │   │   │   ├── dropdown.ts
 │   │   │   │   │   └── dropdownActionViewItem.ts
 │   │   │   │   ├── findinput
-│   │   │   │   │   ├── findInput.css
 │   │   │   │   │   ├── findInput.ts
 │   │   │   │   │   ├── findInputToggles.ts
 │   │   │   │   │   └── replaceInput.ts
 │   │   │   │   ├── grid
 │   │   │   │   │   ├── grid.ts
-│   │   │   │   │   ├── gridview.css
 │   │   │   │   │   └── gridview.ts
 │   │   │   │   ├── highlightedlabel
 │   │   │   │   │   └── highlightedLabel.ts
@@ -118,24 +98,18 @@ src
 │   │   │   │   │   ├── hoverDelegate.ts
 │   │   │   │   │   ├── hoverDelegate2.ts
 │   │   │   │   │   ├── hoverDelegateFactory.ts
-│   │   │   │   │   ├── hoverWidget.css
 │   │   │   │   │   └── hoverWidget.ts
 │   │   │   │   ├── iconLabel
 │   │   │   │   │   ├── iconLabel.ts
 │   │   │   │   │   ├── iconLabels.ts
-│   │   │   │   │   ├── iconlabel.css
 │   │   │   │   │   └── simpleIconLabel.ts
 │   │   │   │   ├── icons
-│   │   │   │   │   ├── iconSelectBox.css
 │   │   │   │   │   └── iconSelectBox.ts
 │   │   │   │   ├── inputbox
-│   │   │   │   │   ├── inputBox.css
 │   │   │   │   │   └── inputBox.ts
 │   │   │   │   ├── keybindingLabel
-│   │   │   │   │   ├── keybindingLabel.css
 │   │   │   │   │   └── keybindingLabel.ts
 │   │   │   │   ├── list
-│   │   │   │   │   ├── list.css
 │   │   │   │   │   ├── list.ts
 │   │   │   │   │   ├── listPaging.ts
 │   │   │   │   │   ├── listView.ts
@@ -145,28 +119,21 @@ src
 │   │   │   │   │   └── splice.ts
 │   │   │   │   ├── menu
 │   │   │   │   │   ├── menu.ts
-│   │   │   │   │   ├── menubar.css
 │   │   │   │   │   └── menubar.ts
 │   │   │   │   ├── mouseCursor
-│   │   │   │   │   ├── mouseCursor.css
 │   │   │   │   │   └── mouseCursor.ts
 │   │   │   │   ├── progressbar
 │   │   │   │   │   ├── progressAccessibilitySignal.ts
-│   │   │   │   │   ├── progressbar.css
 │   │   │   │   │   └── progressbar.ts
 │   │   │   │   ├── radio
-│   │   │   │   │   ├── radio.css
 │   │   │   │   │   └── radio.ts
 │   │   │   │   ├── resizable
 │   │   │   │   │   └── resizable.ts
 │   │   │   │   ├── sash
-│   │   │   │   │   ├── sash.css
 │   │   │   │   │   └── sash.ts
 │   │   │   │   ├── scrollbar
 │   │   │   │   │   ├── abstractScrollbar.ts
 │   │   │   │   │   ├── horizontalScrollbar.ts
-│   │   │   │   │   ├── media
-│   │   │   │   │   │   └── scrollbars.css
 │   │   │   │   │   ├── scrollableElement.ts
 │   │   │   │   │   ├── scrollableElementOptions.ts
 │   │   │   │   │   ├── scrollbarArrow.ts
@@ -174,29 +141,21 @@ src
 │   │   │   │   │   ├── scrollbarVisibilityController.ts
 │   │   │   │   │   └── verticalScrollbar.ts
 │   │   │   │   ├── selectBox
-│   │   │   │   │   ├── selectBox.css
 │   │   │   │   │   ├── selectBox.ts
-│   │   │   │   │   ├── selectBoxCustom.css
 │   │   │   │   │   ├── selectBoxCustom.ts
 │   │   │   │   │   └── selectBoxNative.ts
 │   │   │   │   ├── severityIcon
 │   │   │   │   │   ├── media
-│   │   │   │   │   │   └── severityIcon.css
 │   │   │   │   │   └── severityIcon.ts
 │   │   │   │   ├── splitview
-│   │   │   │   │   ├── paneview.css
 │   │   │   │   │   ├── paneview.ts
-│   │   │   │   │   ├── splitview.css
 │   │   │   │   │   └── splitview.ts
 │   │   │   │   ├── table
-│   │   │   │   │   ├── table.css
 │   │   │   │   │   ├── table.ts
 │   │   │   │   │   └── tableWidget.ts
 │   │   │   │   ├── toggle
-│   │   │   │   │   ├── toggle.css
 │   │   │   │   │   └── toggle.ts
 │   │   │   │   ├── toolbar
-│   │   │   │   │   ├── toolbar.css
 │   │   │   │   │   └── toolbar.ts
 │   │   │   │   ├── tree
 │   │   │   │   │   ├── abstractTree.ts
@@ -205,9 +164,6 @@ src
 │   │   │   │   │   ├── dataTree.ts
 │   │   │   │   │   ├── indexTree.ts
 │   │   │   │   │   ├── indexTreeModel.ts
-│   │   │   │   │   ├── media
-│   │   │   │   │   │   ├── paneviewlet.css
-│   │   │   │   │   │   └── tree.css
 │   │   │   │   │   ├── objectTree.ts
 │   │   │   │   │   ├── objectTreeModel.ts
 │   │   │   │   │   ├── tree.ts
@@ -442,8 +398,6 @@ src
 │   │   │   └── main.ts
 │   │   ├── electron-sandbox
 │   │   │   ├── processExplorer
-│   │   │   │   ├── media
-│   │   │   │   │   └── processExplorer.css
 │   │   │   │   ├── processExplorer-dev.html
 │   │   │   │   ├── processExplorer.html
 │   │   │   │   ├── processExplorer.ts
@@ -484,14 +438,12 @@ src
 │   │   │   │   │   ├── native
 │   │   │   │   │   │   ├── debugEditContext.ts
 │   │   │   │   │   │   ├── editContextFactory.ts
-│   │   │   │   │   │   ├── nativeEditContext.css
 │   │   │   │   │   │   ├── nativeEditContext.ts
 │   │   │   │   │   │   ├── nativeEditContextRegistry.ts
 │   │   │   │   │   │   ├── nativeEditContextUtils.ts
 │   │   │   │   │   │   └── screenReaderSupport.ts
 │   │   │   │   │   ├── screenReaderUtils.ts
 │   │   │   │   │   └── textArea
-│   │   │   │   │       ├── textAreaEditContext.css
 │   │   │   │   │       ├── textAreaEditContext.ts
 │   │   │   │   │       ├── textAreaEditContextInput.ts
 │   │   │   │   │       └── textAreaEditContextState.ts
@@ -515,8 +467,6 @@ src
 │   │   │   │   ├── css
 │   │   │   │   │   ├── decorationCssRuleExtractor.ts
 │   │   │   │   │   ├── decorationStyleCache.ts
-│   │   │   │   │   └── media
-│   │   │   │   │       └── decorationCssRuleExtractor.css
 │   │   │   │   ├── gpu.ts
 │   │   │   │   ├── gpuDisposable.ts
 │   │   │   │   ├── gpuUtils.ts
@@ -542,7 +492,6 @@ src
 │   │   │   │   ├── codeEditorService.ts
 │   │   │   │   ├── editorWorkerService.ts
 │   │   │   │   ├── hoverService
-│   │   │   │   │   ├── hover.css
 │   │   │   │   │   ├── hoverService.ts
 │   │   │   │   │   ├── hoverWidget.ts
 │   │   │   │   │   └── updatableHoverWidget.ts
@@ -561,91 +510,71 @@ src
 │   │   │   ├── view.ts
 │   │   │   ├── viewParts
 │   │   │   │   ├── blockDecorations
-│   │   │   │   │   ├── blockDecorations.css
 │   │   │   │   │   └── blockDecorations.ts
 │   │   │   │   ├── contentWidgets
 │   │   │   │   │   └── contentWidgets.ts
 │   │   │   │   ├── currentLineHighlight
-│   │   │   │   │   ├── currentLineHighlight.css
 │   │   │   │   │   └── currentLineHighlight.ts
 │   │   │   │   ├── decorations
-│   │   │   │   │   ├── decorations.css
 │   │   │   │   │   └── decorations.ts
 │   │   │   │   ├── editorScrollbar
 │   │   │   │   │   └── editorScrollbar.ts
 │   │   │   │   ├── glyphMargin
-│   │   │   │   │   ├── glyphMargin.css
 │   │   │   │   │   └── glyphMargin.ts
 │   │   │   │   ├── gpuMark
-│   │   │   │   │   ├── gpuMark.css
 │   │   │   │   │   └── gpuMark.ts
 │   │   │   │   ├── indentGuides
-│   │   │   │   │   ├── indentGuides.css
 │   │   │   │   │   └── indentGuides.ts
 │   │   │   │   ├── lineNumbers
-│   │   │   │   │   ├── lineNumbers.css
 │   │   │   │   │   └── lineNumbers.ts
 │   │   │   │   ├── linesDecorations
-│   │   │   │   │   ├── linesDecorations.css
 │   │   │   │   │   └── linesDecorations.ts
 │   │   │   │   ├── margin
-│   │   │   │   │   ├── margin.css
 │   │   │   │   │   └── margin.ts
 │   │   │   │   ├── marginDecorations
-│   │   │   │   │   ├── marginDecorations.css
 │   │   │   │   │   └── marginDecorations.ts
 │   │   │   │   ├── minimap
-│   │   │   │   │   ├── minimap.css
 │   │   │   │   │   ├── minimap.ts
 │   │   │   │   │   ├── minimapCharRenderer.ts
 │   │   │   │   │   ├── minimapCharRendererFactory.ts
 │   │   │   │   │   ├── minimapCharSheet.ts
 │   │   │   │   │   └── minimapPreBaked.ts
 │   │   │   │   ├── overlayWidgets
-│   │   │   │   │   ├── overlayWidgets.css
 │   │   │   │   │   └── overlayWidgets.ts
 │   │   │   │   ├── overviewRuler
 │   │   │   │   │   ├── decorationsOverviewRuler.ts
 │   │   │   │   │   └── overviewRuler.ts
 │   │   │   │   ├── rulers
-│   │   │   │   │   ├── rulers.css
 │   │   │   │   │   └── rulers.ts
 │   │   │   │   ├── rulersGpu
 │   │   │   │   │   └── rulersGpu.ts
 │   │   │   │   ├── scrollDecoration
-│   │   │   │   │   ├── scrollDecoration.css
 │   │   │   │   │   └── scrollDecoration.ts
 │   │   │   │   ├── selections
-│   │   │   │   │   ├── selections.css
 │   │   │   │   │   └── selections.ts
 │   │   │   │   ├── viewCursors
 │   │   │   │   │   ├── viewCursor.ts
-│   │   │   │   │   ├── viewCursors.css
 │   │   │   │   │   └── viewCursors.ts
 │   │   │   │   ├── viewLines
 │   │   │   │   │   ├── domReadingContext.ts
 │   │   │   │   │   ├── rangeUtil.ts
 │   │   │   │   │   ├── viewLine.ts
 │   │   │   │   │   ├── viewLineOptions.ts
-│   │   │   │   │   ├── viewLines.css
 │   │   │   │   │   └── viewLines.ts
 │   │   │   │   ├── viewLinesGpu
 │   │   │   │   │   └── viewLinesGpu.ts
 │   │   │   │   ├── viewZones
 │   │   │   │   │   └── viewZones.ts
 │   │   │   │   └── whitespace
-│   │   │   │       ├── whitespace.css
 │   │   │   │       └── whitespace.ts
 │   │   │   └── widget
 │   │   │       ├── codeEditor
 │   │   │       │   ├── codeEditorContributions.ts
 │   │   │       │   ├── codeEditorWidget.ts
-│   │   │       │   ├── editor.css
 │   │   │       │   └── embeddedCodeEditorWidget.ts
 │   │   │       ├── diffEditor
 │   │   │       │   ├── commands.ts
 │   │   │       │   ├── components
-│   │   │       │   │   ├── accessibleDiffViewer.css
 │   │   │       │   │   ├── accessibleDiffViewer.ts
 │   │   │       │   │   ├── diffEditorDecorations.ts
 │   │   │       │   │   ├── diffEditorEditors.ts
@@ -668,14 +597,12 @@ src
 │   │   │       │   │   ├── overviewRulerFeature.ts
 │   │   │       │   │   └── revertButtonsFeature.ts
 │   │   │       │   ├── registrations.contribution.ts
-│   │   │       │   ├── style.css
 │   │   │       │   ├── utils
 │   │   │       │   │   └── editorGutter.ts
 │   │   │       │   └── utils.ts
 │   │   │       ├── markdownRenderer
 │   │   │       │   └── browser
 │   │   │       │       ├── markdownRenderer.ts
-│   │   │       │       └── renderedMarkdown.css
 │   │   │       └── multiDiffEditor
 │   │   │           ├── colors.ts
 │   │   │           ├── diffEditorItemTemplate.ts
@@ -684,7 +611,6 @@ src
 │   │   │           ├── multiDiffEditorWidget.ts
 │   │   │           ├── multiDiffEditorWidgetImpl.ts
 │   │   │           ├── objectPool.ts
-│   │   │           ├── style.css
 │   │   │           ├── utils.ts
 │   │   │           └── workbenchUIElementFactory.ts
 │   │   ├── common
@@ -949,11 +875,9 @@ src
 │   │   ├── contrib
 │   │   │   ├── anchorSelect
 │   │   │   │   └── browser
-│   │   │   │       ├── anchorSelect.css
 │   │   │   │       └── anchorSelect.ts
 │   │   │   ├── bracketMatching
 │   │   │   │   ├── browser
-│   │   │   │   │   ├── bracketMatching.css
 │   │   │   │   │   └── bracketMatching.ts
 │   │   │   ├── caretOperations
 │   │   │   │   ├── browser
@@ -972,7 +896,6 @@ src
 │   │   │   │   │   ├── codeActionKeybindingResolver.ts
 │   │   │   │   │   ├── codeActionMenu.ts
 │   │   │   │   │   ├── codeActionModel.ts
-│   │   │   │   │   ├── lightBulbWidget.css
 │   │   │   │   │   └── lightBulbWidget.ts
 │   │   │   │   ├── common
 │   │   │   │   │   └── types.ts
@@ -981,13 +904,11 @@ src
 │   │   │   │       ├── codeLensCache.ts
 │   │   │   │       ├── codelens.ts
 │   │   │   │       ├── codelensController.ts
-│   │   │   │       ├── codelensWidget.css
 │   │   │   │       └── codelensWidget.ts
 │   │   │   ├── colorPicker
 │   │   │   │   └── browser
 │   │   │   │       ├── color.ts
 │   │   │   │       ├── colorDetector.ts
-│   │   │   │       ├── colorPicker.css
 │   │   │   │       ├── colorPickerContribution.ts
 │   │   │   │       ├── colorPickerModel.ts
 │   │   │   │       ├── colorPickerParticipantUtils.ts
@@ -1004,8 +925,6 @@ src
 │   │   │   │       │   ├── hoverColorPicker.ts
 │   │   │   │       │   ├── hoverColorPickerContribution.ts
 │   │   │   │       │   └── hoverColorPickerParticipant.ts
-│   │   │   │       ├── images
-│   │   │   │       │   └── opacity-background.png
 │   │   │   │       └── standaloneColorPicker
 │   │   │   │           ├── standaloneColorPickerActions.ts
 │   │   │   │           ├── standaloneColorPickerController.ts
@@ -1027,7 +946,6 @@ src
 │   │   │   │       └── contribution.ts
 │   │   │   ├── dnd
 │   │   │   │   └── browser
-│   │   │   │       ├── dnd.css
 │   │   │   │       ├── dnd.ts
 │   │   │   │       └── dragAndDropCommand.ts
 │   │   │   ├── documentSymbols
@@ -1042,7 +960,6 @@ src
 │   │   │   │   │   ├── dropIntoEditorContribution.ts
 │   │   │   │   │   ├── dropIntoEditorController.ts
 │   │   │   │   │   ├── edit.ts
-│   │   │   │   │   ├── postEditWidget.css
 │   │   │   │   │   └── postEditWidget.ts
 │   │   │   ├── editorState
 │   │   │   │   ├── browser
@@ -1053,10 +970,8 @@ src
 │   │   │   │   │   ├── findController.ts
 │   │   │   │   │   ├── findDecorations.ts
 │   │   │   │   │   ├── findModel.ts
-│   │   │   │   │   ├── findOptionsWidget.css
 │   │   │   │   │   ├── findOptionsWidget.ts
 │   │   │   │   │   ├── findState.ts
-│   │   │   │   │   ├── findWidget.css
 │   │   │   │   │   ├── findWidget.ts
 │   │   │   │   │   ├── findWidgetSearchHistory.ts
 │   │   │   │   │   ├── replaceAllCommand.ts
@@ -1064,7 +979,6 @@ src
 │   │   │   │   │   └── replaceWidgetHistory.ts
 │   │   │   ├── folding
 │   │   │   │   ├── browser
-│   │   │   │   │   ├── folding.css
 │   │   │   │   │   ├── folding.ts
 │   │   │   │   │   ├── foldingDecorations.ts
 │   │   │   │   │   ├── foldingModel.ts
@@ -1085,20 +999,16 @@ src
 │   │   │   │       ├── gotoError.ts
 │   │   │   │       ├── gotoErrorWidget.ts
 │   │   │   │       ├── markerNavigationService.ts
-│   │   │   │       └── media
-│   │   │   │           └── gotoErrorWidget.css
 │   │   │   ├── gotoSymbol
 │   │   │   │   ├── browser
 │   │   │   │   │   ├── goToCommands.ts
 │   │   │   │   │   ├── goToSymbol.ts
 │   │   │   │   │   ├── link
 │   │   │   │   │   │   ├── clickLinkGesture.ts
-│   │   │   │   │   │   ├── goToDefinitionAtPosition.css
 │   │   │   │   │   │   └── goToDefinitionAtPosition.ts
 │   │   │   │   │   ├── peek
 │   │   │   │   │   │   ├── referencesController.ts
 │   │   │   │   │   │   ├── referencesTree.ts
-│   │   │   │   │   │   ├── referencesWidget.css
 │   │   │   │   │   │   └── referencesWidget.ts
 │   │   │   │   │   ├── referencesModel.ts
 │   │   │   │   │   └── symbolNavigation.ts
@@ -1118,7 +1028,6 @@ src
 │   │   │   │   │   ├── glyphHoverComputer.ts
 │   │   │   │   │   ├── glyphHoverController.ts
 │   │   │   │   │   ├── glyphHoverWidget.ts
-│   │   │   │   │   ├── hover.css
 │   │   │   │   │   ├── hoverAccessibleViews.ts
 │   │   │   │   │   ├── hoverActionIds.ts
 │   │   │   │   │   ├── hoverActions.ts
@@ -1131,7 +1040,6 @@ src
 │   │   │   │   │   └── resizableContentWidget.ts
 │   │   │   ├── inPlaceReplace
 │   │   │   │   └── browser
-│   │   │   │       ├── inPlaceReplace.css
 │   │   │   │       ├── inPlaceReplace.ts
 │   │   │   │       └── inPlaceReplaceCommand.ts
 │   │   │   ├── indentation
@@ -1156,7 +1064,6 @@ src
 │   │   │   │   │   │   └── inlineCompletionsController.ts
 │   │   │   │   │   ├── hintsWidget
 │   │   │   │   │   │   ├── hoverParticipant.ts
-│   │   │   │   │   │   ├── inlineCompletionsHintsWidget.css
 │   │   │   │   │   │   └── inlineCompletionsHintsWidget.ts
 │   │   │   │   │   ├── inlineCompletions.contribution.ts
 │   │   │   │   │   ├── inlineCompletionsAccessibleView.ts
@@ -1175,7 +1082,6 @@ src
 │   │   │   │   │   ├── utils.ts
 │   │   │   │   │   └── view
 │   │   │   │   │       ├── ghostText
-│   │   │   │   │       │   ├── ghostTextView.css
 │   │   │   │   │       │   └── ghostTextView.ts
 │   │   │   │   │       ├── inlineCompletionsView.ts
 │   │   │   │   │       └── inlineEdits
@@ -1200,11 +1106,9 @@ src
 │   │   │   │   │           ├── theme.ts
 │   │   │   │   │           ├── utils
 │   │   │   │   │           │   └── utils.ts
-│   │   │   │   │           └── view.css
 │   │   │   ├── inlineProgress
 │   │   │   │   └── browser
 │   │   │   │       ├── inlineProgress.ts
-│   │   │   │       └── inlineProgressWidget.css
 │   │   │   ├── insertFinalNewLine
 │   │   │   │   └── browser
 │   │   │   │       ├── insertFinalNewLine.ts
@@ -1220,39 +1124,32 @@ src
 │   │   │   │   │   └── sortLinesCommand.ts
 │   │   │   ├── linkedEditing
 │   │   │   │   ├── browser
-│   │   │   │   │   ├── linkedEditing.css
 │   │   │   │   │   └── linkedEditing.ts
 │   │   │   ├── links
 │   │   │   │   └── browser
 │   │   │   │       ├── getLinks.ts
-│   │   │   │       ├── links.css
 │   │   │   │       └── links.ts
 │   │   │   ├── longLinesHelper
 │   │   │   │   └── browser
 │   │   │   │       └── longLinesHelper.ts
 │   │   │   ├── message
 │   │   │   │   └── browser
-│   │   │   │       ├── messageController.css
 │   │   │   │       └── messageController.ts
 │   │   │   ├── multicursor
 │   │   │   │   ├── browser
 │   │   │   │   │   └── multicursor.ts
 │   │   │   ├── parameterHints
 │   │   │   │   ├── browser
-│   │   │   │   │   ├── parameterHints.css
 │   │   │   │   │   ├── parameterHints.ts
 │   │   │   │   │   ├── parameterHintsModel.ts
 │   │   │   │   │   ├── parameterHintsWidget.ts
 │   │   │   │   │   └── provideSignatureHelp.ts
 │   │   │   ├── peekView
 │   │   │   │   └── browser
-│   │   │   │       ├── media
-│   │   │   │       │   └── peekViewWidget.css
 │   │   │   │       └── peekView.ts
 │   │   │   ├── placeholderText
 │   │   │   │   └── browser
 │   │   │   │       ├── placeholderText.contribution.ts
-│   │   │   │       ├── placeholderText.css
 │   │   │   │       └── placeholderTextContribution.ts
 │   │   │   ├── quickAccess
 │   │   │   │   └── browser
@@ -1266,7 +1163,6 @@ src
 │   │   │   ├── rename
 │   │   │   │   └── browser
 │   │   │   │       ├── rename.ts
-│   │   │   │       ├── renameWidget.css
 │   │   │   │       └── renameWidget.ts
 │   │   │   ├── sectionHeaders
 │   │   │   │   └── browser
@@ -1288,12 +1184,10 @@ src
 │   │   │   │   │   ├── snippet.md
 │   │   │   │   │   ├── snippetController2.ts
 │   │   │   │   │   ├── snippetParser.ts
-│   │   │   │   │   ├── snippetSession.css
 │   │   │   │   │   ├── snippetSession.ts
 │   │   │   │   │   └── snippetVariables.ts
 │   │   │   ├── stickyScroll
 │   │   │   │   ├── browser
-│   │   │   │   │   ├── stickyScroll.css
 │   │   │   │   │   ├── stickyScrollActions.ts
 │   │   │   │   │   ├── stickyScrollContribution.ts
 │   │   │   │   │   ├── stickyScrollController.ts
@@ -1304,8 +1198,6 @@ src
 │   │   │   ├── suggest
 │   │   │   │   ├── browser
 │   │   │   │   │   ├── completionModel.ts
-│   │   │   │   │   ├── media
-│   │   │   │   │   │   └── suggest.css
 │   │   │   │   │   ├── suggest.ts
 │   │   │   │   │   ├── suggestAlternatives.ts
 │   │   │   │   │   ├── suggestCommitCharacters.ts
@@ -1322,7 +1214,6 @@ src
 │   │   │   │   │   └── wordDistance.ts
 │   │   │   ├── symbolIcons
 │   │   │   │   └── browser
-│   │   │   │       ├── symbolIcons.css
 │   │   │   │       └── symbolIcons.ts
 │   │   │   ├── toggleTabFocusMode
 │   │   │   │   └── browser
@@ -1332,16 +1223,13 @@ src
 │   │   │   │       └── tokenization.ts
 │   │   │   ├── unicodeHighlighter
 │   │   │   │   └── browser
-│   │   │   │       ├── bannerController.css
 │   │   │   │       ├── bannerController.ts
-│   │   │   │       ├── unicodeHighlighter.css
 │   │   │   │       └── unicodeHighlighter.ts
 │   │   │   ├── unusualLineTerminators
 │   │   │   │   └── browser
 │   │   │   │       └── unusualLineTerminators.ts
 │   │   │   ├── wordHighlighter
 │   │   │   │   └── browser
-│   │   │   │       ├── highlightDecorations.css
 │   │   │   │       ├── highlightDecorations.ts
 │   │   │   │       ├── textualHighlightProvider.ts
 │   │   │   │       └── wordHighlighter.ts
@@ -1353,7 +1241,6 @@ src
 │   │   │   │   │   └── wordPartOperations.ts
 │   │   │   └── zoneWidget
 │   │   │       └── browser
-│   │   │           ├── zoneWidget.css
 │   │   │           └── zoneWidget.ts
 │   │   ├── editor.all.ts
 │   │   ├── editor.api.ts
@@ -1363,12 +1250,8 @@ src
 │   │   │   ├── browser
 │   │   │   │   ├── colorizer.ts
 │   │   │   │   ├── iPadShowKeyboard
-│   │   │   │   │   ├── iPadShowKeyboard.css
 │   │   │   │   │   ├── iPadShowKeyboard.ts
-│   │   │   │   │   ├── keyboard-dark.svg
-│   │   │   │   │   └── keyboard-light.svg
 │   │   │   │   ├── inspectTokens
-│   │   │   │   │   ├── inspectTokens.css
 │   │   │   │   │   └── inspectTokens.ts
 │   │   │   │   ├── quickAccess
 │   │   │   │   │   ├── standaloneCommandsQuickAccess.ts
@@ -1376,11 +1259,9 @@ src
 │   │   │   │   │   ├── standaloneGotoSymbolQuickAccess.ts
 │   │   │   │   │   └── standaloneHelpQuickAccess.ts
 │   │   │   │   ├── quickInput
-│   │   │   │   │   ├── standaloneQuickInput.css
 │   │   │   │   │   └── standaloneQuickInputService.ts
 │   │   │   │   ├── referenceSearch
 │   │   │   │   │   └── standaloneReferenceSearch.ts
-│   │   │   │   ├── standalone-tokens.css
 │   │   │   │   ├── standaloneCodeEditor.ts
 │   │   │   │   ├── standaloneCodeEditorService.ts
 │   │   │   │   ├── standaloneEditor.ts
@@ -1448,7 +1329,6 @@ src
 │   │   ├── actionWidget
 │   │   │   ├── browser
 │   │   │   │   ├── actionList.ts
-│   │   │   │   ├── actionWidget.css
 │   │   │   │   └── actionWidget.ts
 │   │   │   └── common
 │   │   │       └── actionWidget.ts
@@ -1459,7 +1339,6 @@ src
 │   │   │   │   ├── dropdownActionViewItemWithKeybinding.ts
 │   │   │   │   ├── dropdownWithPrimaryActionViewItem.ts
 │   │   │   │   ├── floatingMenu.ts
-│   │   │   │   ├── menuEntryActionViewItem.css
 │   │   │   │   ├── menuEntryActionViewItem.ts
 │   │   │   │   └── toolbar.ts
 │   │   │   ├── common
@@ -1785,7 +1664,6 @@ src
 │   │   │       └── wrapInReloadableClass.ts
 │   │   ├── opener
 │   │   │   ├── browser
-│   │   │   │   ├── link.css
 │   │   │   │   └── link.ts
 │   │   │   ├── common
 │   │   │   │   └── opener.ts
@@ -1834,8 +1712,6 @@ src
 │   │   │   ├── browser
 │   │   │   │   ├── commandsQuickAccess.ts
 │   │   │   │   ├── helpQuickAccess.ts
-│   │   │   │   ├── media
-│   │   │   │   │   └── quickInput.css
 │   │   │   │   ├── pickerQuickAccess.ts
 │   │   │   │   ├── quickAccess.ts
 │   │   │   │   ├── quickInput.ts
@@ -2397,8 +2273,6 @@ src
 │       │   │   ├── helpActions.ts
 │       │   │   ├── layoutActions.ts
 │       │   │   ├── listCommands.ts
-│       │   │   ├── media
-│       │   │   │   └── actions.css
 │       │   │   ├── navigationActions.ts
 │       │   │   ├── quickAccessActions.ts
 │       │   │   ├── textInputActions.ts
@@ -2414,27 +2288,16 @@ src
 │       │   ├── editor.ts
 │       │   ├── labels.ts
 │       │   ├── layout.ts
-│       │   ├── media
-│       │   │   ├── code-icon.svg
-│       │   │   ├── part.css
-│       │   │   └── style.css
 │       │   ├── panecomposite.ts
 │       │   ├── part.ts
 │       │   ├── parts
 │       │   │   ├── activitybar
 │       │   │   │   ├── activitybarPart.ts
-│       │   │   │   └── media
-│       │   │   │       ├── activityaction.css
-│       │   │   │       └── activitybarpart.css
 │       │   │   ├── auxiliarybar
 │       │   │   │   ├── auxiliaryBarActions.ts
 │       │   │   │   ├── auxiliaryBarPart.ts
-│       │   │   │   └── media
-│       │   │   │       └── auxiliaryBarPart.css
 │       │   │   ├── banner
 │       │   │   │   ├── bannerPart.ts
-│       │   │   │   └── media
-│       │   │   │       └── bannerpart.css
 │       │   │   ├── compositeBar.ts
 │       │   │   ├── compositeBarActions.ts
 │       │   │   ├── compositePart.ts
@@ -2472,23 +2335,7 @@ src
 │       │   │   │   ├── editorWithViewState.ts
 │       │   │   │   ├── editorsObserver.ts
 │       │   │   │   ├── media
-│       │   │   │   │   ├── back-tb.png
-│       │   │   │   │   ├── breadcrumbscontrol.css
-│       │   │   │   │   ├── editordroptarget.css
-│       │   │   │   │   ├── editorgroupview.css
-│       │   │   │   │   ├── editorplaceholder.css
-│       │   │   │   │   ├── editorquickaccess.css
-│       │   │   │   │   ├── editorstatus.css
-│       │   │   │   │   ├── editortabscontrol.css
-│       │   │   │   │   ├── editortitlecontrol.css
-│       │   │   │   │   ├── forward-tb.png
-│       │   │   │   │   ├── letterpress-dark.svg
-│       │   │   │   │   ├── letterpress-hcDark.svg
-│       │   │   │   │   ├── letterpress-hcLight.svg
-│       │   │   │   │   ├── letterpress-light.svg
-│       │   │   │   │   ├── multieditortabscontrol.css
-│       │   │   │   │   ├── sidebysideeditor.css
-│       │   │   │   │   └── singleeditortabscontrol.css
+│       │   │   │   │   ├── back-tb
 │       │   │   │   ├── multiEditorTabsControl.ts
 │       │   │   │   ├── multiRowEditorTabsControl.ts
 │       │   │   │   ├── noEditorTabsControl.ts
@@ -2499,15 +2346,7 @@ src
 │       │   │   │   ├── textEditor.ts
 │       │   │   │   └── textResourceEditor.ts
 │       │   │   ├── globalCompositeBar.ts
-│       │   │   ├── media
-│       │   │   │   ├── compositepart.css
-│       │   │   │   └── paneCompositePart.css
 │       │   │   ├── notifications
-│       │   │   │   ├── media
-│       │   │   │   │   ├── notificationsActions.css
-│       │   │   │   │   ├── notificationsCenter.css
-│       │   │   │   │   ├── notificationsList.css
-│       │   │   │   │   └── notificationsToasts.css
 │       │   │   │   ├── notificationAccessibleView.ts
 │       │   │   │   ├── notificationsActions.ts
 │       │   │   │   ├── notificationsAlerts.ts
@@ -2521,36 +2360,24 @@ src
 │       │   │   ├── paneCompositePart.ts
 │       │   │   ├── paneCompositePartService.ts
 │       │   │   ├── panel
-│       │   │   │   ├── media
-│       │   │   │   │   └── panelpart.css
 │       │   │   │   ├── panelActions.ts
 │       │   │   │   └── panelPart.ts
 │       │   │   ├── sidebar
-│       │   │   │   ├── media
-│       │   │   │   │   └── sidebarpart.css
 │       │   │   │   ├── sidebarActions.ts
 │       │   │   │   └── sidebarPart.ts
 │       │   │   ├── statusbar
-│       │   │   │   ├── media
-│       │   │   │   │   └── statusbarpart.css
 │       │   │   │   ├── statusbarActions.ts
 │       │   │   │   ├── statusbarItem.ts
 │       │   │   │   ├── statusbarModel.ts
 │       │   │   │   └── statusbarPart.ts
 │       │   │   ├── titlebar
 │       │   │   │   ├── commandCenterControl.ts
-│       │   │   │   ├── media
-│       │   │   │   │   ├── menubarControl.css
-│       │   │   │   │   └── titlebarpart.css
 │       │   │   │   ├── menubarControl.ts
 │       │   │   │   ├── titlebarActions.ts
 │       │   │   │   ├── titlebarPart.ts
 │       │   │   │   └── windowTitle.ts
 │       │   │   └── views
 │       │   │       ├── checkbox.ts
-│       │   │       ├── media
-│       │   │       │   ├── paneviewlet.css
-│       │   │       │   └── views.css
 │       │   │       ├── treeView.ts
 │       │   │       ├── viewFilter.ts
 │       │   │       ├── viewPane.ts
@@ -2638,7 +2465,6 @@ src
 │       │   │   │   ├── opaqueEdits.ts
 │       │   │   │   └── preview
 │       │   │   │       ├── bulkEdit.contribution.ts
-│       │   │   │       ├── bulkEdit.css
 │       │   │   │       ├── bulkEditPane.ts
 │       │   │   │       ├── bulkEditPreview.ts
 │       │   │   │       └── bulkEditTree.ts
@@ -2647,8 +2473,6 @@ src
 │       │   │   │   ├── callHierarchy.contribution.ts
 │       │   │   │   ├── callHierarchyPeek.ts
 │       │   │   │   ├── callHierarchyTree.ts
-│       │   │   │   └── media
-│       │   │   │       └── callHierarchy.css
 │       │   │   └── common
 │       │   │       └── callHierarchy.ts
 │       │   ├── chat
@@ -2710,8 +2534,6 @@ src
 │       │   │   │   │   ├── chatToolInvocationPart.ts
 │       │   │   │   │   ├── chatTreeContentPart.ts
 │       │   │   │   │   ├── chatWarningContentPart.ts
-│       │   │   │   │   └── media
-│       │   │   │   │       └── chatConfirmationWidget.css
 │       │   │   │   ├── chatDragAndDrop.ts
 │       │   │   │   ├── chatEdinputInputContentProvider.ts
 │       │   │   │   ├── chatEditing
@@ -2756,7 +2578,6 @@ src
 │       │   │   │   ├── chatViewPane.ts
 │       │   │   │   ├── chatWidget.ts
 │       │   │   │   ├── codeBlockContextProviderService.ts
-│       │   │   │   ├── codeBlockPart.css
 │       │   │   │   ├── codeBlockPart.ts
 │       │   │   │   ├── contrib
 │       │   │   │   │   ├── chatDynamicVariables
@@ -2768,22 +2589,9 @@ src
 │       │   │   │   │   ├── chatInputEditorHover.ts
 │       │   │   │   │   ├── chatInputRelatedFilesContrib.ts
 │       │   │   │   │   ├── editorHoverWrapper.ts
-│       │   │   │   │   ├── media
-│       │   │   │   │   │   └── editorHoverWrapper.css
 │       │   │   │   │   └── screenshot.ts
 │       │   │   │   ├── imageUtils.ts
 │       │   │   │   ├── languageModelToolsService.ts
-│       │   │   │   ├── media
-│       │   │   │   │   ├── chat.css
-│       │   │   │   │   ├── chatAgentHover.css
-│       │   │   │   │   ├── chatCodeBlockPill.css
-│       │   │   │   │   ├── chatEditingEditorOverlay.css
-│       │   │   │   │   ├── chatEditorController.css
-│       │   │   │   │   ├── chatEditorOverlay.css
-│       │   │   │   │   ├── chatInlineAnchorWidget.css
-│       │   │   │   │   ├── chatStatus.css
-│       │   │   │   │   ├── chatViewSetup.css
-│       │   │   │   │   └── chatViewWelcome.css
 │       │   │   │   ├── promptSyntax
 │       │   │   │   │   └── contributions
 │       │   │   │   │       ├── createPromptCommand
@@ -2871,8 +2679,6 @@ src
 │       │   │   │   └── voiceChatService.ts
 │       │   │   ├── electron-sandbox
 │       │   │   │   ├── actions
-│       │   │   │   │   ├── media
-│       │   │   │   │   │   └── voiceChatActions.css
 │       │   │   │   │   └── voiceChatActions.ts
 │       │   │   │   └── chat.contribution.ts
 │       │   ├── codeActions
@@ -2882,11 +2688,9 @@ src
 │       │   ├── codeEditor
 │       │   │   ├── browser
 │       │   │   │   ├── accessibility
-│       │   │   │   │   ├── accessibility.css
 │       │   │   │   │   └── accessibility.ts
 │       │   │   │   ├── codeEditor.contribution.ts
 │       │   │   │   ├── dictation
-│       │   │   │   │   ├── editorDictation.css
 │       │   │   │   │   └── editorDictation.ts
 │       │   │   │   ├── diffEditorAccessibilityHelp.ts
 │       │   │   │   ├── diffEditorHelper.ts
@@ -2894,20 +2698,16 @@ src
 │       │   │   │   ├── editorLineNumberMenu.ts
 │       │   │   │   ├── editorSettingsMigration.ts
 │       │   │   │   ├── emptyTextEditorHint
-│       │   │   │   │   ├── emptyTextEditorHint.css
 │       │   │   │   │   └── emptyTextEditorHint.ts
 │       │   │   │   ├── find
-│       │   │   │   │   ├── simpleFindWidget.css
 │       │   │   │   │   └── simpleFindWidget.ts
 │       │   │   │   ├── inspectEditorTokens
-│       │   │   │   │   ├── inspectEditorTokens.css
 │       │   │   │   │   └── inspectEditorTokens.ts
 │       │   │   │   ├── inspectKeybindings.ts
 │       │   │   │   ├── largeFileOptimizations.ts
 │       │   │   │   ├── menuPreventer.ts
 │       │   │   │   ├── outline
 │       │   │   │   │   ├── documentSymbolsOutline.ts
-│       │   │   │   │   ├── documentSymbolsTree.css
 │       │   │   │   │   └── documentSymbolsTree.ts
 │       │   │   │   ├── quickaccess
 │       │   │   │   │   ├── gotoLineQuickAccess.ts
@@ -2916,7 +2716,6 @@ src
 │       │   │   │   ├── selectionClipboard.ts
 │       │   │   │   ├── simpleEditorOptions.ts
 │       │   │   │   ├── suggestEnabledInput
-│       │   │   │   │   ├── suggestEnabledInput.css
 │       │   │   │   │   └── suggestEnabledInput.ts
 │       │   │   │   ├── toggleColumnSelection.ts
 │       │   │   │   ├── toggleMinimap.ts
@@ -2966,9 +2765,6 @@ src
 │       │   │   │   ├── commentsTreeViewer.ts
 │       │   │   │   ├── commentsView.ts
 │       │   │   │   ├── commentsViewActions.ts
-│       │   │   │   ├── media
-│       │   │   │   │   ├── panel.css
-│       │   │   │   │   └── review.css
 │       │   │   │   ├── reactionsAction.ts
 │       │   │   │   ├── simpleCommentEditor.ts
 │       │   │   │   └── timestamp.ts
@@ -2991,8 +2787,6 @@ src
 │       │   │   │   ├── customEditorInput.ts
 │       │   │   │   ├── customEditorInputFactory.ts
 │       │   │   │   ├── customEditors.ts
-│       │   │   │   └── media
-│       │   │   │       └── customEditor.css
 │       │   │   └── common
 │       │   │       ├── contributedCustomEditors.ts
 │       │   │       ├── customEditor.ts
@@ -3038,24 +2832,6 @@ src
 │       │   │   │   ├── extensionHostDebugService.ts
 │       │   │   │   ├── linkDetector.ts
 │       │   │   │   ├── loadedScriptsView.ts
-│       │   │   │   ├── media
-│       │   │   │   │   ├── breakpointWidget.css
-│       │   │   │   │   ├── callStackEditorContribution.css
-│       │   │   │   │   ├── callStackWidget.css
-│       │   │   │   │   ├── continue-tb.png
-│       │   │   │   │   ├── debug.contribution.css
-│       │   │   │   │   ├── debugHover.css
-│       │   │   │   │   ├── debugToolBar.css
-│       │   │   │   │   ├── debugViewlet.css
-│       │   │   │   │   ├── exceptionWidget.css
-│       │   │   │   │   ├── pause-tb.png
-│       │   │   │   │   ├── repl.css
-│       │   │   │   │   ├── restart-tb.png
-│       │   │   │   │   ├── run-with-debugging-tb.png
-│       │   │   │   │   ├── stepinto-tb.png
-│       │   │   │   │   ├── stepout-tb.png
-│       │   │   │   │   ├── stepover-tb.png
-│       │   │   │   │   └── stop-tb.png
 │       │   │   │   ├── rawDebugSession.ts
 │       │   │   │   ├── repl.ts
 │       │   │   │   ├── replAccessibilityHelp.ts
@@ -3156,18 +2932,6 @@ src
 │       │   │   │   ├── fileBasedRecommendations.ts
 │       │   │   │   ├── keymapRecommendations.ts
 │       │   │   │   ├── languageRecommendations.ts
-│       │   │   │   ├── media
-│       │   │   │   │   ├── extension.css
-│       │   │   │   │   ├── extensionActions.css
-│       │   │   │   │   ├── extensionEditor.css
-│       │   │   │   │   ├── extensionsViewlet.css
-│       │   │   │   │   ├── extensionsWidgets.css
-│       │   │   │   │   ├── language-icon.svg
-│       │   │   │   │   ├── loading-dark.svg
-│       │   │   │   │   ├── loading-hc.svg
-│       │   │   │   │   ├── loading.svg
-│       │   │   │   │   ├── runtimeExtensionsEditor.css
-│       │   │   │   │   └── theme-icon.png
 │       │   │   │   ├── remoteRecommendations.ts
 │       │   │   │   ├── unsupportedExtensionsMigrationContribution.ts
 │       │   │   │   ├── webRecommendations.ts
@@ -3222,15 +2986,11 @@ src
 │       │   │   │   ├── fileImportExport.ts
 │       │   │   │   ├── files.contribution.ts
 │       │   │   │   ├── files.ts
-│       │   │   │   ├── media
-│       │   │   │   │   └── explorerviewlet.css
 │       │   │   │   ├── views
 │       │   │   │   │   ├── emptyView.ts
 │       │   │   │   │   ├── explorerDecorationsProvider.ts
 │       │   │   │   │   ├── explorerView.ts
 │       │   │   │   │   ├── explorerViewer.ts
-│       │   │   │   │   ├── media
-│       │   │   │   │   │   └── openeditors.css
 │       │   │   │   │   └── openEditorsView.ts
 │       │   │   │   └── workspaceWatcher.ts
 │       │   │   ├── common
@@ -3268,8 +3028,6 @@ src
 │       │   │   │   ├── inlineChatStrategies.ts
 │       │   │   │   ├── inlineChatWidget.ts
 │       │   │   │   ├── inlineChatZoneWidget.ts
-│       │   │   │   ├── media
-│       │   │   │   │   └── inlineChat.css
 │       │   │   │   └── utils.ts
 │       │   │   ├── common
 │       │   │   │   └── inlineChat.ts
@@ -3285,12 +3043,9 @@ src
 │       │   │       ├── interactive.contribution.ts
 │       │   │       ├── interactiveCommon.ts
 │       │   │       ├── interactiveDocumentService.ts
-│       │   │       ├── interactiveEditor.css
 │       │   │       ├── interactiveEditor.ts
 │       │   │       ├── interactiveEditorInput.ts
 │       │   │       ├── interactiveHistoryService.ts
-│       │   │       ├── media
-│       │   │       │   └── interactive.css
 │       │   │       └── replInputHintContentWidget.ts
 │       │   ├── issue
 │       │   │   ├── browser
@@ -3303,8 +3058,6 @@ src
 │       │   │   │   ├── issueReporterService.ts
 │       │   │   │   ├── issueService.ts
 │       │   │   │   ├── issueTroubleshoot.ts
-│       │   │   │   └── media
-│       │   │   │       └── issueReporter.css
 │       │   │   ├── common
 │       │   │   │   ├── issue.contribution.ts
 │       │   │   │   ├── issue.ts
@@ -3313,8 +3066,6 @@ src
 │       │   │   │   ├── issue.contribution.ts
 │       │   │   │   ├── issueReporterService.ts
 │       │   │   │   ├── issueService.ts
-│       │   │   │   ├── media
-│       │   │   │   │   └── issueReporter.css
 │       │   │   │   ├── nativeIssueFormService.ts
 │       │   │   │   ├── process.contribution.ts
 │       │   │   │   ├── processMainService.ts
@@ -3329,8 +3080,6 @@ src
 │       │   │   └── browser
 │       │   │       ├── languageStatus.contribution.ts
 │       │   │       ├── languageStatus.ts
-│       │   │       └── media
-│       │   │           └── languageStatus.css
 │       │   ├── limitIndicator
 │       │   │   └── browser
 │       │   │       └── limitIndicator.contribution.ts
@@ -3384,10 +3133,7 @@ src
 │       │   │   │   ├── markersTable.ts
 │       │   │   │   ├── markersTreeViewer.ts
 │       │   │   │   ├── markersView.ts
-│       │   │   │   ├── markersViewActions.css
 │       │   │   │   ├── markersViewActions.ts
-│       │   │   │   ├── media
-│       │   │   │   │   └── markers.css
 │       │   │   │   └── messages.ts
 │       │   │   ├── common
 │       │   │   │   └── markers.ts
@@ -3450,8 +3196,6 @@ src
 │       │   │   │       │   └── resultCodeEditorView.ts
 │       │   │   │       ├── fixedZoneWidget.ts
 │       │   │   │       ├── lineAlignment.ts
-│       │   │   │       ├── media
-│       │   │   │       │   └── mergeEditor.css
 │       │   │   │       ├── mergeEditor.ts
 │       │   │   │       ├── scrollSynchronizer.ts
 │       │   │   │       ├── viewModel.ts
@@ -3501,10 +3245,7 @@ src
 │       │   │   │   │   │   ├── findFilters.ts
 │       │   │   │   │   │   ├── findMatchDecorationModel.ts
 │       │   │   │   │   │   ├── findModel.ts
-│       │   │   │   │   │   ├── media
-│       │   │   │   │   │   │   └── notebookFind.css
 │       │   │   │   │   │   ├── notebookFind.ts
-│       │   │   │   │   │   ├── notebookFindReplaceWidget.css
 │       │   │   │   │   │   ├── notebookFindReplaceWidget.ts
 │       │   │   │   │   │   └── notebookFindWidget.ts
 │       │   │   │   │   ├── format
@@ -3577,7 +3318,6 @@ src
 │       │   │   │   │   │   ├── notebookModifiedCellDecorator.ts
 │       │   │   │   │   │   ├── notebookOriginalCellModelFactory.ts
 │       │   │   │   │   │   └── notebookOriginalModelRefFactory.ts
-│       │   │   │   │   ├── notebookDiff.css
 │       │   │   │   │   ├── notebookDiffActions.ts
 │       │   │   │   │   ├── notebookDiffEditor.ts
 │       │   │   │   │   ├── notebookDiffEditorBrowser.ts
@@ -3587,23 +3327,6 @@ src
 │       │   │   │   │   ├── notebookMultiDiffEditor.ts
 │       │   │   │   │   ├── notebookMultiDiffEditorInput.ts
 │       │   │   │   │   └── unchangedEditorRegions.ts
-│       │   │   │   ├── media
-│       │   │   │   │   ├── notebook.css
-│       │   │   │   │   ├── notebookCellChat.css
-│       │   │   │   │   ├── notebookCellEditorHint.css
-│       │   │   │   │   ├── notebookCellInsertToolbar.css
-│       │   │   │   │   ├── notebookCellOutput.css
-│       │   │   │   │   ├── notebookCellStatusBar.css
-│       │   │   │   │   ├── notebookCellTitleToolbar.css
-│       │   │   │   │   ├── notebookChatEditController.css
-│       │   │   │   │   ├── notebookChatEditorOverlay.css
-│       │   │   │   │   ├── notebookDnd.css
-│       │   │   │   │   ├── notebookEditorStickyScroll.css
-│       │   │   │   │   ├── notebookFocusIndicator.css
-│       │   │   │   │   ├── notebookFolding.css
-│       │   │   │   │   ├── notebookKernelActionViewItem.css
-│       │   │   │   │   ├── notebookOutline.css
-│       │   │   │   │   └── notebookToolbar.css
 │       │   │   │   ├── notebook.contribution.ts
 │       │   │   │   ├── notebookAccessibilityHelp.ts
 │       │   │   │   ├── notebookAccessibilityProvider.ts
@@ -3734,13 +3457,11 @@ src
 │       │   │       ├── outline.contribution.ts
 │       │   │       ├── outline.ts
 │       │   │       ├── outlineActions.ts
-│       │   │       ├── outlinePane.css
 │       │   │       ├── outlinePane.ts
 │       │   │       └── outlineViewState.ts
 │       │   ├── output
 │       │   │   ├── browser
 │       │   │   │   ├── output.contribution.ts
-│       │   │   │   ├── output.css
 │       │   │   │   ├── outputLinkProvider.ts
 │       │   │   │   ├── outputServices.ts
 │       │   │   │   └── outputView.ts
@@ -3766,12 +3487,6 @@ src
 │       │   │   │   ├── keybindingsEditor.ts
 │       │   │   │   ├── keybindingsEditorContribution.ts
 │       │   │   │   ├── keyboardLayoutPicker.ts
-│       │   │   │   ├── media
-│       │   │   │   │   ├── keybindings.css
-│       │   │   │   │   ├── keybindingsEditor.css
-│       │   │   │   │   ├── preferences.css
-│       │   │   │   │   ├── settingsEditor2.css
-│       │   │   │   │   └── settingsWidgets.css
 │       │   │   │   ├── preferences.contribution.ts
 │       │   │   │   ├── preferencesActions.ts
 │       │   │   │   ├── preferencesEditor.ts
@@ -3804,9 +3519,6 @@ src
 │       │   ├── remote
 │       │   │   ├── browser
 │       │   │   │   ├── explorerViewItems.ts
-│       │   │   │   ├── media
-│       │   │   │   │   ├── remoteViewlet.css
-│       │   │   │   │   └── tunnelView.css
 │       │   │   │   ├── remote.contribution.ts
 │       │   │   │   ├── remote.ts
 │       │   │   │   ├── remoteConnectionHealth.ts
@@ -3828,9 +3540,6 @@ src
 │       │   │       └── remoteTunnel.contribution.ts
 │       │   ├── replNotebook
 │       │   │   └── browser
-│       │   │       ├── interactiveEditor.css
-│       │   │       ├── media
-│       │   │       │   └── interactive.css
 │       │   │       ├── repl.contribution.ts
 │       │   │       ├── replEditor.ts
 │       │   │       ├── replEditorAccessibilityHelp.ts
@@ -3842,9 +3551,6 @@ src
 │       │   ├── scm
 │       │   │   ├── browser
 │       │   │   │   ├── activity.ts
-│       │   │   │   ├── media
-│       │   │   │   │   ├── dirtydiffDecorator.css
-│       │   │   │   │   └── scm.css
 │       │   │   │   ├── menus.ts
 │       │   │   │   ├── quickDiffDecorator.ts
 │       │   │   │   ├── quickDiffModel.ts
@@ -3876,9 +3582,6 @@ src
 │       │   │   │   │   ├── aiSearchModel.ts
 │       │   │   │   │   └── aiSearchModelBase.ts
 │       │   │   │   ├── anythingQuickAccess.ts
-│       │   │   │   ├── media
-│       │   │   │   │   ├── anythingQuickAccess.css
-│       │   │   │   │   └── searchview.css
 │       │   │   │   ├── notebookSearch
 │       │   │   │   │   ├── notebookSearchContributions.ts
 │       │   │   │   │   ├── notebookSearchModel.ts
@@ -3929,8 +3632,6 @@ src
 │       │   ├── searchEditor
 │       │   │   └── browser
 │       │   │       ├── constants.ts
-│       │   │       ├── media
-│       │   │       │   └── searchEditor.css
 │       │   │       ├── searchEditor.contribution.ts
 │       │   │       ├── searchEditor.ts
 │       │   │       ├── searchEditorActions.ts
@@ -3940,7 +3641,6 @@ src
 │       │   ├── share
 │       │   │   ├── browser
 │       │   │   │   ├── share.contribution.ts
-│       │   │   │   ├── share.css
 │       │   │   │   └── shareService.ts
 │       │   │   └── common
 │       │   │       └── share.ts
@@ -4020,11 +3720,6 @@ src
 │       │   │   │   ├── baseTerminalBackend.ts
 │       │   │   │   ├── detachedTerminal.ts
 │       │   │   │   ├── environmentVariableInfo.ts
-│       │   │   │   ├── media
-│       │   │   │   │   ├── terminal.css
-│       │   │   │   │   ├── terminalVoice.css
-│       │   │   │   │   ├── widgets.css
-│       │   │   │   │   └── xterm.css
 │       │   │   │   ├── remotePty.ts
 │       │   │   │   ├── remoteTerminalBackend.ts
 │       │   │   │   ├── terminal.contribution.ts
@@ -4132,9 +3827,6 @@ src
 │       │   │   │       └── terminalAutoRepliesConfiguration.ts
 │       │   │   ├── chat
 │       │   │   │   ├── browser
-│       │   │   │   │   ├── media
-│       │   │   │   │   │   ├── terminalChatWidget.css
-│       │   │   │   │   │   └── terminalInitialHint.css
 │       │   │   │   │   ├── terminal.chat.contribution.ts
 │       │   │   │   │   ├── terminal.initialHint.contribution.ts
 │       │   │   │   │   ├── terminalChat.ts
@@ -4157,8 +3849,6 @@ src
 │       │   │   │       └── terminalCommandGuideConfiguration.ts
 │       │   │   ├── developer
 │       │   │   │   ├── browser
-│       │   │   │   │   ├── media
-│       │   │   │   │   │   └── developer.css
 │       │   │   │   │   └── terminal.developer.contribution.ts
 │       │   │   │   └── common
 │       │   │   │       └── terminal.developer.ts
@@ -4167,8 +3857,6 @@ src
 │       │   │   │       └── terminal.environmentChanges.contribution.ts
 │       │   │   ├── find
 │       │   │   │   ├── browser
-│       │   │   │   │   ├── media
-│       │   │   │   │   │   └── terminalFind.css
 │       │   │   │   │   ├── terminal.find.contribution.ts
 │       │   │   │   │   └── terminalFindWidget.ts
 │       │   │   │   └── common
@@ -4206,8 +3894,6 @@ src
 │       │   │   │       └── terminalQuickAccess.ts
 │       │   │   ├── quickFix
 │       │   │   │   ├── browser
-│       │   │   │   │   ├── media
-│       │   │   │   │   │   └── terminalQuickFix.css
 │       │   │   │   │   ├── quickFix.ts
 │       │   │   │   │   ├── quickFixAddon.ts
 │       │   │   │   │   ├── terminal.quickFix.contribution.ts
@@ -4215,8 +3901,6 @@ src
 │       │   │   │   │   └── terminalQuickFixService.ts
 │       │   │   ├── stickyScroll
 │       │   │   │   ├── browser
-│       │   │   │   │   ├── media
-│       │   │   │   │   │   └── stickyScroll.css
 │       │   │   │   │   ├── terminal.stickyScroll.contribution.ts
 │       │   │   │   │   ├── terminalStickyScrollColorRegistry.ts
 │       │   │   │   │   ├── terminalStickyScrollContribution.ts
@@ -4225,8 +3909,6 @@ src
 │       │   │   │       └── terminalStickyScrollConfiguration.ts
 │       │   │   ├── suggest
 │       │   │   │   ├── browser
-│       │   │   │   │   ├── media
-│       │   │   │   │   │   └── terminalSymbolIcons.css
 │       │   │   │   │   ├── pwshCompletionProviderAddon.ts
 │       │   │   │   │   ├── terminal.suggest.contribution.ts
 │       │   │   │   │   ├── terminalCompletionItem.ts
@@ -4257,8 +3939,6 @@ src
 │       │   │   │   ├── themes.contribution.ts
 │       │   ├── timeline
 │       │   │   ├── browser
-│       │   │   │   ├── media
-│       │   │   │   │   └── timelinePane.css
 │       │   │   │   ├── timeline.contribution.ts
 │       │   │   │   └── timelinePane.ts
 │       │   │   └── common
@@ -4266,8 +3946,6 @@ src
 │       │   │       └── timelineService.ts
 │       │   ├── typeHierarchy
 │       │   │   ├── browser
-│       │   │   │   ├── media
-│       │   │   │   │   └── typeHierarchy.css
 │       │   │   │   ├── typeHierarchy.contribution.ts
 │       │   │   │   ├── typeHierarchyPeek.ts
 │       │   │   │   └── typeHierarchyTree.ts
@@ -4275,8 +3953,6 @@ src
 │       │   │       └── typeHierarchy.ts
 │       │   ├── update
 │       │   │   ├── browser
-│       │   │   │   ├── media
-│       │   │   │   │   └── releasenoteseditor.css
 │       │   │   │   ├── releaseNotesEditor.ts
 │       │   │   │   ├── update.contribution.ts
 │       │   │   │   └── update.ts
@@ -4294,8 +3970,6 @@ src
 │       │   │   │   └── urlGlob.ts
 │       │   ├── userDataProfile
 │       │   │   ├── browser
-│       │   │   │   ├── media
-│       │   │   │   │   └── userDataProfilesEditor.css
 │       │   │   │   ├── userDataProfile.contribution.ts
 │       │   │   │   ├── userDataProfile.ts
 │       │   │   │   ├── userDataProfileActions.ts
@@ -4357,8 +4031,6 @@ src
 │       │   │       └── welcomeBanner.contribution.ts
 │       │   ├── welcomeDialog
 │       │   │   └── browser
-│       │   │       ├── media
-│       │   │       │   └── welcomeWidget.css
 │       │   │       ├── welcomeDialog.contribution.ts
 │       │   │       └── welcomeWidget.ts
 │       │   ├── welcomeGettingStarted
@@ -4373,41 +4045,12 @@ src
 │       │   │   │   ├── gettingStartedInput.ts
 │       │   │   │   ├── gettingStartedList.ts
 │       │   │   │   ├── gettingStartedService.ts
-│       │   │   │   ├── media
-│       │   │   │   │   └── gettingStarted.css
 │       │   │   │   └── startupPage.ts
 │       │   │   ├── common
 │       │   │   │   ├── gettingStartedContent.ts
 │       │   │   │   └── media
-│       │   │   │       ├── commandPalette.svg
-│       │   │   │       ├── dark-hc.png
-│       │   │   │       ├── dark.png
-│       │   │   │       ├── debug.svg
-│       │   │   │       ├── empty.ts
-│       │   │   │       ├── extensions-web.svg
-│       │   │   │       ├── extensions.svg
-│       │   │   │       ├── git.svg
-│       │   │   │       ├── languages.svg
-│       │   │   │       ├── learn.svg
-│       │   │   │       ├── light-hc.png
-│       │   │   │       ├── light.png
-│       │   │   │       ├── menuBar.svg
-│       │   │   │       ├── multi-file-edits.svg
 │       │   │   │       ├── notebookProfile.ts
-│       │   │   │       ├── notebookThemes
-│       │   │   │       │   ├── colab.png
-│       │   │   │       │   ├── default.png
-│       │   │   │       │   └── jupyter.png
-│       │   │   │       ├── openFolder.svg
-│       │   │   │       ├── profiles.svg
-│       │   │   │       ├── runTask.svg
-│       │   │   │       ├── search.svg
-│       │   │   │       ├── settings.svg
-│       │   │   │       ├── settingsSync.svg
-│       │   │   │       ├── shortcuts.svg
-│       │   │   │       ├── terminal.svg
 │       │   │   │       ├── theme_picker.ts
-│       │   │   │       └── workspaceTrust.svg
 │       │   ├── welcomeViews
 │       │   │   └── common
 │       │   │       ├── newFile.contribution.ts
@@ -4419,8 +4062,6 @@ src
 │       │   │   │   ├── editor
 │       │   │   │   │   ├── editorWalkThrough.ts
 │       │   │   │   │   └── vs_code_editor_walkthrough.ts
-│       │   │   │   ├── media
-│       │   │   │   │   └── walkThroughPart.css
 │       │   │   │   ├── walkThrough.contribution.ts
 │       │   │   │   ├── walkThroughActions.ts
 │       │   │   │   ├── walkThroughInput.ts
@@ -4430,8 +4071,6 @@ src
 │       │   │       └── walkThroughUtils.ts
 │       │   ├── workspace
 │       │   │   ├── browser
-│       │   │   │   ├── media
-│       │   │   │   │   └── workspaceTrustEditor.css
 │       │   │   │   ├── workspace.contribution.ts
 │       │   │   │   └── workspaceTrustEditor.ts
 │       │   │   └── common
@@ -4443,13 +4082,9 @@ src
 │       │   ├── actions
 │       │   │   ├── developerActions.ts
 │       │   │   ├── installActions.ts
-│       │   │   ├── media
-│       │   │   │   └── actions.css
 │       │   │   └── windowActions.ts
 │       │   ├── desktop.contribution.ts
 │       │   ├── desktop.main.ts
-│       │   ├── media
-│       │   │   └── window.css
 │       │   ├── parts
 │       │   │   ├── dialogs
 │       │   │   │   ├── dialog.contribution.ts
@@ -4598,9 +4233,6 @@ src
 │       │   │   │   ├── extensionManagementServerService.ts
 │       │   │   │   ├── extensionManagementService.ts
 │       │   │   │   ├── extensionsIcons.ts
-│       │   │   │   ├── media
-│       │   │   │   │   ├── defaultIcon.png
-│       │   │   │   │   └── extensionManagement.css
 │       │   │   │   ├── remoteExtensionManagementService.ts
 │       │   │   │   └── webExtensionManagementService.ts
 │       │   │   ├── electron-sandbox
@@ -4836,8 +4468,6 @@ src
 │       │   │   │   └── preferencesValidation.ts
 │       │   ├── progress
 │       │   │   ├── browser
-│       │   │   │   ├── media
-│       │   │   │   │   └── progressService.css
 │       │   │   │   ├── progressIndicator.ts
 │       │   │   │   └── progressService.ts
 │       │   ├── quickinput
@@ -4912,8 +4542,6 @@ src
 │       │   │   │   └── storageService.ts
 │       │   ├── suggest
 │       │   │   └── browser
-│       │   │       ├── media
-│       │   │       │   └── suggest.css
 │       │   │       ├── simpleCompletionItem.ts
 │       │   │       ├── simpleCompletionModel.ts
 │       │   │       ├── simpleSuggestWidget.ts
@@ -5048,8 +4676,6 @@ src
 │       │   │   │   ├── globalStateResource.ts
 │       │   │   │   ├── iconSelectBox.ts
 │       │   │   │   ├── keybindingsResource.ts
-│       │   │   │   ├── media
-│       │   │   │   │   └── userDataProfileView.css
 │       │   │   │   ├── settingsResource.ts
 │       │   │   │   ├── snippetsResource.ts
 │       │   │   │   ├── tasksResource.ts
@@ -5135,141 +4761,5 @@ src
 │       ├── workbench.desktop.main.ts
 │       ├── workbench.web.main.internal.ts
 │       └── workbench.web.main.ts
-└── vscode-dts
-    ├── README.md
-    ├── vscode.d.ts
-    ├── vscode.proposed.activeComment.d.ts
-    ├── vscode.proposed.aiRelatedInformation.d.ts
-    ├── vscode.proposed.aiTextSearchProvider.d.ts
-    ├── vscode.proposed.authLearnMore.d.ts
-    ├── vscode.proposed.authSession.d.ts
-    ├── vscode.proposed.canonicalUriProvider.d.ts
-    ├── vscode.proposed.chatEditing.d.ts
-    ├── vscode.proposed.chatParticipantAdditions.d.ts
-    ├── vscode.proposed.chatParticipantPrivate.d.ts
-    ├── vscode.proposed.chatProvider.d.ts
-    ├── vscode.proposed.chatReferenceBinaryData.d.ts
-    ├── vscode.proposed.chatReferenceDiagnostic.d.ts
-    ├── vscode.proposed.chatTab.d.ts
-    ├── vscode.proposed.codeActionAI.d.ts
-    ├── vscode.proposed.codeActionRanges.d.ts
-    ├── vscode.proposed.codiconDecoration.d.ts
-    ├── vscode.proposed.commentReactor.d.ts
-    ├── vscode.proposed.commentReveal.d.ts
-    ├── vscode.proposed.commentThreadApplicability.d.ts
-    ├── vscode.proposed.commentingRangeHint.d.ts
-    ├── vscode.proposed.commentsDraftState.d.ts
-    ├── vscode.proposed.contribAccessibilityHelpContent.d.ts
-    ├── vscode.proposed.contribCommentEditorActionsMenu.d.ts
-    ├── vscode.proposed.contribCommentPeekContext.d.ts
-    ├── vscode.proposed.contribCommentThreadAdditionalMenu.d.ts
-    ├── vscode.proposed.contribCommentsViewThreadMenus.d.ts
-    ├── vscode.proposed.contribDebugCreateConfiguration.d.ts
-    ├── vscode.proposed.contribDiffEditorGutterToolBarMenus.d.ts
-    ├── vscode.proposed.contribEditSessions.d.ts
-    ├── vscode.proposed.contribEditorContentMenu.d.ts
-    ├── vscode.proposed.contribLabelFormatterWorkspaceTooltip.d.ts
-    ├── vscode.proposed.contribMenuBarHome.d.ts
-    ├── vscode.proposed.contribMergeEditorMenus.d.ts
-    ├── vscode.proposed.contribMultiDiffEditorMenus.d.ts
-    ├── vscode.proposed.contribNotebookStaticPreloads.d.ts
-    ├── vscode.proposed.contribRemoteHelp.d.ts
-    ├── vscode.proposed.contribShareMenu.d.ts
-    ├── vscode.proposed.contribSourceControlHistoryItemMenu.d.ts
-    ├── vscode.proposed.contribSourceControlHistoryTitleMenu.d.ts
-    ├── vscode.proposed.contribSourceControlInputBoxMenu.d.ts
-    ├── vscode.proposed.contribSourceControlTitleMenu.d.ts
-    ├── vscode.proposed.contribStatusBarItems.d.ts
-    ├── vscode.proposed.contribViewContainerTitle.d.ts
-    ├── vscode.proposed.contribViewsRemote.d.ts
-    ├── vscode.proposed.contribViewsWelcome.d.ts
-    ├── vscode.proposed.customEditorMove.d.ts
-    ├── vscode.proposed.debugVisualization.d.ts
-    ├── vscode.proposed.defaultChatParticipant.d.ts
-    ├── vscode.proposed.diffCommand.d.ts
-    ├── vscode.proposed.diffContentOptions.d.ts
-    ├── vscode.proposed.documentFiltersExclusive.d.ts
-    ├── vscode.proposed.editSessionIdentityProvider.d.ts
-    ├── vscode.proposed.editorHoverVerbosityLevel.d.ts
-    ├── vscode.proposed.editorInsets.d.ts
-    ├── vscode.proposed.embeddings.d.ts
-    ├── vscode.proposed.extensionRuntime.d.ts
-    ├── vscode.proposed.extensionsAny.d.ts
-    ├── vscode.proposed.externalUriOpener.d.ts
-    ├── vscode.proposed.fileSearchProvider.d.ts
-    ├── vscode.proposed.fileSearchProvider2.d.ts
-    ├── vscode.proposed.findFiles2.d.ts
-    ├── vscode.proposed.findTextInFiles.d.ts
-    ├── vscode.proposed.findTextInFiles2.d.ts
-    ├── vscode.proposed.fsChunks.d.ts
-    ├── vscode.proposed.idToken.d.ts
-    ├── vscode.proposed.inlineCompletionsAdditions.d.ts
-    ├── vscode.proposed.inlineEdit.d.ts
-    ├── vscode.proposed.interactive.d.ts
-    ├── vscode.proposed.interactiveWindow.d.ts
-    ├── vscode.proposed.ipc.d.ts
-    ├── vscode.proposed.languageModelCapabilities.d.ts
-    ├── vscode.proposed.languageModelSystem.d.ts
-    ├── vscode.proposed.languageModelToolsForAgent.d.ts
-    ├── vscode.proposed.languageStatusText.d.ts
-    ├── vscode.proposed.mappedEditsProvider.d.ts
-    ├── vscode.proposed.multiDocumentHighlightProvider.d.ts
-    ├── vscode.proposed.nativeWindowHandle.d.ts
-    ├── vscode.proposed.newSymbolNamesProvider.d.ts
-    ├── vscode.proposed.notebookCellExecution.d.ts
-    ├── vscode.proposed.notebookCellExecutionState.d.ts
-    ├── vscode.proposed.notebookControllerAffinityHidden.d.ts
-    ├── vscode.proposed.notebookDeprecated.d.ts
-    ├── vscode.proposed.notebookExecution.d.ts
-    ├── vscode.proposed.notebookKernelSource.d.ts
-    ├── vscode.proposed.notebookLiveShare.d.ts
-    ├── vscode.proposed.notebookMessaging.d.ts
-    ├── vscode.proposed.notebookMime.d.ts
-    ├── vscode.proposed.notebookReplDocument.d.ts
-    ├── vscode.proposed.notebookVariableProvider.d.ts
-    ├── vscode.proposed.portsAttributes.d.ts
-    ├── vscode.proposed.profileContentHandlers.d.ts
-    ├── vscode.proposed.quickDiffProvider.d.ts
-    ├── vscode.proposed.quickInputButtonLocation.d.ts
-    ├── vscode.proposed.quickPickItemTooltip.d.ts
-    ├── vscode.proposed.quickPickSortByLabel.d.ts
-    ├── vscode.proposed.resolvers.d.ts
-    ├── vscode.proposed.scmActionButton.d.ts
-    ├── vscode.proposed.scmHistoryProvider.d.ts
-    ├── vscode.proposed.scmMultiDiffEditor.d.ts
-    ├── vscode.proposed.scmSelectedProvider.d.ts
-    ├── vscode.proposed.scmTextDocument.d.ts
-    ├── vscode.proposed.scmValidation.d.ts
-    ├── vscode.proposed.shareProvider.d.ts
-    ├── vscode.proposed.speech.d.ts
-    ├── vscode.proposed.statusBarItemTooltip.d.ts
-    ├── vscode.proposed.tabInputMultiDiff.d.ts
-    ├── vscode.proposed.tabInputTextMerge.d.ts
-    ├── vscode.proposed.taskPresentationGroup.d.ts
-    ├── vscode.proposed.taskStatus.d.ts
-    ├── vscode.proposed.telemetry.d.ts
-    ├── vscode.proposed.terminalCompletionProvider.d.ts
-    ├── vscode.proposed.terminalDataWriteEvent.d.ts
-    ├── vscode.proposed.terminalDimensions.d.ts
-    ├── vscode.proposed.terminalExecuteCommandEvent.d.ts
-    ├── vscode.proposed.terminalQuickFixProvider.d.ts
-    ├── vscode.proposed.terminalSelection.d.ts
-    ├── vscode.proposed.terminalShellEnv.d.ts
-    ├── vscode.proposed.terminalShellType.d.ts
-    ├── vscode.proposed.textDocumentEncoding.d.ts
-    ├── vscode.proposed.textEditorDiffInformation.d.ts
-    ├── vscode.proposed.textSearchComplete2.d.ts
-    ├── vscode.proposed.textSearchProvider.d.ts
-    ├── vscode.proposed.textSearchProvider2.d.ts
-    ├── vscode.proposed.timeline.d.ts
-    ├── vscode.proposed.tokenInformation.d.ts
-    ├── vscode.proposed.treeViewActiveItem.d.ts
-    ├── vscode.proposed.treeViewMarkdownMessage.d.ts
-    ├── vscode.proposed.treeViewReveal.d.ts
-    ├── vscode.proposed.tunnelFactory.d.ts
-    ├── vscode.proposed.tunnels.d.ts
-    ├── vscode.proposed.valueSelectionInQuickPick.d.ts
-    └── vscode.proposed.workspaceTrust.d.ts
-
 
 ```
