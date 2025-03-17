@@ -68,4 +68,9 @@ obj = null
 
 ```
 
+```typescript
 
+// 变量和interface可同名
+export const ILanguageService = createDecorator<ILanguageService>('languageService');
+
+```

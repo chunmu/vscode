@@ -1,8 +1,5 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) Microsoft Corporation. All rights reserved.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
-
+/******************************************** 已阅 ********************************************/
+// 初步构建一个实例化样板 基本只有骨架 真正应用在service的时候丰富细节
 import { DisposableStore } from '../../../base/common/lifecycle.js';
 import * as descriptors from './descriptors.js';
 import { ServiceCollection } from './serviceCollection.js';
@@ -116,7 +113,6 @@ export function createDecorator<T>(serviceId: string): ServiceIdentifier<T> {
 	};
 
 	id.toString = () => serviceId;
-	console.log(id, 'chunmu: createDecorator')
 
 	_util.serviceIds.set(serviceId, id);
 	return id;

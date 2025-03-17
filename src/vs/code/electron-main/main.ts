@@ -482,28 +482,28 @@ class CodeMain {
 	// }
 
 	private quit(accessor: ServicesAccessor, reason?: ExpectedError | Error): void {
-		const logService = accessor.get(ILogService);
-		const lifecycleMainService = accessor.get(ILifecycleMainService);
+		// const logService = accessor.get(ILogService);
+		// const lifecycleMainService = accessor.get(ILifecycleMainService);
 
-		let exitCode = 0;
+		// let exitCode = 0;
 
-		if (reason) {
-			if ((reason as ExpectedError).isExpected) {
-				if (reason.message) {
-					logService.trace(reason.message);
-				}
-			} else {
-				exitCode = 1; // signal error to the outside
+		// if (reason) {
+		// 	if ((reason as ExpectedError).isExpected) {
+		// 		if (reason.message) {
+		// 			logService.trace(reason.message);
+		// 		}
+		// 	} else {
+		// 		exitCode = 1; // signal error to the outside
 
-				if (reason.stack) {
-					logService.error(reason.stack);
-				} else {
-					logService.error(`Startup error: ${reason.toString()}`);
-				}
-			}
-		}
+		// 		if (reason.stack) {
+		// 			logService.error(reason.stack);
+		// 		} else {
+		// 			logService.error(`Startup error: ${reason.toString()}`);
+		// 		}
+		// 	}
+		// }
 
-		lifecycleMainService.kill(exitCode);
+		// lifecycleMainService.kill(exitCode);
 	}
 
 	// //#region Command line arguments utilities

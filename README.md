@@ -233,7 +233,7 @@ src
 │   │   │   ├── keybindings.ts
 │   │   │   ├── labels.ts
 │   │   │   ├── lazy.ts
-│   │   │   ├── lifecycle.ts 基于FinalizationRegistry的资源回收通知等逻辑，没细看实现
+│   │   │   ├── lifecycle.ts 基于FinalizationRegistry的资源回收通知等逻辑，用于处理service资源回收
 │   │   │   ├── linkedList.ts
 │   │   │   ├── linkedText.ts
 │   │   │   ├── map.ts map/set工具方法，主要做了存取，转string，key为URI的RourceMap工具，链表Map(LinkedMap)，基于链表的缓存基础类Cache，基于前面Cache的LRU(最少使用算法)缓存，基于前面Cache的MRU(最近使用算法)缓存，key和value相互作为key，value的BidirectionalMap，双Map结构，专门存放set的Map(SetMap)
@@ -1553,9 +1553,9 @@ src
 │   │   │   │   ├── descriptors.ts
 │   │   │   │   ├── extensions.ts
 │   │   │   │   ├── graph.ts
-│   │   │   │   ├── instantiation.ts
+│   │   │   │   ├── instantiation.ts 初步构建一个实例化样板 基本只有骨架 真正应用在service的时候丰富细节
 │   │   │   │   ├── instantiationService.ts
-│   │   │   │   └── serviceCollection.ts
+│   │   │   │   └── serviceCollection.ts 用一个Map维护存储service集合
 │   │   ├── ipc
 │   │   │   ├── common
 │   │   │   │   ├── mainProcessService.ts

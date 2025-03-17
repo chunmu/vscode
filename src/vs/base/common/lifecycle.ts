@@ -1,5 +1,5 @@
 /******************************************** 已阅 ********************************************/
-// 基于FinalizationRegistry的资源回收通知等逻辑，没细看实现
+// 基于FinalizationRegistry的资源回收通知等逻辑，用于处理service资源回收
 
 import { compareBy, numberComparator } from './arrays.js';
 import { groupBy } from './collections.js';
