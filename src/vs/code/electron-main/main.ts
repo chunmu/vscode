@@ -7,6 +7,7 @@
 import '../../platform/update/common/update.config.contribution.js';
 
 import { app, dialog } from 'electron';
+import { unlinkSync, promises } from 'fs';
 import { URI } from '../../base/common/uri.js';
 import { coalesce, distinct } from '../../base/common/arrays.js';
 import { Promises } from '../../base/common/async.js';
@@ -102,53 +103,51 @@ class CodeMain {
 		setUnexpectedErrorHandler(err => console.error(err));
 
 		// Create services
-		// const [instantiationService, instanceEnvironment, environmentMainService, configurationService, stateMainService, bufferLogger, productService, userDataProfilesMainService] = this.createServices();
-		const [instantiationService, instanceEnvironment, environmentMainService] = this.createServices();
+		const [instantiationService, instanceEnvironment, environmentMainService, configurationService, stateMainService, bufferLogger, productService, userDataProfilesMainService] = this.createServices();
 
 		try {
 
 			// Init services
 			try {
-				// await this.initServices(environmentMainService, userDataProfilesMainService, configurationService, stateMainService, productService);
-				// await this.initServices(environmentMainService, userDataProfilesMainService, configurationService, stateMainService, productService);
+				await this.initServices(environmentMainService, userDataProfilesMainService, configurationService, stateMainService, productService);
 			} catch (error) {
 
 				// Show a dialog for errors that can be resolved by the user
-				// this.handleStartupDataDirError(environmentMainService, productService, error);
+				this.handleStartupDataDirError(environmentMainService, productService, error);
 
 				throw error;
 			}
 
 			// Startup
-			// await instantiationService.invokeFunction(async accessor => {
-			// 	const logService = accessor.get(ILogService);
-			// 	const lifecycleMainService = accessor.get(ILifecycleMainService);
-			// 	const fileService = accessor.get(IFileService);
-			// 	const loggerService = accessor.get(ILoggerService);
+			await instantiationService.invokeFunction(async accessor => {
+				const logService = accessor.get(ILogService);
+				const lifecycleMainService = accessor.get(ILifecycleMainService);
+				const fileService = accessor.get(IFileService);
+				const loggerService = accessor.get(ILoggerService);
 
-			// 	// Create the main IPC server by trying to be the server
-			// 	// If this throws an error it means we are not the first
-			// 	// instance of VS Code running and so we would quit.
-			// 	const mainProcessNodeIpcServer = await this.claimInstance(logService, environmentMainService, lifecycleMainService, instantiationService, productService, true);
+				// Create the main IPC server by trying to be the server
+				// If this throws an error it means we are not the first
+				// instance of VS Code running and so we would quit.
+				const mainProcessNodeIpcServer = await this.claimInstance(logService, environmentMainService, lifecycleMainService, instantiationService, productService, true);
 
-			// 	// Write a lockfile to indicate an instance is running
-			// 	// (https://github.com/microsoft/vscode/issues/127861#issuecomment-877417451)
-			// 	FSPromises.writeFile(environmentMainService.mainLockfile, String(process.pid)).catch(err => {
-			// 		logService.warn(`app#startup(): Error writing main lockfile: ${err.stack}`);
-			// 	});
+				// Write a lockfile to indicate an instance is running
+				// (https://github.com/microsoft/vscode/issues/127861#issuecomment-877417451)
+				FSPromises.writeFile(environmentMainService.mainLockfile, String(process.pid)).catch(err => {
+					logService.warn(`app#startup(): Error writing main lockfile: ${err.stack}`);
+				});
 
-			// 	// Delay creation of spdlog for perf reasons (https://github.com/microsoft/vscode/issues/72906)
-			// 	bufferLogger.logger = loggerService.createLogger('main', { name: localize('mainLog', "Main") });
+				// Delay creation of spdlog for perf reasons (https://github.com/microsoft/vscode/issues/72906)
+				bufferLogger.logger = loggerService.createLogger('main', { name: localize('mainLog', "Main") });
 
-			// 	// Lifecycle
-			// 	Event.once(lifecycleMainService.onWillShutdown)(evt => {
-			// 		fileService.dispose();
-			// 		configurationService.dispose();
-			// 		evt.join('instanceLockfile', promises.unlink(environmentMainService.mainLockfile).catch(() => { /* ignored */ }));
-			// 	});
+				// Lifecycle
+				Event.once(lifecycleMainService.onWillShutdown)(evt => {
+					fileService.dispose();
+					configurationService.dispose();
+					evt.join('instanceLockfile', promises.unlink(environmentMainService.mainLockfile).catch(() => { /* ignored */ }));
+				});
 
-			// 	return instantiationService.createInstance(CodeApplication, mainProcessNodeIpcServer, instanceEnvironment).startup();
-			// });
+				return instantiationService.createInstance(CodeApplication, mainProcessNodeIpcServer, instanceEnvironment).startup();
+			});
 		} catch (error) {
 			instantiationService.invokeFunction(this.quit, error);
 		}
@@ -258,171 +257,171 @@ class CodeMain {
 		return instanceEnvironment;
 	}
 
-	// private async initServices(environmentMainService: IEnvironmentMainService, userDataProfilesMainService: UserDataProfilesMainService, configurationService: ConfigurationService, stateService: StateService, productService: IProductService): Promise<void> {
-	// 	await Promises.settled<unknown>([
+	private async initServices(environmentMainService: IEnvironmentMainService, userDataProfilesMainService: UserDataProfilesMainService, configurationService: ConfigurationService, stateService: StateService, productService: IProductService): Promise<void> {
+		await Promises.settled<unknown>([
 
-	// 		// Environment service (paths)
-	// 		Promise.all<string | undefined>([
-	// 			this.allowWindowsUNCPath(environmentMainService.extensionsPath), // enable extension paths on UNC drives...
-	// 			environmentMainService.codeCachePath,							 // ...other user-data-derived paths should already be enlisted from `main.js`
-	// 			environmentMainService.logsHome.with({ scheme: Schemas.file }).fsPath,
-	// 			userDataProfilesMainService.defaultProfile.globalStorageHome.with({ scheme: Schemas.file }).fsPath,
-	// 			environmentMainService.workspaceStorageHome.with({ scheme: Schemas.file }).fsPath,
-	// 			environmentMainService.localHistoryHome.with({ scheme: Schemas.file }).fsPath,
-	// 			environmentMainService.backupHome
-	// 		].map(path => path ? promises.mkdir(path, { recursive: true }) : undefined)),
+			// Environment service (paths)
+			Promise.all<string | undefined>([
+				this.allowWindowsUNCPath(environmentMainService.extensionsPath), // enable extension paths on UNC drives...
+				environmentMainService.codeCachePath,							 // ...other user-data-derived paths should already be enlisted from `main.js`
+				environmentMainService.logsHome.with({ scheme: Schemas.file }).fsPath,
+				userDataProfilesMainService.defaultProfile.globalStorageHome.with({ scheme: Schemas.file }).fsPath,
+				environmentMainService.workspaceStorageHome.with({ scheme: Schemas.file }).fsPath,
+				environmentMainService.localHistoryHome.with({ scheme: Schemas.file }).fsPath,
+				environmentMainService.backupHome
+			].map(path => path ? promises.mkdir(path, { recursive: true }) : undefined)),
 
-	// 		// State service
-	// 		stateService.init(),
+			// State service
+			stateService.init(),
 
-	// 		// Configuration service
-	// 		configurationService.initialize()
-	// 	]);
+			// Configuration service
+			configurationService.initialize()
+		]);
 
-	// 	// Initialize user data profiles after initializing the state
-	// 	userDataProfilesMainService.init();
-	// }
+		// Initialize user data profiles after initializing the state
+		userDataProfilesMainService.init();
+	}
 
-	// private allowWindowsUNCPath(path: string): string {
-	// 	if (isWindows) {
-	// 		const host = getUNCHost(path);
-	// 		if (host) {
-	// 			addUNCHostToAllowlist(host);
-	// 		}
-	// 	}
+	private allowWindowsUNCPath(path: string): string {
+		if (isWindows) {
+			const host = getUNCHost(path);
+			if (host) {
+				addUNCHostToAllowlist(host);
+			}
+		}
 
-	// 	return path;
-	// }
+		return path;
+	}
 
-	// private async claimInstance(logService: ILogService, environmentMainService: IEnvironmentMainService, lifecycleMainService: ILifecycleMainService, instantiationService: IInstantiationService, productService: IProductService, retry: boolean): Promise<NodeIPCServer> {
+	private async claimInstance(logService: ILogService, environmentMainService: IEnvironmentMainService, lifecycleMainService: ILifecycleMainService, instantiationService: IInstantiationService, productService: IProductService, retry: boolean): Promise<NodeIPCServer> {
 
-	// 	// Try to setup a server for running. If that succeeds it means
-	// 	// we are the first instance to startup. Otherwise it is likely
-	// 	// that another instance is already running.
-	// 	let mainProcessNodeIpcServer: NodeIPCServer;
-	// 	try {
-	// 		mark('code/willStartMainServer');
-	// 		mainProcessNodeIpcServer = await nodeIPCServe(environmentMainService.mainIPCHandle);
-	// 		mark('code/didStartMainServer');
-	// 		Event.once(lifecycleMainService.onWillShutdown)(() => mainProcessNodeIpcServer.dispose());
-	// 	} catch (error) {
+		// Try to setup a server for running. If that succeeds it means
+		// we are the first instance to startup. Otherwise it is likely
+		// that another instance is already running.
+		let mainProcessNodeIpcServer: NodeIPCServer;
+		try {
+			mark('code/willStartMainServer');
+			mainProcessNodeIpcServer = await nodeIPCServe(environmentMainService.mainIPCHandle);
+			mark('code/didStartMainServer');
+			Event.once(lifecycleMainService.onWillShutdown)(() => mainProcessNodeIpcServer.dispose());
+		} catch (error) {
 
-	// 		// Handle unexpected errors (the only expected error is EADDRINUSE that
-	// 		// indicates another instance of VS Code is running)
-	// 		if (error.code !== 'EADDRINUSE') {
+			// Handle unexpected errors (the only expected error is EADDRINUSE that
+			// indicates another instance of VS Code is running)
+			if (error.code !== 'EADDRINUSE') {
 
-	// 			// Show a dialog for errors that can be resolved by the user
-	// 			this.handleStartupDataDirError(environmentMainService, productService, error);
+				// Show a dialog for errors that can be resolved by the user
+				this.handleStartupDataDirError(environmentMainService, productService, error);
 
-	// 			// Any other runtime error is just printed to the console
-	// 			throw error;
-	// 		}
+				// Any other runtime error is just printed to the console
+				throw error;
+			}
 
-	// 		// there's a running instance, let's connect to it
-	// 		let client: NodeIPCClient<string>;
-	// 		try {
-	// 			client = await nodeIPCConnect(environmentMainService.mainIPCHandle, 'main');
-	// 		} catch (error) {
+			// there's a running instance, let's connect to it
+			let client: NodeIPCClient<string>;
+			try {
+				client = await nodeIPCConnect(environmentMainService.mainIPCHandle, 'main');
+			} catch (error) {
 
-	// 			// Handle unexpected connection errors by showing a dialog to the user
-	// 			if (!retry || isWindows || error.code !== 'ECONNREFUSED') {
-	// 				if (error.code === 'EPERM') {
-	// 					this.showStartupWarningDialog(
-	// 						localize('secondInstanceAdmin', "Another instance of {0} is already running as administrator.", productService.nameShort),
-	// 						localize('secondInstanceAdminDetail', "Please close the other instance and try again."),
-	// 						productService
-	// 					);
-	// 				}
+				// Handle unexpected connection errors by showing a dialog to the user
+				if (!retry || isWindows || error.code !== 'ECONNREFUSED') {
+					if (error.code === 'EPERM') {
+						this.showStartupWarningDialog(
+							localize('secondInstanceAdmin', "Another instance of {0} is already running as administrator.", productService.nameShort),
+							localize('secondInstanceAdminDetail', "Please close the other instance and try again."),
+							productService
+						);
+					}
 
-	// 				throw error;
-	// 			}
+					throw error;
+				}
 
-	// 			// it happens on Linux and OS X that the pipe is left behind
-	// 			// let's delete it, since we can't connect to it and then
-	// 			// retry the whole thing
-	// 			try {
-	// 				unlinkSync(environmentMainService.mainIPCHandle);
-	// 			} catch (error) {
-	// 				logService.warn('Could not delete obsolete instance handle', error);
+				// it happens on Linux and OS X that the pipe is left behind
+				// let's delete it, since we can't connect to it and then
+				// retry the whole thing
+				try {
+					unlinkSync(environmentMainService.mainIPCHandle);
+				} catch (error) {
+					logService.warn('Could not delete obsolete instance handle', error);
 
-	// 				throw error;
-	// 			}
+					throw error;
+				}
 
-	// 			return this.claimInstance(logService, environmentMainService, lifecycleMainService, instantiationService, productService, false);
-	// 		}
+				return this.claimInstance(logService, environmentMainService, lifecycleMainService, instantiationService, productService, false);
+			}
 
-	// 		// Tests from CLI require to be the only instance currently
-	// 		if (environmentMainService.extensionTestsLocationURI && !environmentMainService.debugExtensionHost.break) {
-	// 			const msg = `Running extension tests from the command line is currently only supported if no other instance of ${productService.nameShort} is running.`;
-	// 			logService.error(msg);
-	// 			client.dispose();
+			// Tests from CLI require to be the only instance currently
+			if (environmentMainService.extensionTestsLocationURI && !environmentMainService.debugExtensionHost.break) {
+				const msg = `Running extension tests from the command line is currently only supported if no other instance of ${productService.nameShort} is running.`;
+				logService.error(msg);
+				client.dispose();
 
-	// 			throw new Error(msg);
-	// 		}
+				throw new Error(msg);
+			}
 
-	// 		// Show a warning dialog after some timeout if it takes long to talk to the other instance
-	// 		// Skip this if we are running with --wait where it is expected that we wait for a while.
-	// 		// Also skip when gathering diagnostics (--status) which can take a longer time.
-	// 		let startupWarningDialogHandle: NodeJS.Timeout | undefined = undefined;
-	// 		if (!environmentMainService.args.wait && !environmentMainService.args.status) {
-	// 			startupWarningDialogHandle = setTimeout(() => {
-	// 				this.showStartupWarningDialog(
-	// 					localize('secondInstanceNoResponse', "Another instance of {0} is running but not responding", productService.nameShort),
-	// 					localize('secondInstanceNoResponseDetail', "Please close all other instances and try again."),
-	// 					productService
-	// 				);
-	// 			}, 10000);
-	// 		}
+			// Show a warning dialog after some timeout if it takes long to talk to the other instance
+			// Skip this if we are running with --wait where it is expected that we wait for a while.
+			// Also skip when gathering diagnostics (--status) which can take a longer time.
+			let startupWarningDialogHandle: NodeJS.Timeout | undefined = undefined;
+			if (!environmentMainService.args.wait && !environmentMainService.args.status) {
+				startupWarningDialogHandle = setTimeout(() => {
+					this.showStartupWarningDialog(
+						localize('secondInstanceNoResponse', "Another instance of {0} is running but not responding", productService.nameShort),
+						localize('secondInstanceNoResponseDetail', "Please close all other instances and try again."),
+						productService
+					);
+				}, 10000);
+			}
 
-	// 		const otherInstanceLaunchMainService = ProxyChannel.toService<ILaunchMainService>(client.getChannel('launch'), { disableMarshalling: true });
-	// 		const otherInstanceDiagnosticsMainService = ProxyChannel.toService<IDiagnosticsMainService>(client.getChannel('diagnostics'), { disableMarshalling: true });
+			const otherInstanceLaunchMainService = ProxyChannel.toService<ILaunchMainService>(client.getChannel('launch'), { disableMarshalling: true });
+			const otherInstanceDiagnosticsMainService = ProxyChannel.toService<IDiagnosticsMainService>(client.getChannel('diagnostics'), { disableMarshalling: true });
 
-	// 		// Process Info
-	// 		if (environmentMainService.args.status) {
-	// 			return instantiationService.invokeFunction(async () => {
-	// 				const diagnosticsService = new DiagnosticsService(NullTelemetryService, productService);
-	// 				const mainDiagnostics = await otherInstanceDiagnosticsMainService.getMainDiagnostics();
-	// 				const remoteDiagnostics = await otherInstanceDiagnosticsMainService.getRemoteDiagnostics({ includeProcesses: true, includeWorkspaceMetadata: true });
-	// 				const diagnostics = await diagnosticsService.getDiagnostics(mainDiagnostics, remoteDiagnostics);
-	// 				console.log(diagnostics);
+			// Process Info
+			if (environmentMainService.args.status) {
+				return instantiationService.invokeFunction(async () => {
+					const diagnosticsService = new DiagnosticsService(NullTelemetryService, productService);
+					const mainDiagnostics = await otherInstanceDiagnosticsMainService.getMainDiagnostics();
+					const remoteDiagnostics = await otherInstanceDiagnosticsMainService.getRemoteDiagnostics({ includeProcesses: true, includeWorkspaceMetadata: true });
+					const diagnostics = await diagnosticsService.getDiagnostics(mainDiagnostics, remoteDiagnostics);
+					console.log(diagnostics);
 
-	// 				throw new ExpectedError();
-	// 			});
-	// 		}
+					throw new ExpectedError();
+				});
+			}
 
-	// 		// Windows: allow to set foreground
-	// 		if (isWindows) {
-	// 			await this.windowsAllowSetForegroundWindow(otherInstanceLaunchMainService, logService);
-	// 		}
+			// Windows: allow to set foreground
+			if (isWindows) {
+				await this.windowsAllowSetForegroundWindow(otherInstanceLaunchMainService, logService);
+			}
 
-	// 		// Send environment over...
-	// 		logService.trace('Sending env to running instance...');
-	// 		await otherInstanceLaunchMainService.start(environmentMainService.args, process.env as IProcessEnvironment);
+			// Send environment over...
+			logService.trace('Sending env to running instance...');
+			await otherInstanceLaunchMainService.start(environmentMainService.args, process.env as IProcessEnvironment);
 
-	// 		// Cleanup
-	// 		client.dispose();
+			// Cleanup
+			client.dispose();
 
-	// 		// Now that we started, make sure the warning dialog is prevented
-	// 		if (startupWarningDialogHandle) {
-	// 			clearTimeout(startupWarningDialogHandle);
-	// 		}
+			// Now that we started, make sure the warning dialog is prevented
+			if (startupWarningDialogHandle) {
+				clearTimeout(startupWarningDialogHandle);
+			}
 
-	// 		throw new ExpectedError('Sent env to running instance. Terminating...');
-	// 	}
+			throw new ExpectedError('Sent env to running instance. Terminating...');
+		}
 
-	// 	// Print --status usage info
-	// 	if (environmentMainService.args.status) {
-	// 		console.log(localize('statusWarning', "Warning: The --status argument can only be used if {0} is already running. Please run it again after {0} has started.", productService.nameShort));
+		// Print --status usage info
+		if (environmentMainService.args.status) {
+			console.log(localize('statusWarning', "Warning: The --status argument can only be used if {0} is already running. Please run it again after {0} has started.", productService.nameShort));
 
-	// 		throw new ExpectedError('Terminating...');
-	// 	}
+			throw new ExpectedError('Terminating...');
+		}
 
-	// 	// Set the VSCODE_PID variable here when we are sure we are the first
-	// 	// instance to startup. Otherwise we would wrongly overwrite the PID
-	// 	process.env['VSCODE_PID'] = String(process.pid);
+		// Set the VSCODE_PID variable here when we are sure we are the first
+		// instance to startup. Otherwise we would wrongly overwrite the PID
+		process.env['VSCODE_PID'] = String(process.pid);
 
-	// 	return mainProcessNodeIpcServer;
-	// }
+		return mainProcessNodeIpcServer;
+	}
 
 	private handleStartupDataDirError(environmentMainService: IEnvironmentMainService, productService: IProductService, error: NodeJS.ErrnoException): void {
 		if (error.code === 'EACCES' || error.code === 'EPERM') {
@@ -450,43 +449,43 @@ class CodeMain {
 		}, productService).options);
 	}
 
-	// private async windowsAllowSetForegroundWindow(launchMainService: ILaunchMainService, logService: ILogService): Promise<void> {
-	// 	if (isWindows) {
-	// 		const processId = await launchMainService.getMainProcessId();
+	private async windowsAllowSetForegroundWindow(launchMainService: ILaunchMainService, logService: ILogService): Promise<void> {
+		if (isWindows) {
+			const processId = await launchMainService.getMainProcessId();
 
-	// 		logService.trace('Sending some foreground love to the running instance:', processId);
+			logService.trace('Sending some foreground love to the running instance:', processId);
 
-	// 		try {
-	// 			(await import('windows-foreground-love')).allowSetForegroundWindow(processId);
-	// 		} catch (error) {
-	// 			logService.error(error);
-	// 		}
-	// 	}
-	// }
+			try {
+				(await import('windows-foreground-love')).allowSetForegroundWindow(processId);
+			} catch (error) {
+				logService.error(error);
+			}
+		}
+	}
 
 	private quit(accessor: ServicesAccessor, reason?: ExpectedError | Error): void {
-		// const logService = accessor.get(ILogService);
-		// const lifecycleMainService = accessor.get(ILifecycleMainService);
+		const logService = accessor.get(ILogService);
+		const lifecycleMainService = accessor.get(ILifecycleMainService);
 
-		// let exitCode = 0;
+		let exitCode = 0;
 
-		// if (reason) {
-		// 	if ((reason as ExpectedError).isExpected) {
-		// 		if (reason.message) {
-		// 			logService.trace(reason.message);
-		// 		}
-		// 	} else {
-		// 		exitCode = 1; // signal error to the outside
+		if (reason) {
+			if ((reason as ExpectedError).isExpected) {
+				if (reason.message) {
+					logService.trace(reason.message);
+				}
+			} else {
+				exitCode = 1; // signal error to the outside
 
-		// 		if (reason.stack) {
-		// 			logService.error(reason.stack);
-		// 		} else {
-		// 			logService.error(`Startup error: ${reason.toString()}`);
-		// 		}
-		// 	}
-		// }
+				if (reason.stack) {
+					logService.error(reason.stack);
+				} else {
+					logService.error(`Startup error: ${reason.toString()}`);
+				}
+			}
+		}
 
-		// lifecycleMainService.kill(exitCode);
+		lifecycleMainService.kill(exitCode);
 	}
 
 	// //#region Command line arguments utilities
