@@ -1,7 +1,5 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) Microsoft Corporation. All rights reserved.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/******************************************** 已阅 ********************************************/
+// 获取product.json的配置
 
 import { env } from '../../../base/common/process.js';
 import { IProductConfiguration } from '../../../base/common/product.js';

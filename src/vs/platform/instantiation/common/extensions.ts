@@ -9,12 +9,14 @@ import { BrandedService, ServiceIdentifier } from './instantiation.js';
 const _registry: [ServiceIdentifier<any>, SyncDescriptor<any>][] = [];
 
 export const enum InstantiationType {
+	// 立马就需要实例化的 会有性能损耗
 	/**
 	 * Instantiate this service as soon as a consumer depends on it. _Note_ that this
 	 * is more costly as some upfront work is done that is likely not needed
 	 */
 	Eager = 0,
 
+	// 可延迟实例化的，对性能有好处
 	/**
 	 * Instantiate this service as soon as a consumer uses it. This is the _better_
 	 * way of registering a service.

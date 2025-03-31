@@ -287,7 +287,7 @@ src
 │   │   │   ├── prefixTree.ts
 │   │   │   ├── process.ts
 │   │   │   ├── processes.ts
-│   │   │   ├── product.ts
+│   │   │   ├── product.ts 主要是product.json读取内容的ts类型描述
 │   │   │   ├── range.ts
 │   │   │   ├── resourceTree.ts
 │   │   │   ├── resources.ts
@@ -370,8 +370,8 @@ src
 │   │   │   │   │   └── requestImpl.ts
 │   │   │   ├── sandbox
 │   │   │   │   ├── common
-│   │   │   │   │   ├── electronTypes.ts
-│   │   │   │   │   └── sandboxTypes.ts
+│   │   │   │   │   ├── electronTypes.ts electron配置信息
+│   │   │   │   │   └── sandboxTypes.ts 沙盒配置信息
 │   │   │   │   ├── electron-sandbox
 │   │   │   │   │   ├── electronTypes.ts
 │   │   │   │   │   ├── globals.ts
@@ -1441,7 +1441,7 @@ src
 │   │   │   │   ├── environment.ts
 │   │   │   │   └── environmentService.ts
 │   │   │   ├── electron-main
-│   │   │   │   └── environmentMainService.ts
+│   │   │   │   └── environmentMainService.ts 各种environment配置 例如缓存路径，升级配置
 │   │   │   ├── node
 │   │   │   │   ├── argv.ts
 │   │   │   │   ├── argvHelper.ts
@@ -1548,13 +1548,13 @@ src
 │   │   ├── hover
 │   │   │   ├── browser
 │   │   │   │   └── hover.ts
-│   │   ├── instantiation
+│   │   ├── instantiation IOC实现
 │   │   │   ├── common
 │   │   │   │   ├── descriptors.ts
 │   │   │   │   ├── extensions.ts
-│   │   │   │   ├── graph.ts
+│   │   │   │   ├── graph.ts IOC依赖图表 方便查找最总依赖时序
 │   │   │   │   ├── instantiation.ts 初步构建一个实例化样板 基本只有骨架 真正应用在service的时候丰富细节
-│   │   │   │   ├── instantiationService.ts
+│   │   │   │   ├── instantiationService.ts IOC的容器service，本身是一个service 用于服务其他service
 │   │   │   │   └── serviceCollection.ts 用一个Map维护存储service集合
 │   │   ├── ipc
 │   │   │   ├── common
@@ -1681,7 +1681,7 @@ src
 │   │   │       └── processMainService.ts
 │   │   ├── product
 │   │   │   └── common
-│   │   │       ├── product.ts
+│   │   │       ├── product.ts 获取product.json的配置
 │   │   │       └── productService.ts
 │   │   ├── profiling
 │   │   │   ├── common

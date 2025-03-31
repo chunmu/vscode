@@ -7,27 +7,25 @@
 import '../../platform/update/common/update.config.contribution.js';
 
 import { app, dialog } from 'electron';
-import { unlinkSync, promises } from 'fs';
 import { URI } from '../../base/common/uri.js';
 import { coalesce, distinct } from '../../base/common/arrays.js';
-// import { Promises } from '../../base/common/async.js';
+import { Promises } from '../../base/common/async.js';
 import { toErrorMessage } from '../../base/common/errorMessage.js';
 import { ExpectedError, setUnexpectedErrorHandler } from '../../base/common/errors.js';
-// import { IPathWithLineAndColumn, isValidBasename, parseLineAndColumnAware, sanitizeFilePath } from '../../base/common/extpath.js';
-// import { Event } from '../../base/common/event.js';
+import { IPathWithLineAndColumn, isValidBasename, parseLineAndColumnAware, sanitizeFilePath } from '../../base/common/extpath.js';
+import { Event } from '../../base/common/event.js';
 import { getPathLabel } from '../../base/common/labels.js';
-// import { Schemas } from '../../base/common/network.js';
-// import { basename, resolve } from '../../base/common/path.js';
-// import { mark } from '../../base/common/performance.js';
+import { Schemas } from '../../base/common/network.js';
+import { basename, resolve } from '../../base/common/path.js';
+import { mark } from '../../base/common/performance.js';
 import { IProcessEnvironment, isMacintosh, isWindows, OS } from '../../base/common/platform.js';
-// import { cwd } from '../../base/common/process.js';
-// import { rtrim, trim } from '../../base/common/strings.js';
-// import { Promises as FSPromises } from '../../base/node/pfs.js';
-// import { ProxyChannel } from '../../base/parts/ipc/common/ipc.js';
-// import { Client as NodeIPCClient } from '../../base/parts/ipc/common/ipc.net.js';
-// xxxxx
+import { cwd } from '../../base/common/process.js';
+import { rtrim, trim } from '../../base/common/strings.js';
+import { Promises as FSPromises } from '../../base/node/pfs.js';
+import { ProxyChannel } from '../../base/parts/ipc/common/ipc.js';
+import { Client as NodeIPCClient } from '../../base/parts/ipc/common/ipc.net.js';
 import { connect as nodeIPCConnect, serve as nodeIPCServe, Server as NodeIPCServer, XDG_RUNTIME_DIR } from '../../base/parts/ipc/node/ipc.net.js';
-// import { CodeApplication } from './app.js';
+import { CodeApplication } from './app.js';
 import { localize } from '../../nls.js';
 import { IConfigurationService } from '../../platform/configuration/common/configuration.js';
 import { ConfigurationService } from '../../platform/configuration/common/configurationService.js';
@@ -35,46 +33,46 @@ import { IDiagnosticsMainService } from '../../platform/diagnostics/electron-mai
 import { DiagnosticsService } from '../../platform/diagnostics/node/diagnosticsService.js';
 import { NativeParsedArgs } from '../../platform/environment/common/argv.js';
 import { EnvironmentMainService, IEnvironmentMainService } from '../../platform/environment/electron-main/environmentMainService.js';
-// import { addArg, parseMainProcessArgv } from '../../platform/environment/node/argvHelper.js';
-// import { createWaitMarkerFileSync } from '../../platform/environment/node/wait.js';
-// import { IFileService } from '../../platform/files/common/files.js';
+import { addArg, parseMainProcessArgv } from '../../platform/environment/node/argvHelper.js';
+import { createWaitMarkerFileSync } from '../../platform/environment/node/wait.js';
+import { IFileService } from '../../platform/files/common/files.js';
 import { FileService } from '../../platform/files/common/fileService.js';
-// import { DiskFileSystemProvider } from '../../platform/files/node/diskFileSystemProvider.js';
-// import { SyncDescriptor } from '../../platform/instantiation/common/descriptors.js';
+import { DiskFileSystemProvider } from '../../platform/files/node/diskFileSystemProvider.js';
+import { SyncDescriptor } from '../../platform/instantiation/common/descriptors.js';
 import { IInstantiationService, ServicesAccessor } from '../../platform/instantiation/common/instantiation.js';
 // 【实例化】服务
 import { InstantiationService } from '../../platform/instantiation/common/instantiationService.js';
 import { ServiceCollection } from '../../platform/instantiation/common/serviceCollection.js';
 import { ILaunchMainService } from '../../platform/launch/electron-main/launchMainService.js';
 import { ILifecycleMainService, LifecycleMainService } from '../../platform/lifecycle/electron-main/lifecycleMainService.js';
-// import { BufferLogger } from '../../platform/log/common/bufferLog.js';
+import { BufferLogger } from '../../platform/log/common/bufferLog.js';
 import { ConsoleMainLogger, getLogLevel, ILoggerService, ILogService } from '../../platform/log/common/log.js';
 import product from '../../platform/product/common/product.js';
 import { IProductService } from '../../platform/product/common/productService.js';
 import { IProtocolMainService } from '../../platform/protocol/electron-main/protocol.js';
 import { ProtocolMainService } from '../../platform/protocol/electron-main/protocolMainService.js';
-// import { ITunnelService } from '../../platform/tunnel/common/tunnel.js';
+import { ITunnelService } from '../../platform/tunnel/common/tunnel.js';
 import { TunnelService } from '../../platform/tunnel/node/tunnelService.js';
-// import { IRequestService } from '../../platform/request/common/request.js';
+import { IRequestService } from '../../platform/request/common/request.js';
 import { RequestService } from '../../platform/request/electron-utility/requestService.js';
-// import { ISignService } from '../../platform/sign/common/sign.js';
+import { ISignService } from '../../platform/sign/common/sign.js';
 import { SignService } from '../../platform/sign/node/signService.js';
-// import { IStateReadService, IStateService } from '../../platform/state/node/state.js';
-// import { NullTelemetryService } from '../../platform/telemetry/common/telemetryUtils.js';
+import { IStateReadService, IStateService } from '../../platform/state/node/state.js';
+import { NullTelemetryService } from '../../platform/telemetry/common/telemetryUtils.js';
 import { IThemeMainService, ThemeMainService } from '../../platform/theme/electron-main/themeMainService.js';
 import { IUserDataProfilesMainService, UserDataProfilesMainService } from '../../platform/userDataProfile/electron-main/userDataProfile.js';
-// import { IPolicyService, NullPolicyService } from '../../platform/policy/common/policy.js';
+import { IPolicyService, NullPolicyService } from '../../platform/policy/common/policy.js';
 import { NativePolicyService } from '../../platform/policy/node/nativePolicyService.js';
 import { FilePolicyService } from '../../platform/policy/common/filePolicyService.js';
 import { DisposableStore } from '../../base/common/lifecycle.js';
-// import { IUriIdentityService } from '../../platform/uriIdentity/common/uriIdentity.js';
+import { IUriIdentityService } from '../../platform/uriIdentity/common/uriIdentity.js';
 import { UriIdentityService } from '../../platform/uriIdentity/common/uriIdentityService.js';
 import { ILoggerMainService, LoggerMainService } from '../../platform/log/electron-main/loggerService.js';
 import { LogService } from '../../platform/log/common/logService.js';
 import { massageMessageBoxOptions } from '../../platform/dialogs/common/dialogs.js';
 import { SaveStrategy, StateService } from '../../platform/state/node/stateService.js';
-// import { FileUserDataProvider } from '../../platform/userData/common/fileUserDataProvider.js';
-// import { addUNCHostToAllowlist, getUNCHost } from '../../base/node/unc.js';
+import { FileUserDataProvider } from '../../platform/userData/common/fileUserDataProvider.js';
+import { addUNCHostToAllowlist, getUNCHost } from '../../base/node/unc.js';
 
 /**
  * The main VS Code entry point.
@@ -105,14 +103,14 @@ class CodeMain {
 
 		// Create services
 		// const [instantiationService, instanceEnvironment, environmentMainService, configurationService, stateMainService, bufferLogger, productService, userDataProfilesMainService] = this.createServices();
-		const [instantiationService] = this.createServices();
+		const [instantiationService, instanceEnvironment, environmentMainService] = this.createServices();
 
 		try {
 
 			// Init services
 			try {
 				// await this.initServices(environmentMainService, userDataProfilesMainService, configurationService, stateMainService, productService);
-				throw new Error('x')
+				// await this.initServices(environmentMainService, userDataProfilesMainService, configurationService, stateMainService, productService);
 			} catch (error) {
 
 				// Show a dialog for errors that can be resolved by the user
@@ -156,124 +154,109 @@ class CodeMain {
 		}
 	}
 
-	private createServices(): [IInstantiationService, IProductService] {
-		// Map<ServiceIdentifier<any>, any> 构造了一个map
+	private createServices(): [IInstantiationService, IProcessEnvironment, IEnvironmentMainService, ConfigurationService, StateService, BufferLogger, IProductService, UserDataProfilesMainService] {
 		const services = new ServiceCollection();
-		// 新增一个可观测错误堆栈的，容器Set，用于存储具有回收内容或动作的service
 		const disposables = new DisposableStore();
-		// 所有窗口立刻关闭 即将退出应用
 		process.once('exit', () => disposables.dispose());
 
 		// Product
 		const productService = { _serviceBrand: undefined, ...product };
 		services.set(IProductService, productService);
 
+		// Environment
+		const environmentMainService = new EnvironmentMainService(this.resolveArgs(), productService);
+		const instanceEnvironment = this.patchEnvironment(environmentMainService); // Patch `process.env` with the instance's environment
+		services.set(IEnvironmentMainService, environmentMainService);
 
-		return [new InstantiationService(services, true), productService];
+		// Logger
+		const loggerService = new LoggerMainService(getLogLevel(environmentMainService), environmentMainService.logsHome);
+		services.set(ILoggerMainService, loggerService);
+
+		// Log: We need to buffer the spdlog logs until we are sure
+		// we are the only instance running, otherwise we'll have concurrent
+		// log file access on Windows (https://github.com/microsoft/vscode/issues/41218)
+		const bufferLogger = new BufferLogger(loggerService.getLogLevel());
+		const logService = disposables.add(new LogService(bufferLogger, [new ConsoleMainLogger(loggerService.getLogLevel())]));
+		services.set(ILogService, logService);
+
+		// Files
+		const fileService = new FileService(logService);
+		services.set(IFileService, fileService);
+		const diskFileSystemProvider = new DiskFileSystemProvider(logService);
+		fileService.registerProvider(Schemas.file, diskFileSystemProvider);
+
+		// URI Identity
+		const uriIdentityService = new UriIdentityService(fileService);
+		services.set(IUriIdentityService, uriIdentityService);
+
+		// State
+		const stateService = new StateService(SaveStrategy.DELAYED, environmentMainService, logService, fileService);
+		services.set(IStateReadService, stateService);
+		services.set(IStateService, stateService);
+
+		// User Data Profiles
+		const userDataProfilesMainService = new UserDataProfilesMainService(stateService, uriIdentityService, environmentMainService, fileService, logService);
+		services.set(IUserDataProfilesMainService, userDataProfilesMainService);
+
+		// Use FileUserDataProvider for user data to
+		// enable atomic read / write operations.
+		fileService.registerProvider(Schemas.vscodeUserData, new FileUserDataProvider(Schemas.file, diskFileSystemProvider, Schemas.vscodeUserData, userDataProfilesMainService, uriIdentityService, logService));
+
+		// Policy
+		let policyService: IPolicyService | undefined;
+		if (isWindows && productService.win32RegValueName) {
+			policyService = disposables.add(new NativePolicyService(logService, productService.win32RegValueName));
+		} else if (isMacintosh && productService.darwinBundleIdentifier) {
+			policyService = disposables.add(new NativePolicyService(logService, productService.darwinBundleIdentifier));
+		} else if (environmentMainService.policyFile) {
+			policyService = disposables.add(new FilePolicyService(environmentMainService.policyFile, fileService, logService));
+		} else {
+			policyService = new NullPolicyService();
+		}
+		services.set(IPolicyService, policyService);
+
+		// Configuration
+		const configurationService = new ConfigurationService(userDataProfilesMainService.defaultProfile.settingsResource, fileService, policyService, logService);
+		services.set(IConfigurationService, configurationService);
+
+		// Lifecycle
+		services.set(ILifecycleMainService, new SyncDescriptor(LifecycleMainService, undefined, false));
+
+		// Request
+		services.set(IRequestService, new SyncDescriptor(RequestService, undefined, true));
+
+		// Themes
+		services.set(IThemeMainService, new SyncDescriptor(ThemeMainService));
+
+		// Signing
+		services.set(ISignService, new SyncDescriptor(SignService, undefined, false /* proxied to other processes */));
+
+		// Tunnel
+		services.set(ITunnelService, new SyncDescriptor(TunnelService));
+
+		// Protocol (instantiated early and not using sync descriptor for security reasons)
+		services.set(IProtocolMainService, new ProtocolMainService(environmentMainService, userDataProfilesMainService, logService));
+
+		return [new InstantiationService(services, true), instanceEnvironment, environmentMainService, configurationService, stateService, bufferLogger, productService, userDataProfilesMainService];
 	}
 
-	// private createServices(): [IInstantiationService, IProcessEnvironment, IEnvironmentMainService, ConfigurationService, StateService, BufferLogger, IProductService, UserDataProfilesMainService] {
-	// 	const services = new ServiceCollection();
-	// 	const disposables = new DisposableStore();
-	// 	process.once('exit', () => disposables.dispose());
+	// 某些全局配置同步到environment实例
+	private patchEnvironment(environmentMainService: IEnvironmentMainService): IProcessEnvironment {
+		const instanceEnvironment: IProcessEnvironment = {
+			VSCODE_IPC_HOOK: environmentMainService.mainIPCHandle
+		};
 
-	// 	// Product
-	// 	const productService = { _serviceBrand: undefined, ...product };
-	// 	services.set(IProductService, productService);
+		['VSCODE_NLS_CONFIG', 'VSCODE_PORTABLE'].forEach(key => {
+			const value = process.env[key];
+			if (typeof value === 'string') {
+				instanceEnvironment[key] = value;
+			}
+		});
 
-	// 	// Environment
-	// 	const environmentMainService = new EnvironmentMainService(this.resolveArgs(), productService);
-	// 	const instanceEnvironment = this.patchEnvironment(environmentMainService); // Patch `process.env` with the instance's environment
-	// 	services.set(IEnvironmentMainService, environmentMainService);
+		Object.assign(process.env, instanceEnvironment);
 
-	// 	// Logger
-	// 	const loggerService = new LoggerMainService(getLogLevel(environmentMainService), environmentMainService.logsHome);
-	// 	services.set(ILoggerMainService, loggerService);
-
-	// 	// Log: We need to buffer the spdlog logs until we are sure
-	// 	// we are the only instance running, otherwise we'll have concurrent
-	// 	// log file access on Windows (https://github.com/microsoft/vscode/issues/41218)
-	// 	const bufferLogger = new BufferLogger(loggerService.getLogLevel());
-	// 	const logService = disposables.add(new LogService(bufferLogger, [new ConsoleMainLogger(loggerService.getLogLevel())]));
-	// 	services.set(ILogService, logService);
-
-	// 	// Files
-	// 	const fileService = new FileService(logService);
-	// 	services.set(IFileService, fileService);
-	// 	const diskFileSystemProvider = new DiskFileSystemProvider(logService);
-	// 	fileService.registerProvider(Schemas.file, diskFileSystemProvider);
-
-	// 	// URI Identity
-	// 	const uriIdentityService = new UriIdentityService(fileService);
-	// 	services.set(IUriIdentityService, uriIdentityService);
-
-	// 	// State
-	// 	const stateService = new StateService(SaveStrategy.DELAYED, environmentMainService, logService, fileService);
-	// 	services.set(IStateReadService, stateService);
-	// 	services.set(IStateService, stateService);
-
-	// 	// User Data Profiles
-	// 	const userDataProfilesMainService = new UserDataProfilesMainService(stateService, uriIdentityService, environmentMainService, fileService, logService);
-	// 	services.set(IUserDataProfilesMainService, userDataProfilesMainService);
-
-	// 	// Use FileUserDataProvider for user data to
-	// 	// enable atomic read / write operations.
-	// 	fileService.registerProvider(Schemas.vscodeUserData, new FileUserDataProvider(Schemas.file, diskFileSystemProvider, Schemas.vscodeUserData, userDataProfilesMainService, uriIdentityService, logService));
-
-	// 	// Policy
-	// 	let policyService: IPolicyService | undefined;
-	// 	if (isWindows && productService.win32RegValueName) {
-	// 		policyService = disposables.add(new NativePolicyService(logService, productService.win32RegValueName));
-	// 	} else if (isMacintosh && productService.darwinBundleIdentifier) {
-	// 		policyService = disposables.add(new NativePolicyService(logService, productService.darwinBundleIdentifier));
-	// 	} else if (environmentMainService.policyFile) {
-	// 		policyService = disposables.add(new FilePolicyService(environmentMainService.policyFile, fileService, logService));
-	// 	} else {
-	// 		policyService = new NullPolicyService();
-	// 	}
-	// 	services.set(IPolicyService, policyService);
-
-	// 	// Configuration
-	// 	const configurationService = new ConfigurationService(userDataProfilesMainService.defaultProfile.settingsResource, fileService, policyService, logService);
-	// 	services.set(IConfigurationService, configurationService);
-
-	// 	// Lifecycle
-	// 	services.set(ILifecycleMainService, new SyncDescriptor(LifecycleMainService, undefined, false));
-
-	// 	// Request
-	// 	services.set(IRequestService, new SyncDescriptor(RequestService, undefined, true));
-
-	// 	// Themes
-	// 	services.set(IThemeMainService, new SyncDescriptor(ThemeMainService));
-
-	// 	// Signing
-	// 	services.set(ISignService, new SyncDescriptor(SignService, undefined, false /* proxied to other processes */));
-
-	// 	// Tunnel
-	// 	services.set(ITunnelService, new SyncDescriptor(TunnelService));
-
-	// 	// Protocol (instantiated early and not using sync descriptor for security reasons)
-	// 	services.set(IProtocolMainService, new ProtocolMainService(environmentMainService, userDataProfilesMainService, logService));
-
-	// 	return [new InstantiationService(services, true), instanceEnvironment, environmentMainService, configurationService, stateService, bufferLogger, productService, userDataProfilesMainService];
-	// }
-
-	// private patchEnvironment(environmentMainService: IEnvironmentMainService): IProcessEnvironment {
-	// 	const instanceEnvironment: IProcessEnvironment = {
-	// 		VSCODE_IPC_HOOK: environmentMainService.mainIPCHandle
-	// 	};
-
-	// 	['VSCODE_NLS_CONFIG', 'VSCODE_PORTABLE'].forEach(key => {
-	// 		const value = process.env[key];
-	// 		if (typeof value === 'string') {
-	// 			instanceEnvironment[key] = value;
-	// 		}
-	// 	});
-
-	// 	Object.assign(process.env, instanceEnvironment);
-
-	// 	return instanceEnvironment;
-	// }
+		return instanceEnvironment;
+	}
 
 	// private async initServices(environmentMainService: IEnvironmentMainService, userDataProfilesMainService: UserDataProfilesMainService, configurationService: ConfigurationService, stateService: StateService, productService: IProductService): Promise<void> {
 	// 	await Promises.settled<unknown>([
@@ -508,119 +491,119 @@ class CodeMain {
 
 	// //#region Command line arguments utilities
 
-	// private resolveArgs(): NativeParsedArgs {
+	private resolveArgs(): NativeParsedArgs {
 
-	// 	// Parse arguments
-	// 	const args = this.validatePaths(parseMainProcessArgv(process.argv));
+		// Parse arguments
+		const args = this.validatePaths(parseMainProcessArgv(process.argv));
 
-	// 	// If we are started with --wait create a random temporary file
-	// 	// and pass it over to the starting instance. We can use this file
-	// 	// to wait for it to be deleted to monitor that the edited file
-	// 	// is closed and then exit the waiting process.
-	// 	//
-	// 	// Note: we are not doing this if the wait marker has been already
-	// 	// added as argument. This can happen if VS Code was started from CLI.
+		// If we are started with --wait create a random temporary file
+		// and pass it over to the starting instance. We can use this file
+		// to wait for it to be deleted to monitor that the edited file
+		// is closed and then exit the waiting process.
+		//
+		// Note: we are not doing this if the wait marker has been already
+		// added as argument. This can happen if VS Code was started from CLI.
 
-	// 	if (args.wait && !args.waitMarkerFilePath) {
-	// 		const waitMarkerFilePath = createWaitMarkerFileSync(args.verbose);
-	// 		if (waitMarkerFilePath) {
-	// 			addArg(process.argv, '--waitMarkerFilePath', waitMarkerFilePath);
-	// 			args.waitMarkerFilePath = waitMarkerFilePath;
-	// 		}
-	// 	}
+		if (args.wait && !args.waitMarkerFilePath) {
+			const waitMarkerFilePath = createWaitMarkerFileSync(args.verbose);
+			if (waitMarkerFilePath) {
+				addArg(process.argv, '--waitMarkerFilePath', waitMarkerFilePath);
+				args.waitMarkerFilePath = waitMarkerFilePath;
+			}
+		}
 
-	// 	return args;
-	// }
+		return args;
+	}
 
-	// private validatePaths(args: NativeParsedArgs): NativeParsedArgs {
+	private validatePaths(args: NativeParsedArgs): NativeParsedArgs {
 
-	// 	// Track URLs if they're going to be used
-	// 	if (args['open-url']) {
-	// 		args._urls = args._;
-	// 		args._ = [];
-	// 	}
+		// Track URLs if they're going to be used
+		if (args['open-url']) {
+			args._urls = args._;
+			args._ = [];
+		}
 
-	// 	// Normalize paths and watch out for goto line mode
-	// 	if (!args['remote']) {
-	// 		const paths = this.doValidatePaths(args._, args.goto);
-	// 		args._ = paths;
-	// 	}
+		// Normalize paths and watch out for goto line mode
+		if (!args['remote']) {
+			const paths = this.doValidatePaths(args._, args.goto);
+			args._ = paths;
+		}
 
-	// 	return args;
-	// }
+		return args;
+	}
 
-	// private doValidatePaths(args: string[], gotoLineMode?: boolean): string[] {
-	// 	const currentWorkingDir = cwd();
-	// 	const result = args.map(arg => {
-	// 		let pathCandidate = String(arg);
+	private doValidatePaths(args: string[], gotoLineMode?: boolean): string[] {
+		const currentWorkingDir = cwd();
+		const result = args.map(arg => {
+			let pathCandidate = String(arg);
 
-	// 		let parsedPath: IPathWithLineAndColumn | undefined = undefined;
-	// 		if (gotoLineMode) {
-	// 			parsedPath = parseLineAndColumnAware(pathCandidate);
-	// 			pathCandidate = parsedPath.path;
-	// 		}
+			let parsedPath: IPathWithLineAndColumn | undefined = undefined;
+			if (gotoLineMode) {
+				parsedPath = parseLineAndColumnAware(pathCandidate);
+				pathCandidate = parsedPath.path;
+			}
 
-	// 		if (pathCandidate) {
-	// 			pathCandidate = this.preparePath(currentWorkingDir, pathCandidate);
-	// 		}
+			if (pathCandidate) {
+				pathCandidate = this.preparePath(currentWorkingDir, pathCandidate);
+			}
 
-	// 		const sanitizedFilePath = sanitizeFilePath(pathCandidate, currentWorkingDir);
+			const sanitizedFilePath = sanitizeFilePath(pathCandidate, currentWorkingDir);
 
-	// 		const filePathBasename = basename(sanitizedFilePath);
-	// 		if (filePathBasename /* can be empty if code is opened on root */ && !isValidBasename(filePathBasename)) {
-	// 			return null; // do not allow invalid file names
-	// 		}
+			const filePathBasename = basename(sanitizedFilePath);
+			if (filePathBasename /* can be empty if code is opened on root */ && !isValidBasename(filePathBasename)) {
+				return null; // do not allow invalid file names
+			}
 
-	// 		if (gotoLineMode && parsedPath) {
-	// 			parsedPath.path = sanitizedFilePath;
+			if (gotoLineMode && parsedPath) {
+				parsedPath.path = sanitizedFilePath;
 
-	// 			return this.toPath(parsedPath);
-	// 		}
+				return this.toPath(parsedPath);
+			}
 
-	// 		return sanitizedFilePath;
-	// 	});
+			return sanitizedFilePath;
+		});
 
-	// 	const caseInsensitive = isWindows || isMacintosh;
-	// 	const distinctPaths = distinct(result, path => path && caseInsensitive ? path.toLowerCase() : (path || ''));
+		const caseInsensitive = isWindows || isMacintosh;
+		const distinctPaths = distinct(result, path => path && caseInsensitive ? path.toLowerCase() : (path || ''));
 
-	// 	return coalesce(distinctPaths);
-	// }
+		return coalesce(distinctPaths);
+	}
 
-	// private preparePath(cwd: string, path: string): string {
+	private preparePath(cwd: string, path: string): string {
 
-	// 	// Trim trailing quotes
-	// 	if (isWindows) {
-	// 		path = rtrim(path, '"'); // https://github.com/microsoft/vscode/issues/1498
-	// 	}
+		// Trim trailing quotes
+		if (isWindows) {
+			path = rtrim(path, '"'); // https://github.com/microsoft/vscode/issues/1498
+		}
 
-	// 	// Trim whitespaces
-	// 	path = trim(trim(path, ' '), '\t');
+		// Trim whitespaces
+		path = trim(trim(path, ' '), '\t');
 
-	// 	if (isWindows) {
+		if (isWindows) {
 
-	// 		// Resolve the path against cwd if it is relative
-	// 		path = resolve(cwd, path);
+			// Resolve the path against cwd if it is relative
+			path = resolve(cwd, path);
 
-	// 		// Trim trailing '.' chars on Windows to prevent invalid file names
-	// 		path = rtrim(path, '.');
-	// 	}
+			// Trim trailing '.' chars on Windows to prevent invalid file names
+			path = rtrim(path, '.');
+		}
 
-	// 	return path;
-	// }
+		return path;
+	}
 
-	// private toPath(pathWithLineAndCol: IPathWithLineAndColumn): string {
-	// 	const segments = [pathWithLineAndCol.path];
+	private toPath(pathWithLineAndCol: IPathWithLineAndColumn): string {
+		const segments = [pathWithLineAndCol.path];
 
-	// 	if (typeof pathWithLineAndCol.line === 'number') {
-	// 		segments.push(String(pathWithLineAndCol.line));
-	// 	}
+		if (typeof pathWithLineAndCol.line === 'number') {
+			segments.push(String(pathWithLineAndCol.line));
+		}
 
-	// 	if (typeof pathWithLineAndCol.column === 'number') {
-	// 		segments.push(String(pathWithLineAndCol.column));
-	// 	}
+		if (typeof pathWithLineAndCol.column === 'number') {
+			segments.push(String(pathWithLineAndCol.column));
+		}
 
-	// 	return segments.join(':');
-	// }
+		return segments.join(':');
+	}
 
 	//#endregion
 }

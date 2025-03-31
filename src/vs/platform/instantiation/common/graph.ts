@@ -1,10 +1,7 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) Microsoft Corporation. All rights reserved.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+/******************************************** 已阅 ********************************************/
+// IOC依赖图表 方便查找最总依赖时序
 
 export class Node<T> {
-
 
 	readonly incoming = new Map<string, Node<T>>();
 	readonly outgoing = new Map<string, Node<T>>();

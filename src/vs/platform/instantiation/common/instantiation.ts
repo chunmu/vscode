@@ -1,5 +1,6 @@
 /******************************************** 已阅 ********************************************/
 // 初步构建一个实例化样板 基本只有骨架 真正应用在service的时候丰富细节
+
 import { DisposableStore } from '../../../base/common/lifecycle.js';
 import * as descriptors from './descriptors.js';
 import { ServiceCollection } from './serviceCollection.js';
@@ -88,6 +89,8 @@ export interface ServiceIdentifier<T> {
 
 // service依赖关系处理
 function storeServiceDependency(id: Function, target: Function, index: number): void {
+	// 如果DI_TARGET有值就是已经绑定过了，有依赖项了，至少一个依赖
+	// 如果没有就建一个新的
 	if ((target as any)[_util.DI_TARGET] === target) {
 		(target as any)[_util.DI_DEPENDENCIES].push({ id, index });
 	} else {

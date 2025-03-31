@@ -1,3 +1,5 @@
+/******************************************** 已阅 ********************************************/
+// 主要是product.json读取内容的ts类型描述
 import { IStringDictionary } from './collections.js';
 import { PlatformName } from './platform.js';
 

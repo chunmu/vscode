@@ -1,3 +1,6 @@
+/******************************************** 已阅 ********************************************/
+// 各种environment配置 例如缓存路径，升级配置
+
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.

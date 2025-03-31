@@ -24,6 +24,7 @@ function createDecorator(mapFn: (fn: Function, key: string) => Function): Method
 	};
 }
 
+// 缓存高消耗方法计算结果的装饰器
 export function memoize(_target: Object, key: string, descriptor: PropertyDescriptor) {
 	let fnKey: 'value' | 'get' | null = null;
 	let fn: Function | null = null;
