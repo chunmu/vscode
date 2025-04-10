@@ -10,6 +10,7 @@ const fs_1 = require("fs");
 const npm = process.platform === 'win32' ? 'npm.cmd' : 'npm';
 const rootDir = path_1.default.resolve(__dirname, '..', '..');
 function runProcess(command, args = []) {
+    console.log(command, args, 'runProcess');
     return new Promise((resolve, reject) => {
         const child = (0, child_process_1.spawn)(command, args, { cwd: rootDir, stdio: 'inherit', env: process.env, shell: process.platform === 'win32' });
         child.on('exit', err => !err ? resolve() : process.exit(err ?? 1));
@@ -52,4 +53,3 @@ if (require.main === module) {
         process.exit(1);
     });
 }
-//# sourceMappingURL=preLaunch.js.map

@@ -255,4 +255,3 @@ if (require.main === module) {
         process.exit(1);
     });
 }
-//# sourceMappingURL=electron.js.map

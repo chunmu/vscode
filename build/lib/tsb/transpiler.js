@@ -303,4 +303,3 @@ function _isDefaultEmpty(src) {
         .replace(/\/\*[\s\S]*?\*\/|([^\\:]|^)\/\/.*$/gm, '$1')
         .trim().length === 0;
 }
-//# sourceMappingURL=transpiler.js.map

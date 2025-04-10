@@ -660,4 +660,3 @@ async function _run() {
 if (__filename === process_1.argv[1]) {
     _run();
 }
-//# sourceMappingURL=index.js.map

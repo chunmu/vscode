@@ -178,4 +178,3 @@ function watchTask(out, build, srcPath = 'src') {
     task.taskName = `watch-${path_1.default.basename(out)}`;
     return task;
 }
-//# sourceMappingURL=compilation.js.map

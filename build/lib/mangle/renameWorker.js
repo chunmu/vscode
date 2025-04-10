@@ -22,4 +22,3 @@ function findRenameLocations(projectPath, fileName, position) {
 workerpool_1.default.worker({
     findRenameLocations
 });
-//# sourceMappingURL=renameWorker.js.map

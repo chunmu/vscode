@@ -26,6 +26,7 @@ function code() {
 
 	# Get electron, compile, built-in extensions
 	if [[ -z "${VSCODE_SKIP_PRELAUNCH}" ]]; then
+		# 用于检查是否有node_modules包，是否有electron 是否已经打包了out文件夹
 		node build/lib/preLaunch.js
 	fi
 
