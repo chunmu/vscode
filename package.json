@@ -10,6 +10,8 @@
   "type": "module",
   "private": true,
   "scripts": {
+    "compile": "node ./node_modules/gulp/bin/gulp.js compile",
+    "electron": "node build/lib/electron"
   },
   "dependencies": {
     "@c4312/eventsource-umd": "^3.0.5",
