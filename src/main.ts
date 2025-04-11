@@ -89,6 +89,16 @@ async function onReady() {
 	}
 }
 
+/**
+ * Main startup routine
+ */
+async function startup(codeCachePath: string | undefined): Promise<void> {
+	process.env['VSCODE_CODE_CACHE_PATH'] = codeCachePath || '';
+
+	// Load Main
+	await import('./vs/code/electron-main/main.js');
+}
+
 function parseCLIArgs(): NativeParsedArgs {
 	return minimist(process.argv, {
 		string: [
