@@ -109,6 +109,40 @@ function parseCLIArgs(): NativeParsedArgs {
 	});
 }
 
+function registerListeners(): void {
+
+	/**
+	 * macOS: when someone drops a file to the not-yet running VSCode, the open-file event fires even before
+	 * the app-ready event. We listen very early for open-file and remember this upon startup as path to open.
+	 */
+	const macOpenFiles: string[] = [];
+	(globalThis as any)['macOpenFiles'] = macOpenFiles;
+	app.on('open-file', function (event, path) {
+		macOpenFiles.push(path);
+	});
+
+	/**
+	 * macOS: react to open-url requests.
+	 */
+	const openUrls: string[] = [];
+	const onOpenUrl =
+		function (event: { preventDefault: () => void }, url: string) {
+			event.preventDefault();
+
+			openUrls.push(url);
+		};
+
+	app.on('will-finish-launching', function () {
+		app.on('open-url', onOpenUrl);
+	});
+
+	(globalThis as any)['getOpenUrls'] = function () {
+		app.removeListener('open-url', onOpenUrl);
+
+		return openUrls;
+	};
+}
+
 function getCodeCachePath(): string | undefined {
 
 	// explicitly disabled via CLI args
