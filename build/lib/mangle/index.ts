@@ -12,7 +12,7 @@ import ts from 'typescript';
 import { pathToFileURL } from 'url';
 import workerpool from 'workerpool';
 import { StaticLanguageServiceHost } from './staticLanguageServiceHost';
-const buildfile = require('../../buildfile');
+// const buildfile = require('../../buildfile');
 
 class ShortIdent {
 
@@ -299,18 +299,19 @@ const skippedExportMangledFiles = [
 
 	// entry points
 	...[
-		buildfile.workerEditor,
-		buildfile.workerExtensionHost,
-		buildfile.workerNotebook,
-		buildfile.workerLanguageDetection,
-		buildfile.workerLocalFileSearch,
-		buildfile.workerProfileAnalysis,
-		buildfile.workerOutputLinks,
-		buildfile.workerBackgroundTokenization,
-		buildfile.workbenchDesktop,
-		buildfile.workbenchWeb,
-		buildfile.code,
-		buildfile.codeWeb
+		// buildfile.workerEditor,
+		// buildfile.workerExtensionHost,
+		// buildfile.workerNotebook,
+		// buildfile.workerLanguageDetection,
+		// buildfile.workerLocalFileSearch,
+		// buildfile.workerProfileAnalysis,
+		// buildfile.workerOutputLinks,
+		// buildfile.workerBackgroundTokenization,
+		// buildfile.workbenchDesktop,
+		// buildfile.workbenchWeb,
+		// buildfile.code,
+		// buildfile.codeWeb
+		// @ts-ignore
 	].flat().map(x => x.name),
 ];
 

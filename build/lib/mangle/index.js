@@ -17,7 +17,7 @@ const typescript_1 = __importDefault(require("typescript"));
 const url_1 = require("url");
 const workerpool_1 = __importDefault(require("workerpool"));
 const staticLanguageServiceHost_1 = require("./staticLanguageServiceHost");
-const buildfile = require('../../buildfile');
+// const buildfile = require('../../buildfile');
 class ShortIdent {
     prefix;
     static _keywords = new Set(['await', 'break', 'case', 'catch', 'class', 'const', 'continue', 'debugger',
@@ -266,19 +266,19 @@ const skippedExportMangledFiles = [
     'pfs',
     // entry points
     ...[
-        // buildfile.workerEditor,
-        // buildfile.workerExtensionHost,
-        // buildfile.workerNotebook,
-        // buildfile.workerLanguageDetection,
-        // buildfile.workerLocalFileSearch,
-        // buildfile.workerProfileAnalysis,
-        // buildfile.workerOutputLinks,
-        // buildfile.workerBackgroundTokenization,
-        // buildfile.workbenchDesktop,
-        // buildfile.workbenchWeb,
-        // buildfile.code,
-        // buildfile.codeWeb
-		// @ts-ignore
+    // buildfile.workerEditor,
+    // buildfile.workerExtensionHost,
+    // buildfile.workerNotebook,
+    // buildfile.workerLanguageDetection,
+    // buildfile.workerLocalFileSearch,
+    // buildfile.workerProfileAnalysis,
+    // buildfile.workerOutputLinks,
+    // buildfile.workerBackgroundTokenization,
+    // buildfile.workbenchDesktop,
+    // buildfile.workbenchWeb,
+    // buildfile.code,
+    // buildfile.codeWeb
+    // @ts-ignore
     ].flat().map(x => x.name),
 ];
 const skippedExportMangledProjects = [

@@ -8,4 +8,3 @@ const watch = process.platform === 'win32' ? require('./watch-win32') : require(
 module.exports = function () {
     return watch.apply(null, arguments);
 };
-//# sourceMappingURL=index.js.map
