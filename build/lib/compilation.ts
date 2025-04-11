@@ -9,13 +9,9 @@ import gulp from 'gulp';
 import path from 'path';
 import { createReporter } from './reporter';
 import * as util from './util';
-import fancyLog from 'fancy-log';
-import ansiColors from 'ansi-colors';
 import os from 'os';
 import File from 'vinyl';
 import * as task from './task';
-import { Mangler } from './mangle/index';
-import { RawSourceMap } from 'source-map';
 import { gulpPostcss } from './postcss';
 import ts = require('typescript');
 const watch = require('./watch');
@@ -118,42 +114,18 @@ export function transpileTask(src: string, out: string, esbuild: boolean): task.
 	return task;
 }
 
-export function compileTask(src: string, out: string, build: boolean, options: { disableMangle?: boolean; preserveEnglish?: boolean } = {}): task.StreamTask {
-
+export function compileTask(src: string, out: string, build: boolean): task.StreamTask {
+	console.log(out, 'xxoutxxxfff')
 	const task = () => {
 
 		if (os.totalmem() < 4_000_000_000) {
 			throw new Error('compilation requires 4GB of RAM');
 		}
-
 		const compile = createCompile(src, { build, emitError: true, transpileOnly: false });
 		const srcPipe = gulp.src(`${src}/**`, { base: `${src}` });
-
 		// mangle: TypeScript to TypeScript
-		let mangleStream = es.through();
-		if (build && !options.disableMangle) {
-			let ts2tsMangler = new Mangler(compile.projectPath, (...data) => fancyLog(ansiColors.blue('[mangler]'), ...data), { mangleExports: true, manglePrivateFields: true });
-			const newContentsByFileName = ts2tsMangler.computeNewFileContents(new Set(['saveState']));
-			mangleStream = es.through(async function write(data: File & { sourceMap?: RawSourceMap }) {
-				type TypeScriptExt = typeof ts & { normalizePath(path: string): string };
-				const tsNormalPath = (<TypeScriptExt>ts).normalizePath(data.path);
-				const newContents = (await newContentsByFileName).get(tsNormalPath);
-				if (newContents !== undefined) {
-					data.contents = Buffer.from(newContents.out);
-					data.sourceMap = newContents.sourceMap && JSON.parse(newContents.sourceMap);
-				}
-				this.push(data);
-			}, async function end() {
-				// free resources
-				(await newContentsByFileName).clear();
-
-				this.push(null);
-				(<any>ts2tsMangler) = undefined;
-			});
-		}
-
+		console.log(out, 'out')
 		return srcPipe
-			.pipe(mangleStream)
 			.pipe(compile())
 			.pipe(gulp.dest(out));
 	};

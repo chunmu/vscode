@@ -1,7 +1,3 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) Microsoft Corporation. All rights reserved.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
 
 'use strict';
 
@@ -20,7 +16,7 @@ gulp.task(compileClientTask);
 const watchClientTask = task.define('watch-client', task.series(util.rimraf('out'), task.parallel(watchTask('out', false))));
 gulp.task(watchClientTask);
 
-// All
+// // All
 const _compileTask = task.define('compile', task.parallel(compileClientTask));
 gulp.task(_compileTask);
 
