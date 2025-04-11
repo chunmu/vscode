@@ -266,18 +266,19 @@ const skippedExportMangledFiles = [
     'pfs',
     // entry points
     ...[
-        buildfile.workerEditor,
-        buildfile.workerExtensionHost,
-        buildfile.workerNotebook,
-        buildfile.workerLanguageDetection,
-        buildfile.workerLocalFileSearch,
-        buildfile.workerProfileAnalysis,
-        buildfile.workerOutputLinks,
-        buildfile.workerBackgroundTokenization,
-        buildfile.workbenchDesktop,
-        buildfile.workbenchWeb,
-        buildfile.code,
-        buildfile.codeWeb
+        // buildfile.workerEditor,
+        // buildfile.workerExtensionHost,
+        // buildfile.workerNotebook,
+        // buildfile.workerLanguageDetection,
+        // buildfile.workerLocalFileSearch,
+        // buildfile.workerProfileAnalysis,
+        // buildfile.workerOutputLinks,
+        // buildfile.workerBackgroundTokenization,
+        // buildfile.workbenchDesktop,
+        // buildfile.workbenchWeb,
+        // buildfile.code,
+        // buildfile.codeWeb
+		// @ts-ignore
     ].flat().map(x => x.name),
 ];
 const skippedExportMangledProjects = [

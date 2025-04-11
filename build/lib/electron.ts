@@ -103,7 +103,7 @@ export const config = {
 	version: electronVersion,
 	tag: product.electronRepository ? `v${electronVersion}-${msBuildId}` : undefined,
 	productAppName: product.nameLong,
-	companyName: 'Microsoft Corporation',
+	companyName: 'noop',
 	copyright: 'Copyright (C) 2024 Microsoft. All rights reserved',
 	darwinIcon: 'resources/darwin/code.icns',
 	darwinBundleIdentifier: product.darwinBundleIdentifier,

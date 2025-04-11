@@ -47,8 +47,8 @@ async function main() {
 	await ensureCompiled();
 
 	// Can't require this until after dependencies are installed
-	const { getBuiltInExtensions } = require('./builtInExtensions');
-	await getBuiltInExtensions();
+	// const { getBuiltInExtensions } = require('./builtInExtensions');
+	// await getBuiltInExtensions();
 }
 
 if (require.main === module) {
