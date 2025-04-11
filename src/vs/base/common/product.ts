@@ -1,4 +1,3 @@
-console.log('xx')
 export interface IBuiltInExtension {
 	readonly name: string;
 	readonly version: string;
