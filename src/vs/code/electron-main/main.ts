@@ -11,6 +11,11 @@ class CodeMain {
 	}
 
 	private async startup(): Promise<void> {
+		
+	}
+
+	private createServices() {
+		// private createServices(): [IInstantiationService] {
 
 	}
 }
