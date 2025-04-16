@@ -302,7 +302,7 @@ src
 │   │   │   ├── stopwatch.ts 没啥特殊的，用于打标计时类工具
 │   │   │   ├── stream.ts
 │   │   │   ├── strings.ts
-│   │   │   ├── symbols.ts
+│   │   │   ├── symbols.ts symbol标记
 │   │   │   ├── ternarySearchTree.ts
 │   │   │   ├── tfIdf.ts
 │   │   │   ├── themables.ts
