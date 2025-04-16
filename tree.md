@@ -208,7 +208,7 @@ src
 │   │   │   ├── event.ts
 │   │   │   ├── extpath.ts
 │   │   │   ├── filters.ts
-│   │   │   ├── functional.ts 创建只执行一次的方法 一般命名为once
+│   │   │   ├── functional.ts 创建只执行一次的方法 一般命名为once 利用闭包特性处理
 │   │   │   ├── fuzzyScorer.ts
 │   │   │   ├── glob.ts
 │   │   │   ├── hash.ts
@@ -234,7 +234,7 @@ src
 │   │   │   ├── labels.ts
 │   │   │   ├── lazy.ts
 │   │   │   ├── lifecycle.ts 基于FinalizationRegistry的资源回收通知等逻辑，用于处理service资源回收
-│   │   │   ├── linkedList.ts
+│   │   │   ├── linkedList.ts 链表数据结构工具类，更具有性能优势
 │   │   │   ├── linkedText.ts
 │   │   │   ├── map.ts map/set工具方法，主要做了存取，转string，key为URI的RourceMap工具，链表Map(LinkedMap)，基于链表的缓存基础类Cache，基于前面Cache的LRU(最少使用算法)缓存，基于前面Cache的MRU(最近使用算法)缓存，key和value相互作为key，value的BidirectionalMap，双Map结构，专门存放set的Map(SetMap)
 │   │   │   ├── marked
