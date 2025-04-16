@@ -6,7 +6,6 @@
 import { CharCode } from './charCode.js';
 import { MarshalledId } from './marshallingIds.js';
 import * as paths from './path.js';
-import { isWindows } from './platform.js';
 
 const _schemePattern = /^\w[\w\d+.-]*$/;
 const _singleSlashStart = /^\//;
@@ -307,9 +306,6 @@ export class URI implements UriComponents {
 		// normalize to fwd-slashes on windows,
 		// on other systems bwd-slashes are valid
 		// filename character, eg /f\oo/ba\r.txt
-		if (isWindows) {
-			path = path.replace(/\\/g, _slash);
-		}
 
 		// check for authority as used in UNC shares
 		// or use the path as given
@@ -358,11 +354,7 @@ export class URI implements UriComponents {
 			throw new Error(`[UriError]: cannot call joinPath on URI without path`);
 		}
 		let newPath: string;
-		if (isWindows && uri.scheme === 'file') {
-			newPath = URI.file(paths.win32.join(uriToFsPath(uri, true), ...pathFragment)).path;
-		} else {
-			newPath = paths.posix.join(uri.path, ...pathFragment);
-		}
+		newPath = paths.posix.join(uri.path, ...pathFragment);
 		return uri.with({ path: newPath });
 	}
 
@@ -445,7 +437,7 @@ interface UriState extends UriComponents {
 	_sep?: 1;
 }
 
-const _pathSepMarker = isWindows ? 1 : undefined;
+const _pathSepMarker = undefined;
 
 // This class exists so that URI is compatible with vscode.Uri (API).
 class Uri extends URI {
@@ -639,9 +631,6 @@ export function uriToFsPath(uri: URI, keepDriveLetterCasing: boolean): string {
 	} else {
 		// other path
 		value = uri.path;
-	}
-	if (isWindows) {
-		value = value.replace(/\//g, '\\');
 	}
 	return value;
 }
