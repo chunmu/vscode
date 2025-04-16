@@ -299,7 +299,7 @@ src
 │   │   │   ├── sequence.ts 队列管理 对队列的切割splice做了事件通知
 │   │   │   ├── severity.ts
 │   │   │   ├── skipList.ts
-│   │   │   ├── stopwatch.ts
+│   │   │   ├── stopwatch.ts 没啥特殊的，用于打标计时类工具
 │   │   │   ├── stream.ts
 │   │   │   ├── strings.ts
 │   │   │   ├── symbols.ts
