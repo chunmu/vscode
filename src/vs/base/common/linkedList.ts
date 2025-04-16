@@ -1,8 +1,3 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) Microsoft Corporation. All rights reserved.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
-
 class Node<E> {
 
 	static readonly Undefined = new Node<any>(undefined);
@@ -56,11 +51,13 @@ export class LinkedList<E> {
 
 	private _insert(element: E, atTheEnd: boolean): () => void {
 		const newNode = new Node(element);
+		// 空链表的情况，首尾指针都指向同一个元素
 		if (this._first === Node.Undefined) {
 			this._first = newNode;
 			this._last = newNode;
 
 		} else if (atTheEnd) {
+			// 尾部push，next指向新元素，prev指向原尾部元素
 			// push
 			const oldLast = this._last;
 			this._last = newNode;
@@ -68,6 +65,7 @@ export class LinkedList<E> {
 			oldLast.next = newNode;
 
 		} else {
+			// 头部unshift，next指向原首部元素，prev指向新元素
 			// unshift
 			const oldFirst = this._first;
 			this._first = newNode;
