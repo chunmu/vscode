@@ -23,6 +23,14 @@ class CodeMain {
 			const services = new ServiceCollection();
 			// 新建一个存储可释放类的集合
 			const disposables = new DisposableStore();
+
+			dialog.showMessageBoxSync({
+				type: 'warning',
+				title: 'xx',
+				// @ts-ignore
+				message: IInstantiationService.type,
+			});
+
 			return [new InstantiationService(services, true)]
 	}
 }
