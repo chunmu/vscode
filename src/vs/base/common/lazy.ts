@@ -1,8 +1,3 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) Microsoft Corporation. All rights reserved.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
-
 export class Lazy<T> {
 
 	private _didRun: boolean = false;
@@ -24,6 +19,7 @@ export class Lazy<T> {
 	 * This will force evaluation of the lazy value if it has not been resolved yet. Lazy values are only
 	 * resolved once. `getValue` will re-throw exceptions that are hit while resolving the value
 	 */
+	// 只有在访问到value的时候，才需要执行executor，如果执行过了就取结果，也可用于类似once
 	get value(): T {
 		if (!this._didRun) {
 			try {
@@ -43,5 +39,6 @@ export class Lazy<T> {
 	/**
 	 * Get the wrapped value without forcing evaluation.
 	 */
+	// 有时候只需要看看有没有值，不需要触发执行
 	get rawValue(): T | undefined { return this._value; }
 }

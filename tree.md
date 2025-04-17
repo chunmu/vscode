@@ -301,7 +301,7 @@ src
 │   │   │   ├── skipList.ts
 │   │   │   ├── stopwatch.ts 没啥特殊的，用于打标计时类工具
 │   │   │   ├── stream.ts
-│   │   │   ├── strings.ts
+│   │   │   ├── strings.ts 处理字符各种情况，隐形字符设定，字符切割设定，emoji字符判断等
 │   │   │   ├── symbols.ts symbol标记
 │   │   │   ├── ternarySearchTree.ts
 │   │   │   ├── tfIdf.ts
