@@ -202,7 +202,7 @@ src
 │   │   │   ├── diff
 │   │   │   │   ├── diff.ts
 │   │   │   │   └── diffChange.ts
-│   │   │   ├── equals.ts
+│   │   │   ├── equals.ts 对象类比对是否相等
 │   │   │   ├── errorMessage.ts
 │   │   │   ├── errors.ts xxxxx 还没看到实际用的地方
 │   │   │   ├── event.ts
