@@ -106,6 +106,7 @@ export function createDecorator<T>(serviceId: string): ServiceIdentifier<T> {
 		return _util.serviceIds.get(serviceId)!;
 	}
 
+	// 用了any
 	const id = <any>function (target: Function, key: string, index: number) {
 		if (arguments.length !== 3) {
 			throw new Error('@IServiceName-decorator can only be used to decorate a parameter');
@@ -116,6 +117,7 @@ export function createDecorator<T>(serviceId: string): ServiceIdentifier<T> {
 	id.toString = () => serviceId;
 
 	_util.serviceIds.set(serviceId, id);
+	// 返回any 在返回值类型约束的时候转成了ServiceIdentifier<T>
 	return id;
 }
 
