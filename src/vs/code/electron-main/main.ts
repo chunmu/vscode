@@ -1,4 +1,5 @@
 import { app, dialog } from 'electron';
+import { IInstantiationService, ServicesAccessor } from '../../platform/instantiation/common/instantiation.js';
 
 class CodeMain {
 	main(): void {
@@ -11,7 +12,7 @@ class CodeMain {
 	}
 
 	private async startup(): Promise<void> {
-		
+
 	}
 
 	private createServices() {
