@@ -1,8 +1,3 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) Microsoft Corporation. All rights reserved.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
-
 import { CancellationToken, CancellationTokenSource } from './cancellation.js';
 import { BugIndicatingError, CancellationError } from './errors.js';
 import { Emitter, Event } from './event.js';
@@ -31,6 +26,7 @@ export interface CancelablePromise<T> extends Promise<T> {
  * @param callback A function that accepts a cancellation token and returns a promise
  * @returns A promise that can be cancelled
  */
+// 设计了一个可以cancel的promise
 export function createCancelablePromise<T>(callback: (token: CancellationToken) => Promise<T>): CancelablePromise<T> {
 	const source = new CancellationTokenSource();
 
@@ -185,11 +181,7 @@ export function asPromise<T>(callback: () => T | Thenable<T>): Promise<T> {
 	});
 }
 
-/**
- * Creates and returns a new promise, plus its `resolve` and `reject` callbacks.
- *
- * Replace with standardized [`Promise.withResolvers`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/withResolvers) once it is supported
- */
+// 这样包装之后就不用重复new Promise啥的
 export function promiseWithResolvers<T>(): { promise: Promise<T>; resolve: (value: T | PromiseLike<T>) => void; reject: (err?: any) => void } {
 	let resolve: (value: T | PromiseLike<T>) => void;
 	let reject: (reason?: any) => void;
